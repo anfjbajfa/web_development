@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础门户网站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .banner {
+            width: 100%;
+            height: 300px;
+            background: url('https://via.placeholder.com/1200x300') no-repeat center center;
+            background-size: cover;
+        }
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+        .sidebar {
+            width: 25%;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .main-content {
+            width: 75%;
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>基础门户网站</h1>
+    </header>
+    <nav>
+        <a href="#">首页</a>
+        <a href="#">关于我们</a>
+        <a href="#">新闻/博客</a>
+        <a href="#">产品/服务</a>
+        <a href="#">联系我们</a>
+        <a href="#">登录</a>
+    </nav>
+    <div class="banner"></div>
+    <div class="container">
+        <div class="sidebar">
+            <h2>侧边栏</h2>
+            <ul>
+                <li><a href="#">链接1</a></li>
+                <li><a href="#">链接2</a></li>
+                <li><a href="#">链接3</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h2>最新新闻/公告</h2>
+            <p>新闻1: 这是一个示例新闻内容。</p>
+            <p>新闻2: 这是另一个示例新闻内容。</p>
+            <p>新闻3: 更多示例新闻内容。</p>
+        </div>
+    </div>
+    <footer>
+        <p>联系信息 | 社交媒体链接 | 重要链接 | 版权信息</p>
+    </footer>
+</body>
+</html>
