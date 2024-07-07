@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户登录 - 杭州跨远测绘有限公司</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 10px 0;
+      border: 1px solid #ccc;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>用户登录</h2>
+    <form id="loginForm">
+      <label for="username">用户名:</label>
+      <input type="text" id="username" name="username" required>
+      
+      <label for="password">密码:</label>
+      <input type="password" id="password" name="password" required>
+      
+      <input type="submit" value="登录">
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('登录成功！');
+          window.location.href = 'index.html';
+        } else {
+          alert('登录失败：' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
+</body>
+</html>
