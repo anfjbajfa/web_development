@@ -10,6 +10,8 @@ import Cooperation from '../views/Cooperation.vue';
 import Product from '../views/product.vue';
 import Test from '../components/SideBar.vue'
 import Logout from '../views/Logout.vue'
+
+import Profile from '../views/Profile.vue';
 const routes = [
   { path: '/', component: Home },
   { path: '/services', component: Services },
@@ -20,8 +22,9 @@ const routes = [
   { path: '/about/honor', component: Honor },
   { path: '/about/cooperation', component: Cooperation },
   { path: '/test', component: Test },
-  {path:'/logout',component:Logout}
-
+  {path:'/logout',component:Logout},
+  {path:'/profile',component:Profile}
+  
   
 ];
 

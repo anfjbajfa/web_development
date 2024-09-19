@@ -1,3 +1,11 @@
+@import "https://js.arcgis.com/4.30/@arcgis/core/assets/esri/themes/dark/main.css";
+@import "https://js.arcgis.com/calcite-components/2.11.1/calcite.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* local copy of calcite.css */
+/* @import "@arcgis/core/assets/esri/themes/dark/main.css";
+@import "@esri/calcite-components/dist/calcite/calcite.css"; */

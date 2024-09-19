@@ -1,12 +1,19 @@
 server:
   port: 8081
 
+
+
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/UserDB
+    url: jdbc:mysql://${ip}:3306/UserDB
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: Qwer13579
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 1000MB
+ip: localhost
 
 mybatis-plus:
   # configuration:

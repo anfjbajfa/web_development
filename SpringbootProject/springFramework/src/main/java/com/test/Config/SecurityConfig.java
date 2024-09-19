@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.test.filter.JwtAuthenticationTokenFilter;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -61,5 +64,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(accessDeniedHandler);
         http.logout().disable();
         http.cors();
+    }
+
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        // 允许反斜杠
+        firewall.setAllowBackSlash(true);
+        //如果需要允许其他字符，还可以在这里设置
+         firewall.setAllowUrlEncodedDoubleSlash(true); // 允许双斜杠
+
+        return (web) -> web.httpFirewall(firewall);
     }
 }

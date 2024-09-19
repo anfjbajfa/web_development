@@ -13,12 +13,12 @@
         <!-- 电话+邮箱 -->
         <div class="flex flex-col items-center justify-center gap-2">
           <a :href="'tel:' + phone_number"
-            class="mr-6 w-full text-sm font-medium text-black-900 dark:text-white hover:underline">{{ "Call: " +
+            class="mr-6 w-full text-sm font-medium text-black-900 dark:text-white hover:underline">{{ "电话: " +
               phone_number }}</a>
-          <p class="mr-6 text-sm w-full font-medium text-black-900 dark:text-white hover:underline"> {{ 'Email: ' +
-            email
-            }}
-          </p>
+          <a :href="'mailto:' + email"
+            class="mr-6 text-sm w-full font-medium text-black-900 dark:text-white hover:underline">
+            {{ "邮件: " + email }}
+          </a>
         </div>
         <!-- 模式调节按钮 -->
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
@@ -83,7 +83,7 @@
           登录
         </RouterLink>
         <RouterLink v-else class="ml-auto">
-          <Avatar/>
+          <Avatar />
         </RouterLink>
 
 
@@ -143,16 +143,16 @@ let drop_box_store = {
 const isLogined = ref('')
 // 模拟登录状态的改变，可以根据实际的业务逻辑判断是否登录
 function checkLoginStatus() {
-      // 假设有个获取用户信息的方法 getUserInfo()
-      if (getUserInfo() == null) {
-        isLogined.value = false;
-      } else {
-        isLogined.value = true;
-      }
-    }
+  // 假设有个获取用户信息的方法 getUserInfo()
+  if (getUserInfo() == null) {
+    isLogined.value = false;
+  } else {
+    isLogined.value = true;
+  }
+}
 
-    // 调用函数检查是否登录
-  checkLoginStatus();
+// 调用函数检查是否登录
+checkLoginStatus();
 
 function show_hide(name) {
   if (drop_box_store[name]["is_shown"] == 0) {

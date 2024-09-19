@@ -3,7 +3,7 @@
         <div class="py-10 px-5 bg-blue-900 dark:bg-gray-800 md:flex md:items-center md:justify-between">
 
             
-            <p class="text-s text-white">   公司地址：杭州市临平区南苑街道人民大道652-30号(三楼) 
+            <p class="text-s text-white">   公司地址: 杭州市临平区南苑街道人民大道652-30号(三楼) 
                 
             </p>
             

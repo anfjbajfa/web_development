@@ -46,9 +46,16 @@ public class Assert {
         }
     }
 
+    /**
+     * 断言标志数量大于等于2 返回错误
+     * @param countAdmin 标志
+     * @param httpCodeEnum 状态码枚举类
+     * @throws SystemException 系统异常
+     */
     public static void isTwo(int countAdmin, HttpCodeEnum httpCodeEnum) {
         if (countAdmin>=2) {
             throw new SystemException(httpCodeEnum);
         }
     }
+
 }

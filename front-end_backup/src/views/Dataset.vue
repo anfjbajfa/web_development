@@ -1,23 +1,46 @@
 <template>
-    <div class="h-screen flex flex-col">
-      <Header1/>
-      <div>
-        <Test />
-        <MainContent class="flex flex-1"/>
-      </div>
-    </div>
-  </template>
-  
-  <script setup>
-  import Header1 from '../components/Header.vue';
+  <div class="common-layout">
+    <el-container>
+      <el-header>
+        <Header></Header>
+      </el-header>
+      <el-container>
+          <SideBar @show-file-manager="showFileManagerDrawer = true"></SideBar>
+        <el-main>
+          <Maincontent></Maincontent>
+        </el-main>
+      </el-container>
+      
+    </el-container>
+    
+<FileManagerDrawer v-model:visible="showFileManagerDrawer"></FileManagerDrawer>
+  </div>
+</template>
 
-  import Test from '../components/SideBar.vue'
-  import MainContent from '../components/MainContent.vue';
-  </script>
-  
-  <style>
-  /* 全局样式或根元素样式 */
-  body {
-    font-family: 'Arial', sans-serif;
-  }
-  </style>
+<script setup>
+import SideBar from '../components/SideBar.vue'
+import Maincontent from '../components/Maincontent.vue';
+import Header from '../components/Header.vue'
+import { ref } from 'vue';
+import FileManagerDrawer from '../components/FileManagerDrawer.vue';
+// 控制抽屉显示的变量
+const showFileManagerDrawer = ref(false);
+</script>
+
+<style>
+.el-container{
+  height:100vh
+}
+.el-header{
+  background-color: #1e3a8a;
+}
+.el-main{
+  height: 100%;
+  width: 100%;
+  background: #f5f5f5;
+  padding: 0 !important; 
+  margin: 0;     
+  display: flex; 
+  flex-grow: 1;  
+}
+</style>

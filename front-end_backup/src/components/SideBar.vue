@@ -1,77 +1,160 @@
 <template>
-    <el-radio-group v-model="isCollapse" style="margin-top: 10px; ">
-        <el-radio-button :value="false">O</el-radio-button>
-        <el-radio-button :value="true">C</el-radio-button>
-    </el-radio-group>
-    <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen"
-        @close="handleClose">
-        <el-sub-menu index="1">
-            <template #title>
-                <el-icon>
-                    <location />
-                </el-icon>
-                <span>Navigator One</span>
-            </template>
-            <el-menu-item-group>
-                <template #title><span>Group One</span></template>
-                <el-menu-item index="1-1">item one</el-menu-item>
-                <el-menu-item index="1-2">item two</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group Two">
-                <el-menu-item index="1-3">item three</el-menu-item>
-            </el-menu-item-group>
-            <el-sub-menu index="1-4">
-                <template #title><span>item four</span></template>
-                <el-menu-item index="1-4-1">item one</el-menu-item>
-            </el-sub-menu>
+  <el-aside :width="sidebarWidth + 'px'" class="resizable-aside">
+    <el-scrollbar :wrap-style="{ overflowX: 'hidden' }" class="custom-scrollbar">
+      <el-menu :default-openeds="[]" :collapse="isCollapsed" @select="handleSelect">
+        <el-sub-menu index="1" title>
+          <template #title>
+            <el-icon>
+              <D class="icon-adjust" />
+            </el-icon>
+            文件
+          </template>
+          <el-menu-item index="1-1">云端文件管理</el-menu-item>
+          <el-menu-item index="1-2">文件上传</el-menu-item>
+          <el-menu-item index="1-3">文件下载</el-menu-item>
         </el-sub-menu>
 
+        <el-sub-menu index="2">
+          <template #title>
+            <el-icon>
+              <IconMenu class="icon-adjust" />
+            </el-icon>
+            Navigator Two
+          </template>
+          <el-menu-item-group>
+            <template #title>Group 1</template>
+            <el-menu-item index="2-1">Option 1</el-menu-item>
+            <el-menu-item index="2-2">Option 2</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="Group 2">
+            <el-menu-item index="2-3">Option 3</el-menu-item>
+          </el-menu-item-group>
+          <el-sub-menu index="2-4">
+            <template #title>Option 4</template>
+            <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
+          </el-sub-menu>
+        </el-sub-menu>
 
-        
-        <el-menu-item index="2">
-            <el-icon><icon-menu /></el-icon>
-            <template #title>Navigator Two</template>
-        </el-menu-item>
-        <el-menu-item index="3">
+        <el-sub-menu index="3">
+          <template #title>
             <el-icon>
-                <document />
+              <Setting class="icon-adjust" />
             </el-icon>
-            <template #title>Navigator Three</template>
-        </el-menu-item>
-        <el-menu-item index="4">
-            <el-icon>
-                <setting />
-            </el-icon>
-            <template #title>Navigator Four</template>
-        </el-menu-item>
-    </el-menu>
+            Navigator Three
+          </template>
+          <el-menu-item-group>
+            <template #title>Group 1</template>
+            <el-menu-item index="3-1">Option 1</el-menu-item>
+            <el-menu-item index="3-2">Option 2</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="Group 2">
+            <el-menu-item index="3-3">Option 3</el-menu-item>
+          </el-menu-item-group>
+          <el-sub-menu index="3-4">
+            <template #title>Option 4</template>
+            <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
+          </el-sub-menu>
+        </el-sub-menu>
+      </el-menu>
+
+      <el-button @click="toggleCollapse" style="margin: 1px">
+        <el-icon v-if="!isCollapsed">
+          <DArrowLeft />
+        </el-icon>
+        <el-icon v-else>
+          <DArrowRight />
+        </el-icon>
+      </el-button>
+    </el-scrollbar>
+
+    <!-- 用于拖动的divider -->
+    <div class="drag-divider" @mousedown="startDragging"></div>
+    
+   
+  </el-aside>
+
+  
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-import {
-    Document,
-    Menu as IconMenu,
-    Location,
-    Setting,
-} from '@element-plus/icons-vue'
+<script setup>
+import { ref} from "vue";
+import { DArrowLeft, DArrowRight, Document as D, Menu as IconMenu, Message, Setting } from "@element-plus/icons-vue";
+import FileManagerDrawer from './FileManagerDrawer.vue';
 
-const isCollapse = ref(true)
-const handleOpen = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-}
+
+const emit = defineEmits(['show-file-manager']);
+
+const handleSelect = (index) => {
+  if (index === "1-1") {
+    emit('show-file-manager'); // 通知父组件显示抽屉
+  }
+  // 处理其他菜单项
+};
+
+const isCollapsed = ref(false);
+const sidebarWidth = ref(200); // 默认宽度
+let isDragging = false;
+
+const toggleCollapse = () => {
+  isCollapsed.value = !isCollapsed.value;
+  sidebarWidth.value = isCollapsed.value ? 45 : 200; // 切换折叠状态时自动调整宽度
+};
+
+// 拖动事件
+const startDragging = (event) => {
+  isDragging = true;
+  const startX = event.clientX;
+  const startWidth = sidebarWidth.value;
+
+  const onMouseMove = (moveEvent) => {
+    if (isDragging) {
+      const newWidth = startWidth + (moveEvent.clientX - startX);
+      if (newWidth >= 45 && newWidth <= 400) {
+        // 限制宽度范围在45px到400px之间
+        sidebarWidth.value = newWidth;
+      }
+    }
+  };
+
+  const onMouseUp = () => {
+    isDragging = false;
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+  };
+
+  document.addEventListener("mousemove", onMouseMove);
+  document.addEventListener("mouseup", onMouseUp);
+};
+
 </script>
 
-<style>
-.el-menu-vertical-demo {
-    width: 200px;
-    min-height: 400px;
-    height: 800px;
-    --el-menu-bg-color:#dce0f0;
+<style scoped>
+.icon-adjust {
+  margin-left: -8px;
 }
 
+.el-aside {
+  max-height: 90vh;
+  /* 设置最大高度为 90% 的视口高度 */
+  overflow: hidden;
+  /* 防止内容超出边界 */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
 
+.custom-scrollbar {
+  overflow-x: hidden !important;
+  /* 禁止横向滚动条 */
+}
+
+.drag-divider {
+  width: 5px;
+  background-color: #d3d3d3;
+  cursor: col-resize;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
 </style>
