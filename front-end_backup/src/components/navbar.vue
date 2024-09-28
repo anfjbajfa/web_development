@@ -51,8 +51,8 @@
             </RouterLink>
 
             <!-- 这个div是关于 -->
-            <div v-else>
-              <!-- 关于+箭头 -->
+            <!-- <div v-else>
+              关于+箭头
               <button @click="show_hide(i)"
                 class="flex items-start text-white dark:text-white hover:underline font-bold">
                 {{ i }}
@@ -63,7 +63,7 @@
                 </svg>
               </button>
 
-              <!-- 子导航栏 -->
+              子导航栏
               <div hidden :ref="(el) => { drop_box_store[i] = { el: el, is_shown: 0 } }"
                 class="z-[999999] font-normal bg-white divide-y border-blue-200 border-2 divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute mt-3">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-400">
@@ -75,7 +75,7 @@
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> -->
           </li>
         </ul>
 
@@ -109,23 +109,14 @@ import Avatar from '../components/Avatar.vue'
 
 let dark_mode = reactive({ 'state': false })
 
-
-
-
-// const props = defineProps(['menu_items', 'company_name', 'phone_number', 'email'])
-// const props= reactive(['menu_items','phone_number','email'])
 let menu_data = {
   "主页": "/",
   "服务": "/services",
   "产品": "/product",
-  "关于": {
-    "合作": "/about/cooperation",
-    "荣誉": '/about/honor',
-    "招聘": "/about/recruitment"
-  },
-
-
-
+  "合作": "/cooperation",
+  "荣誉": '/honor',
+  "招聘": "/recruitment"
+  
 }
 const login = ref("/login")
 

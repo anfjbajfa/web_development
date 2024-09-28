@@ -25,3 +25,6 @@ mybatis-plus:
       logic-not-delete-value: 0
       id-type: auto
     banner: false
+
+file:
+  parent-path: E:/SpringbootProject/file

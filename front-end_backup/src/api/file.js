@@ -10,7 +10,6 @@ function listFiles() {
     return service({
         url: "/file/listFiles", //对应的是整个linpingDir
         method: "get",
-        // data: {},
     })
 }
 

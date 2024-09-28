@@ -1,26 +1,21 @@
 <template>
-    <navbar/>
+    <navbar />
     <div class="fade-bg">
-        
+
 
         <div class="relative pb-9" data-carousel="slide">
             <!-- Carousel wrapper -->
-            <div class="relative h-96 w-full overflow-hidden sm:h-70 xl:h-120 2xl:h-150">
-                <!-- Item 1 -->
-
+            <div class="relative h-[500px] w-full overflow-hidden sm:h-[400px] xl:h-[500px] 2xl:h-[600px]">
+                <!-- Carousel items -->
                 <div :id="_key" class="hidden duration-700 ease-in-out" v-for="_key in Object.keys(data)">
-                    <img :src="'/' + _key + '.webp'"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                    <img :src="'/' + _key + '.webp'" class="absolute block w-full h-full top-0 left-0 object-cover">
                 </div>
-
             </div>
 
             <div class="relative flex justify-center gap-2 pt-8">
                 <button :id="_key + '_i'" type="button" class="w-3 h-3 rounded-full "
                     v-for="_key in Object.keys(data)"></button>
-
             </div>
-
         </div>
 
         <!-- 文字部分 -->
@@ -36,29 +31,29 @@
                             class="text-center mb-6 text-blue-800 text-sm font-normal sm:text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-200">
                             {{ header.description }}</p>
 
-                        
+
 
                     </div>
 
                 </Transition>
             </div>
 
-            
+
         </div>
 
         <div>
             <Transition v-show="!will_change.state" name="slide-fade" appear>
-            <div class="ml-20 bg-white dark:bg-gray-800 p-4 rounded-md shadow-lg w-72 h-100">
-                            <!-- 这是固定位置的内容 -->
-                            <h2 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">最新公告</h2>
-                            <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">临平项目</a>
-                            </p>
-                            <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">乔司项目</a>
-                            </p>
-                            <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">东湖项目</a>
-                            </p>
-            </div>
-        </Transition>
+                <div class="ml-20 bg-white dark:bg-gray-800 p-4 rounded-md shadow-lg w-72 h-100">
+                    <!-- 这是固定位置的内容 -->
+                    <h2 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">最新公告</h2>
+                    <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">临平项目</a>
+                    </p>
+                    <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">乔司项目</a>
+                    </p>
+                    <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">东湖项目</a>
+                    </p>
+                </div>
+            </Transition>
         </div>
 
 

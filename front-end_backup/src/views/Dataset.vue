@@ -7,7 +7,10 @@
       <el-container>
           <SideBar @show-file-manager="showFileManagerDrawer = true"></SideBar>
         <el-main>
-          <Maincontent></Maincontent>
+          <Tab>
+          
+          </Tab>
+          <!-- <Maincontent></Maincontent> -->
         </el-main>
       </el-container>
       
@@ -24,6 +27,7 @@ import Header from '../components/Header.vue'
 import { ref } from 'vue';
 import FileManagerDrawer from '../components/FileManagerDrawer.vue';
 // 控制抽屉显示的变量
+import Tab from '../components/Tab.vue';
 const showFileManagerDrawer = ref(false);
 </script>
 

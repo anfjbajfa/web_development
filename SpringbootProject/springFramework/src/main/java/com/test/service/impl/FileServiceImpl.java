@@ -27,7 +27,8 @@ public class FileServiceImpl implements FileService {
     @Value("${server.port}")
     String port;
     //TODO
-    private static final String parentFilePath = System.getProperty("user.dir") + File.separator + "file";
+    @Value("${file.parent-path}")
+    private String parentFilePath;
 
     @Override
     public ResponseResult<String> uploadFile(MultipartFile file) {
