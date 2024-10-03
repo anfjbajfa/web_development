@@ -10,7 +10,6 @@
           <Tab>
           
           </Tab>
-          <!-- <Maincontent></Maincontent> -->
         </el-main>
       </el-container>
       
@@ -22,7 +21,6 @@
 
 <script setup>
 import SideBar from '../components/SideBar.vue'
-import Maincontent from '../components/Maincontent.vue';
 import Header from '../components/Header.vue'
 import { ref } from 'vue';
 import FileManagerDrawer from '../components/FileManagerDrawer.vue';

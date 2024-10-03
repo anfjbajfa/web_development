@@ -10,8 +10,8 @@
             文件
           </template>
           <el-menu-item index="1-1">云端文件管理</el-menu-item>
-          <el-menu-item index="1-2">文件上传</el-menu-item>
-          <el-menu-item index="1-3">文件下载</el-menu-item>
+          <el-menu-item index="1-2">待定</el-menu-item>
+          <el-menu-item index="1-3">待定</el-menu-item>
         </el-sub-menu>
 
         <el-sub-menu index="2">
@@ -19,12 +19,12 @@
             <el-icon>
               <IconMenu class="icon-adjust" />
             </el-icon>
-            Navigator Two
+            工具栏
           </template>
           <el-menu-item-group>
-            <template #title>Group 1</template>
-            <el-menu-item index="2-1">Option 1</el-menu-item>
-            <el-menu-item index="2-2">Option 2</el-menu-item>
+            <template #title>图层</template>
+            <el-menu-item index="2-1">变更底图</el-menu-item>
+            <el-menu-item index="2-2">添加图层</el-menu-item>
           </el-menu-item-group>
           <el-menu-item-group title="Group 2">
             <el-menu-item index="2-3">Option 3</el-menu-item>
@@ -88,6 +88,9 @@ const handleSelect = (index) => {
   if (index === "1-1") {
     emit('show-file-manager'); // 通知父组件显示抽屉
   }
+  // if(index ==="2-1"){
+
+  // }
   // 处理其他菜单项
 };
 

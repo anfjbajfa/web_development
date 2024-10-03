@@ -17,7 +17,8 @@ public enum HttpCodeEnum {
     REQUIRE_USER_INFO(505, "用户信息不能为空"),
     PARAM_NOT_VALID(506, "请求参数非法"),
     DATE_NOT_VALID(507, "日期格式非法"),
-    ADMIN_EXIST(508,"只允许有一个管理员存在");
+    ADMIN_EXIST(508,"只允许有一个管理员存在"),
+    INTERNAL_SERVER_ERROR(509,"上传失败");
 
 //    相关的
 

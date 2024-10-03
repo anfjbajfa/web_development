@@ -13,4 +13,5 @@ public class FileNode {
         private String label;
         private boolean isDirectory;
         private List<FileNode> children;
+        private String path; // 新增路径字段
 }
