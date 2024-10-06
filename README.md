@@ -8,4 +8,3 @@ Frontend:
 Front-end version for Node.js has to be above 18  
 Under the directory use 'npm install' and 'npm run dev' to run frontend  
 
-https://www.youtube.com/watch?v=VuSozCGlMoE  
