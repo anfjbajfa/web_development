@@ -7,14 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public interface FileService {
     ResponseResult<String> uploadFile(MultipartFile file, String path) throws UnsupportedEncodingException;
-    void downloadFile(String filePath, HttpServletResponse response);
+    void downloadFile(List<String> filePaths, HttpServletResponse response);
     ResponseResult<FileNode> listFiles();
     ResponseResult<Void> deleteFile(String filePath);
     ResponseResult<Void> createDirectory(String parentPath, String folderName);
-    ResponseResult<Void> createFiles(String fileName);
+    ResponseResult<Void> moveFile(List<String> sourcePaths, String targetPath) throws IOException;
+    ResponseResult<Void> renameFile(String sourcePath, String targetPath) throws IOException;
 }

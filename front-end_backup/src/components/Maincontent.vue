@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
 [id^="viewDiv-"] {
   padding: 0;
   margin: 0;
-  height: 850px;
+  height: 860px;
   /* 设置一个固定高度，确保地图能够正确显示 */
   width: 100%;
   border: 1px solid #ccc;

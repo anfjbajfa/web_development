@@ -1,10 +1,8 @@
 package com.test.service.impl;
 
-import com.sun.xml.bind.v2.TODO;
 import com.test.domain.ResponseResult;
 import com.test.domain.vo.FileNode;
 import com.test.enums.HttpCodeEnum;
-import com.test.exception.SystemException;
 import com.test.service.FileService;
 import com.test.utils.FileTreeUtil;
 import com.test.utils.SecurityUtils;
@@ -17,14 +15,14 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -104,57 +102,106 @@ public class FileServiceImpl implements FileService {
 
         // 返回下载链接，注意不暴露文件系统路径
         String url = "http://" + ip + ":" + port + "/file/download?path=" + URLEncoder.encode(sanitizedPath + "/" + saveFile.getName(), "UTF-8");
-        System.out.println(url);
         return ResponseResult.successResult(url);
     }
 
     @Override
-    public void downloadFile(String filePath1, HttpServletResponse response) {
+    public void downloadFile(List<String> filePaths, HttpServletResponse response) {
+        if (filePaths == null || filePaths.isEmpty()) {
+            try {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "未选择要下载的文件。");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        System.out.println(filePaths);
+
         try {
-            // 构建文件路径
             Path rootPath = Paths.get(absoluteParentFilePath).toRealPath();
-            Path filePath = rootPath.resolve(filePath1).normalize();
 
-            // 校验文件路径，防止路径遍历攻击
-            if (!filePath.startsWith(rootPath)) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "非法的文件路径");
-                return;
-            }
+            if (filePaths.size() == 1) {
+                // 单文件下载
+                String singleFilePathStr = filePaths.get(0);
+                Path singleFilePath = rootPath.resolve(singleFilePathStr).normalize();
 
-            File file = filePath.toFile();
-
-            // 检查文件是否存在且为常规文件
-            if (!file.exists() || !file.isFile()) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "文件不存在");
-                return;
-            }
-
-            // 设置响应头，准备下载
-            String encodedFileName = URLEncoder.encode(file.getName(), "UTF-8").replaceAll("\\+", "%20");
-            String contentType = Files.probeContentType(filePath);
-            if (contentType == null) {
-                contentType = "application/octet-stream";
-            }
-            response.setContentType(contentType);
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedFileName + "\"; filename*=UTF-8''" + encodedFileName);
-
-            // 将文件内容写入响应输出流
-            try (InputStream is = new FileInputStream(file); OutputStream os = response.getOutputStream()) {
-                byte[] buffer = new byte[8192];
-                int len;
-                while ((len = is.read(buffer)) != -1) {
-                    os.write(buffer, 0, len);
+                // 防止路径遍历攻击
+                if (!singleFilePath.startsWith(rootPath)) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "非法的文件路径");
+                    return;
                 }
-                os.flush();
-            }
 
+                File singleFile = singleFilePath.toFile();
+
+                if (!singleFile.exists() || !singleFile.isFile()) {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "文件不存在");
+                    return;
+                }
+
+                // 设置响应头
+                String encodedFileName = URLEncoder.encode(singleFile.getName(), "UTF-8").replaceAll("\\+", "%20");
+                String contentType = Files.probeContentType(singleFilePath);
+                if (contentType == null) {
+                    contentType = "application/octet-stream";
+                }
+                response.setContentType(contentType);
+                response.setHeader("Content-Disposition", "attachment; filename=\"" + singleFile.getName() + "\"; filename*=UTF-8''" + encodedFileName);
+
+                // 将文件内容写入响应输出流
+                try (InputStream is = new FileInputStream(singleFile); OutputStream os = response.getOutputStream()) {
+                    byte[] buffer = new byte[8192];
+                    int len;
+                    while ((len = is.read(buffer)) != -1) {
+                        os.write(buffer, 0, len);
+                    }
+                    os.flush();
+                }
+            } else {
+                // 多文件下载，打包为 zip
+                response.setContentType("application/zip");
+                String zipFileName = "download.zip";
+                String encodedFileName = URLEncoder.encode(zipFileName, "UTF-8").replaceAll("\\+", "%20");
+                response.setHeader("Content-Disposition", "attachment; filename=\"" + zipFileName + "\"; filename*=UTF-8''" + encodedFileName);
+
+                // 创建 ZipOutputStream
+                try (ZipOutputStream zos = new ZipOutputStream(response.getOutputStream())) {
+                    for (String filePathStr : filePaths) {
+                        Path filePath = rootPath.resolve(filePathStr).normalize();
+
+                        // 防止路径遍历攻击
+                        if (!filePath.startsWith(rootPath)) {
+                            // 可选择跳过或返回错误
+                            continue; // 跳过非法路径
+                        }
+
+                        File file = filePath.toFile();
+
+                        if (file.exists() && file.isFile()) {
+                            try (FileInputStream fis = new FileInputStream(file)) {
+                                // 获取文件相对于根路径的相对路径，保持目录结构
+                                Path relativePath = rootPath.relativize(filePath);
+                                ZipEntry zipEntry = new ZipEntry(relativePath.toString().replace("\\", "/"));
+                                zos.putNextEntry(zipEntry);
+
+                                byte[] buffer = new byte[8192];
+                                int len;
+                                while ((len = fis.read(buffer)) != -1) {
+                                    zos.write(buffer, 0, len);
+                                }
+
+                                zos.closeEntry();
+                            }
+                        }
+                    }
+
+                    zos.finish();
+                }
+            }
         } catch (IOException e) {
-            // 打印堆栈跟踪到控制台
             e.printStackTrace();
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "系统错误");
             } catch (IOException ioException) {
-                // 再次打印异常
                 ioException.printStackTrace();
             }
         }
@@ -282,34 +329,100 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public ResponseResult<Void> createFiles(String fileName) {
-        // 创建文件
-        File file = new File(absoluteParentFilePath, fileName);
+    public ResponseResult<Void> moveFile(List<String> sourcePaths, String targetPath) throws IOException {
+        Path targetDir = Paths.get(targetPath);
 
-        // 校验路径，防止路径遍历攻击
-        try {
-            String canonicalRootPath = new File(absoluteParentFilePath).getCanonicalPath();
-            String canonicalFilePath = file.getCanonicalPath();
-            if (!canonicalFilePath.startsWith(canonicalRootPath)) {
-                return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "非法的文件路径");
+        // 检查目标目录是否存在，不存在则创建
+        if (!Files.exists(targetDir)) {
+            Files.createDirectories(targetDir);
+        }
+
+        for (String sourcePathStr : sourcePaths) {
+            Path sourcePath = Paths.get(sourcePathStr);
+
+            // 检查源文件是否存在
+            if (!Files.exists(sourcePath)) {
+                throw new IOException("源文件不存在: " + sourcePathStr);
             }
-        } catch (IOException e) {
-            return ResponseResult.errorResult(HttpCodeEnum.SYSTEM_ERROR.getCode(), "系统错误");
-        }
 
-        if (file.exists()) {
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "文件已存在");
-        }
+            // 检查是否为目录
+            if (Files.isDirectory(sourcePath)) {
+                // 递归移动目录
+                Path destination = targetDir.resolve(sourcePath.getFileName());
+                moveDirectoryRecursively(sourcePath, destination);
 
-        try {
-            boolean success = file.createNewFile();
-            if (success) {
-                return new ResponseResult<>();
             } else {
-                return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "创建文件失败");
+                // 移动单个文件
+                Path destination = targetDir.resolve(sourcePath.getFileName());
+                Files.move(sourcePath, destination, StandardCopyOption.REPLACE_EXISTING);
+
             }
-        } catch (IOException e) {
-            return ResponseResult.errorResult(HttpCodeEnum.SYSTEM_ERROR.getCode(), "系统错误");
         }
+        return new ResponseResult<>();
+    }
+
+    /**
+     * 递归移动目录及其内容
+     *
+     * @param sourceDir      源目录路径
+     * @param destinationDir 目标目录路径
+     * @throws IOException 如果移动过程中出现问题
+     */
+    private void moveDirectoryRecursively(Path sourceDir, Path destinationDir) throws IOException {
+        if (Files.exists(destinationDir)) {
+            throw new IOException("目标目录已存在: " + destinationDir.toString());
+        }
+
+        // 使用 Files.walkFileTree 递归移动目录
+        Files.walkFileTree(sourceDir, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                Path targetDirPath = destinationDir.resolve(sourceDir.relativize(dir));
+                Files.createDirectories(targetDirPath);
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                Path targetFilePath = destinationDir.resolve(sourceDir.relativize(file));
+                Files.move(file, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
+                return FileVisitResult.CONTINUE;
+            }
+        });
+
+        // 删除源目录
+        Files.delete(sourceDir);
+    }
+
+
+    @Override
+    public ResponseResult<Void> renameFile(String sourcePath, String targetPath) throws IOException {
+        Path source = Paths.get(sourcePath);
+        Path target = Paths.get(targetPath);
+
+        // 检查源文件是否存在
+        if (!Files.exists(source)) {
+            logger.error("重命名文件找不到源文件:{}", sourcePath);
+            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "源文件不存在");
+        }
+
+        // 检查目标文件是否已存在（根据业务逻辑，你可以决定是否覆盖）
+        if (Files.exists(target)) {
+            logger.warn("目标文件已经存在: {}", targetPath);
+            // 如果不允许覆盖，则返回错误
+            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "目标文件已存在，无法重命名");
+        }
+
+        // 执行文件重命名（移动）操作
+        try {
+            Files.move(source, target, StandardCopyOption.ATOMIC_MOVE); // 确保操作是原子的
+        } catch (IOException e) {
+            logger.error("重命名文件失败: {} -> {}", sourcePath, targetPath, e);
+            throw e; // 将异常抛出给调用方处理
+        }
+
+        return new ResponseResult<>();
     }
 }
+
+

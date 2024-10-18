@@ -1,0 +1,25 @@
+2024-10-02 22:41:02 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+2024-10-02 22:41:02 INFO  [main] com.test.Main - Starting Main using Java 1.8.0_422 on YuDesktop with PID 12524 (C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\MVC\target\classes started by YuFAN in C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject)
+2024-10-02 22:41:02 INFO  [main] com.test.Main - No active profile set, falling back to default profiles: default
+2024-10-02 22:41:02 WARN  [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2024-10-02 22:41:03 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2024-10-02 22:41:03 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-02 22:41:03 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2024-10-02 22:41:03 INFO  [main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@56f71edb' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-10-02 22:41:03 INFO  [main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-10-02 22:41:03 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2024-10-02 22:41:03 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2024-10-02 22:41:03 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-10-02 22:41:03 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.46]
+2024-10-02 22:41:03 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-10-02 22:41:03 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 919 ms
+2024-10-02 22:41:04 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5f9f3e58, org.springframework.security.web.context.SecurityContextPersistenceFilter@49c099b, org.springframework.security.web.header.HeaderWriterFilter@739265f1, org.springframework.web.filter.CorsFilter@3c19592c, com.test.filter.JwtAuthenticationTokenFilter@600f5704, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1953bc95, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@58f31629, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@60e1d87c, org.springframework.security.web.session.SessionManagementFilter@19b07407, org.springframework.security.web.access.ExceptionTranslationFilter@6d6bff89, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1e1237ab]
+2024-10-02 22:41:04 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2024-10-02 22:41:04 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2024-10-02 22:41:04 INFO  [main] com.test.Main - Started Main in 2.316 seconds (JVM running for 2.926)
+2024-10-02 22:41:04 INFO  [main] o.s.b.a.ApplicationAvailabilityBean - Application availability state LivenessState changed to CORRECT
+2024-10-02 22:41:04 INFO  [main] o.s.b.a.ApplicationAvailabilityBean - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2024-10-02 22:41:23 INFO  [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-02 22:41:23 INFO  [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-10-02 22:41:23 INFO  [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-10-02 22:50:01 INFO  [http-nio-8081-exec-1] c.test.service.impl.FileServiceImpl - 文件夹创建成功: C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\file\临平地区\abc

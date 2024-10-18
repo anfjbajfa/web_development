@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +28,10 @@ public class FileController {
         return fileService.uploadFile(file, path);
     }
 
-    @GetMapping("/download")
-    public void downloadFile(@RequestParam("filePath") String filePath, HttpServletResponse response) {
-//        System.out.println("下载的路径是：" + filePath);
-        fileService.downloadFile(filePath, response);
+    @PostMapping("/download")
+    public void downloadFiles(@RequestBody List<String> filePaths, HttpServletResponse response) {
+        System.out.println(filePaths);
+        fileService.downloadFile(filePaths, response);
     }
 
     @GetMapping("/listFiles")
@@ -57,6 +58,23 @@ public class FileController {
         }
         // 调用服务层逻辑
         return fileService.createDirectory(parentPath.trim(), folderName.trim());
+    }
+
+    @PostMapping("/moveFiles")
+    public ResponseResult<Void> moveFiles(@RequestBody Map<String,Object> payload) throws IOException {
+        List<String> filePaths = (List<String>) payload.get("sourcePaths");
+        String targetPath = (String) payload.get("targetPath");
+//      TODO 这里没有做文件路径的判断
+        return fileService.moveFile(filePaths,targetPath);
+    }
+
+    @PostMapping("/renameFile")
+    public ResponseResult<Void> renameFile(@RequestBody Map<String, String> payload) throws IOException {
+        String sourcePath = (String) payload.get("sourcePath");
+        String targetPath = (String) payload.get("targetPath");
+        System.out.println(sourcePath);
+        System.out.println(targetPath);
+        return fileService.renameFile(sourcePath,targetPath);
     }
 }
 

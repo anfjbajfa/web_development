@@ -1,5 +1,5 @@
 <template>
-  <el-aside :width="sidebarWidth + 'px'" class="resizable-aside">
+  <el-aside :width="sidebarWidth1 + 'px'" class="resizable-aside">
     <el-scrollbar :wrap-style="{ overflowX: 'hidden' }" class="custom-scrollbar">
       <el-menu :default-openeds="[]" :collapse="isCollapsed" @select="handleSelect">
         <el-sub-menu index="1" title>
@@ -40,7 +40,7 @@
             <el-icon>
               <Setting class="icon-adjust" />
             </el-icon>
-            Navigator Three
+            设置
           </template>
           <el-menu-item-group>
             <template #title>Group 1</template>
@@ -68,7 +68,7 @@
     </el-scrollbar>
 
     <!-- 用于拖动的divider -->
-    <div class="drag-divider" @mousedown="startDragging"></div>
+    <div class="drag-divider" @mousedown="startDragging1"></div>
     
    
   </el-aside>
@@ -95,26 +95,26 @@ const handleSelect = (index) => {
 };
 
 const isCollapsed = ref(false);
-const sidebarWidth = ref(200); // 默认宽度
+const sidebarWidth1 = ref(200); // 默认宽度
 let isDragging = false;
 
 const toggleCollapse = () => {
   isCollapsed.value = !isCollapsed.value;
-  sidebarWidth.value = isCollapsed.value ? 45 : 200; // 切换折叠状态时自动调整宽度
+  sidebarWidth1.value = isCollapsed.value ? 45 : 200; // 切换折叠状态时自动调整宽度
 };
 
 // 拖动事件
-const startDragging = (event) => {
+const startDragging1 = (event) => {
   isDragging = true;
   const startX = event.clientX;
-  const startWidth = sidebarWidth.value;
+  const startWidth = sidebarWidth1.value;
 
   const onMouseMove = (moveEvent) => {
     if (isDragging) {
       const newWidth = startWidth + (moveEvent.clientX - startX);
       if (newWidth >= 45 && newWidth <= 400) {
         // 限制宽度范围在45px到400px之间
-        sidebarWidth.value = newWidth;
+        sidebarWidth1.value = newWidth;
       }
     }
   };
@@ -144,6 +144,7 @@ const startDragging = (event) => {
   position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 1000;
 }
 
 .custom-scrollbar {

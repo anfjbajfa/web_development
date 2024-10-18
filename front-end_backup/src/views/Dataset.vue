@@ -5,17 +5,17 @@
         <Header></Header>
       </el-header>
       <el-container>
-          <SideBar @show-file-manager="showFileManagerDrawer = true"></SideBar>
+          <SideBar @show-file-manager="showFileManagerDrawer = true" ></SideBar>
         <el-main>
           <Tab>
           
           </Tab>
+          <FileManagerDrawer v-model:visible="showFileManagerDrawer" ></FileManagerDrawer>
         </el-main>
+        
       </el-container>
-      
     </el-container>
-    
-<FileManagerDrawer v-model:visible="showFileManagerDrawer"></FileManagerDrawer>
+  
   </div>
 </template>
 
@@ -33,9 +33,14 @@ const showFileManagerDrawer = ref(false);
 .el-container{
   height:100vh
 }
-.el-header{
+
+.el-header {
   background-color: #1e3a8a;
+  position: relative;
+  z-index: 1000;
 }
+
+
 .el-main{
   height: 100%;
   width: 100%;
@@ -43,6 +48,9 @@ const showFileManagerDrawer = ref(false);
   padding: 0 !important; 
   margin: 0;     
   display: flex; 
-  flex-grow: 1;  
+  flex-grow: 1;
+ 
 }
+
+
 </style>
