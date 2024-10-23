@@ -22,7 +22,6 @@ import Graphic from '@arcgis/core/Graphic';
 import FileManagerDrawer from "./FileManagerDrawer.vue"
 
 
-
 // 定义 props 接收 showBasemap 和 mapId
 const props = defineProps({
   showBasemap: Boolean,
@@ -140,6 +139,9 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+
+@import "https://js.arcgis.com/4.30/@arcgis/core/assets/esri/themes/dark/main.css";
+@import "https://js.arcgis.com/calcite-components/2.11.1/calcite.css";
 /* 使用动态 ID 的通用样式 */
 [id^="viewDiv-"] {
   padding: 0;
@@ -152,7 +154,10 @@ onBeforeUnmount(() => {
 }
 
 /* 自定义输入框样式 */
+
 .esri-search__input {
   color: blue; /* 修改字体颜色 */
 }
+
+
 </style>

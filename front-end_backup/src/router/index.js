@@ -7,7 +7,7 @@ import Register from '../views/register.vue';
 import Dataset from '../views/Dataset.vue';
 import Honor from '../views/Honor.vue';
 import Cooperation from '../views/Cooperation.vue';
-import Product from '../views/product.vue';
+import Recruitment from '../views/recruitment.vue';
 
 import Logout from '../views/Logout.vue'
 
@@ -15,15 +15,14 @@ import Profile from '../views/Profile.vue';
 const routes = [
   { path: '/', component: Home },
   { path: '/services', component: Services },
-  { path: '/product', component: Product },
   { path: '/login', component: Login },
   { path: '/login/register', component: Register },
   { path: '/dataset', component: Dataset },
   { path: '/honor', component: Honor },
   { path: '/cooperation', component: Cooperation },
   {path:'/logout',component:Logout},
-  {path:'/profile',component:Profile}
-  
+  {path:'/profile',component:Profile},
+  {path:'/recruitment',component:Recruitment}
   
 ];
 

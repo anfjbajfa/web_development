@@ -1,23 +1,10 @@
 <template>
-    <navbar></navbar>
-    <div>
-
-
-    </div>
-
-
+  <navbar></navbar>
 </template>
 
-
-
 <script setup>
-
-import { reactive } from 'vue';
 import navbar from '../components/navbar.vue';
-
-
 </script>
-
 
 <style>
 

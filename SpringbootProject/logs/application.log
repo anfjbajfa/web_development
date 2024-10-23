@@ -19,3 +19,85 @@
 2024-10-17 20:21:36 INFO  [main] com.test.Main - Started Main in 2.972 seconds (JVM running for 3.855)
 2024-10-17 20:21:36 INFO  [main] o.s.b.a.ApplicationAvailabilityBean - Application availability state LivenessState changed to CORRECT
 2024-10-17 20:21:36 INFO  [main] o.s.b.a.ApplicationAvailabilityBean - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2024-10-18 17:51:22 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+2024-10-18 17:51:22 INFO  [main] com.test.Main - Starting Main using Java 1.8.0_422 on YuDesktop with PID 14464 (C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\MVC\target\classes started by YuFAN in C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject)
+2024-10-18 17:51:22 INFO  [main] com.test.Main - No active profile set, falling back to default profiles: default
+2024-10-18 17:51:22 WARN  [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2024-10-18 17:51:23 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2024-10-18 17:51:23 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-18 17:51:23 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2024-10-18 17:51:23 INFO  [main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@62e7dffa' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-10-18 17:51:23 INFO  [main] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-10-18 17:51:23 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8081 (http)
+2024-10-18 17:51:23 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2024-10-18 17:51:23 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-10-18 17:51:23 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.46]
+2024-10-18 17:51:23 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-10-18 17:51:23 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1275 ms
+2024-10-18 17:51:24 INFO  [main] o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2c30c81d, org.springframework.security.web.context.SecurityContextPersistenceFilter@61149fa5, org.springframework.security.web.header.HeaderWriterFilter@73ca34e7, org.springframework.web.filter.CorsFilter@415a3f6a, com.test.filter.JwtAuthenticationTokenFilter@44b21f9f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@f2d890c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@54ffa561, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@a54acec, org.springframework.security.web.session.SessionManagementFilter@58eac00e, org.springframework.security.web.access.ExceptionTranslationFilter@611e5819, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7a083b96]
+2024-10-18 17:51:24 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2024-10-18 17:51:24 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+2024-10-18 17:51:24 INFO  [main] com.test.Main - Started Main in 2.895 seconds (JVM running for 3.67)
+2024-10-18 17:51:24 INFO  [main] o.s.b.a.ApplicationAvailabilityBean - Application availability state LivenessState changed to CORRECT
+2024-10-18 17:51:24 INFO  [main] o.s.b.a.ApplicationAvailabilityBean - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2024-10-18 17:51:29 INFO  [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-18 17:51:29 INFO  [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-10-18 17:51:29 INFO  [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-10-18 17:51:29 INFO  [http-nio-8081-exec-1] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-18 17:51:29 INFO  [http-nio-8081-exec-1] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-18 17:51:32 ERROR [http-nio-8081-exec-1] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to localhost:6379] with root cause
+java.net.ConnectException: Connection refused: no further information
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:334)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:707)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+2024-10-18 17:51:38 ERROR [http-nio-8081-exec-5] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.data.redis.RedisConnectionFailureException: Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to localhost:6379] with root cause
+java.net.ConnectException: Connection refused: no further information
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:334)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:707)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+2024-10-18 18:22:46 INFO  [lettuce-nioEventLoop-4-3] i.l.core.protocol.CommandHandler - null Unexpected exception during request: java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:253)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:750)
+2024-10-18 18:22:46 INFO  [lettuce-eventExecutorLoop-1-9] i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/127.0.0.1:6379
+2024-10-18 18:22:48 WARN  [lettuce-nioEventLoop-4-4] i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2024-10-18 18:22:52 INFO  [lettuce-eventExecutorLoop-1-12] i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2024-10-18 18:22:54 WARN  [lettuce-nioEventLoop-4-7] i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2024-10-18 18:22:59 INFO  [lettuce-eventExecutorLoop-1-15] i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2024-10-18 18:23:01 WARN  [lettuce-nioEventLoop-4-10] i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2024-10-18 18:23:06 INFO  [lettuce-eventExecutorLoop-1-2] i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379
+2024-10-18 18:23:08 WARN  [lettuce-nioEventLoop-4-13] i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost:6379]: Connection refused: no further information: localhost/127.0.0.1:6379
+2024-10-18 18:23:13 INFO  [lettuce-eventExecutorLoop-1-4] i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost:6379

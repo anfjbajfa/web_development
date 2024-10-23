@@ -1,205 +1,386 @@
 <template>
-    <navbar />
-    <div class="fade-bg">
-
-
-        <div class="relative pb-9" data-carousel="slide">
-            <!-- Carousel wrapper -->
-            <div class="relative h-[500px] w-full overflow-hidden sm:h-[400px] xl:h-[500px] 2xl:h-[600px]">
-                <!-- Carousel items -->
-                <div :id="_key" class="hidden duration-700 ease-in-out" v-for="_key in Object.keys(data)">
-                    <img :src="'/' + _key + '.webp'" class="absolute block w-full h-full top-0 left-0 object-cover">
-                </div>
-            </div>
-
-            <div class="relative flex justify-center gap-2 pt-8">
-                <button :id="_key + '_i'" type="button" class="w-3 h-3 rounded-full "
-                    v-for="_key in Object.keys(data)"></button>
-            </div>
-        </div>
-
-        <!-- 文字部分 -->
-        <div class="flex justify-center  w-full ">
-            <div class="p3">
-
-                <Transition v-show="!will_change.state" name="slide-fade" appear>
-                    <div>
-                        <h1
-                            class="text-center mb-4 text-blue-900 text-lg font-extrabold leading-none tracking-tight sm:text-4xl lg:text-5xl dark:text-white">
-                            {{ header.title }}</h1>
-                        <p
-                            class="text-center mb-6 text-blue-800 text-sm font-normal sm:text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-200">
-                            {{ header.description }}</p>
-
-
-
+    <navbar></navbar>
+    <div class="hero-section">
+        <!-- Swiper 容器 -->
+        <Swiper :modules="modules" :slides-per-view="1" :autoplay="{ delay: 5000, pauseOnMouseEnter: true }"
+            :pagination="{ clickable: true }" :loop="true" class="mySwiper" :speed="1300">
+            <!-- Swiper Slide 1 -->
+            <SwiperSlide>
+                <img src="/surving.webp" alt="Construction Site 1" class="background-image" />
+                <div class="overlay">
+                    <div class="content-container">
+                        <div class="left-content">
+                            <h1>什么是测绘?</h1>
+                            <h2>
+                                测绘是大地与天空的对话，借助精确的工具与技术，<br />
+                                将自然的脉络和人类的足迹细致描绘在蓝图之上
+                            </h2>
+                            <button class="cta-button">了解更多</button>
+                        </div>
                     </div>
-
-                </Transition>
-            </div>
-
-
-        </div>
-
-        <div>
-            <Transition v-show="!will_change.state" name="slide-fade" appear>
-                <div class="ml-20 bg-white dark:bg-gray-800 p-4 rounded-md shadow-lg w-72 h-100">
-                    <!-- 这是固定位置的内容 -->
-                    <h2 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">最新公告</h2>
-                    <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">临平项目</a>
-                    </p>
-                    <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">乔司项目</a>
-                    </p>
-                    <p class="mb-1"><a href="" class="text-blue-600 hover:underline dark:text-blue-400">东湖项目</a>
-                    </p>
                 </div>
-            </Transition>
+            </SwiperSlide>
+
+            <!-- Swiper Slide 2 -->
+            <SwiperSlide>
+                <img src="/drone.jpg" alt="Construction Site 2" class="background-image" />
+                <div class="overlay">
+                    <div class="content-container">
+                        <div class="left-content">
+                            <h1>我们的服务</h1>
+                            <h2>
+                                提供无人机精准测绘解决方案，满足您的各类需求<br />
+                                从基础测量到高级数据分析，我们都是您的可靠伙伴
+                            </h2>
+                            <button class="cta-button">了解更多</button>
+                        </div>
+                    </div>
+                </div>
+            </SwiperSlide>
+
+            <SwiperSlide>
+                <img src="/digitalization.webp" alt="智能数字化" class="background-image" />
+                <div class="overlay">
+                    <div class="content-container">
+                        <div class="left-content">
+                            <h1>智能数字化测绘</h1>
+                            <h2>
+                                采用无人机和GIS技术，提供精准、高效的测绘解决方案<br />
+                                从数据采集到三维建模，全流程数字化服务，助您掌握地理信息
+                            </h2>
+                            <button class="cta-button">了解更多</button>
+                        </div>
+                    </div>
+                </div>
+            </SwiperSlide>
+
+        </Swiper>
+    </div>
+    <div class="comapny-wrapper">
+        <div class="company-brief">
+            <h2>公司简介&愿景</h2>
+            <div class="company-description">
+                杭州跨远测绘有限公司是一家甲级专业测绘企业，成立于2006年1月19日。公司自成立以来，始终秉持<br>“精确、创新、服务”的理念，为客户提供高质量的测绘服务。作为一家拥有50名员工的小型企业，我们<br>致力于在测绘行业中树立标杆，始终走在技术创新的前沿。通过不断提升员工的专业能力和使用先进的<br>测绘设备，为客户提供精准的数据支持和解决方案。
+            </div>
         </div>
-
-
+        <div class="runnning-range">
+            <div class="mid-content">
+                <h2>经营范围</h2>
+                <ul>
+                    <li>
+                        <div class="icon">🏗️</div>
+                        <div class="service-info">
+                            <h3>
+                                <RouterLink to="/services" class="service-link">
+                                    工程测量
+                                </RouterLink>
+                            </h3>
+                            <p>主要经营范围包括工程测量：控制、地形、市政工程、建筑物放样等</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">🏙️</div>
+                        <div class="service-info">
+                            <h3>
+                                <RouterLink to="/services" class="service-link">
+                                    不动产测绘
+                                </RouterLink>
+                            </h3>
+                            <p>线与不动产测绘：地籍测绘、宗地测量、土地面积测算、土地勘测定界等</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">🛠️</div>
+                        <div class="service-info">
+                            <h3>
+                                <RouterLink to="/services" class="service-link">
+                                    地理信息系统工程
+                                </RouterLink>
+                            </h3>
+                            <p>提供地理信息系统工程服务，包括测绘航空摄影等高精度技术支持</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
     </div>
-
+    <div class="footer">
+        <span>联系我们获取免费咨询</span>
+        <button>在线测绘需求表单</button>
+    </div>
+    <LastestProjects></LastestProjects>
+    
 </template>
 
-
-
 <script setup>
-import { reactive, onMounted } from 'vue';
-import { Carousel } from 'flowbite'
-import { useStore } from 'vuex';
 import navbar from '../components/navbar.vue';
-
-let if_initial = true
-
-let current = reactive({ active: -1 })
-let will_change = reactive({ state: false })
-let header = reactive({ title: "", description: "" })
-
-const store = useStore()
-let data = store.state.homeData
-
-let index_ = {}
-for (let i in data) {
-    let p = Object.keys(data).indexOf(i)
-    index_[p] = data[i]
-
-}
-
-
-onMounted(() => {
-    carousel_creator()
-})
-
-
-
-function carousel_creator() {
-    const items = []
-    const items_i = []
-
-    for (let i in data) {
-        let p = Object.keys(data).indexOf(i)
-        let x = {
-            position: p,
-            el: document.getElementById(i)
-        }
-        let y = {
-            position: p,
-            el: document.getElementById(i + "_i")
-        }
-        items.push(x)
-        items_i.push(y)
-    }
-
-    const options = {
-        defaultPosition: 0,
-        interval: 6000,
-
-        indicators: {
-            activeClasses: 'bg-blue-500 dark:bg-gray-800',
-            inactiveClasses: 'bg-blue-300 dark:bg-gray-800/50 hover:bg-green-400 dark:hover:bg-gray-800',
-            items: items_i
-        },
-        onChange: (instance) => {
-            // handle_heading_animation(350)
-            will_change.state = !will_change.state
-            if (if_initial) {
-                current.active = instance._activeItem.position
-                header.title = index_[current.active].title
-                header.description = index_[current.active].description
-                will_change.state = !will_change.state
-                if_initial = false
-
-            }
-            else {
-                setTimeout(() => {
-                    current.active = instance._activeItem.position
-                    header.title = index_[current.active].title
-                    header.description = index_[current.active].description
-                    will_change.state = !will_change.state
-                }, 455)
-            }
-
-
-        }
-    }
-
-
-    let carousel = new Carousel(items, options)
-
-    carousel.cycle()
-
-
-}
-
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css/bundle';
+import { Pagination, A11y, Autoplay } from 'swiper/modules';
+import LastestProjects from './LastestProjects.vue';
+const modules = [Pagination, A11y, Autoplay];
 </script>
 
-
-
 <style scoped>
-.slide-fade-enter-active {
-    animation: fadeIn .45s;
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    overflow: hidden;
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: .25;
-    }
-
-    100% {
-        opacity: 1;
-    }
+.mySwiper {
+    width: 100%;
+    height: 100%;
 }
 
-
-.slide-fade-leave-active {
-    animation: fadeOut .45s;
+:deep(.mySwiper .swiper-pagination-bullet-active) {
+    width: 30px !important;
+    background-color: rgb(253, 174, 16) !important;
+    height: 10px;
 }
 
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
+:deep(.mySwiper .swiper-pagination-bullet) {
+    width: 20px;
+    height: 8px;
+    background-color: rgb(244, 219, 164);
+    border-radius: 3px;
+    margin: 0 5px;
+    transition: all 0.3s;
 }
 
-
-.fade-bg {
-    animation: fadeIn 3s;
-    min-height: 100vh;
-    height: 1200px;
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 73px;
+    left: 0;
+    z-index: 1;
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
+.overlay {
+    position: absolute;
+    top: 73px;
+    left: 0;
+    width: 100%;
+    height: 75vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.content-container {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    color: white;
+}
+
+.left-content {
+    margin-top: 60px;
+    margin-left: 240px;
+}
+
+.left-content h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.left-content p {
+    font-size: 19.2px;
+    margin: 20px 0;
+}
+
+.cta-button {
+    background-color: #ffcc00;
+    color: black;
+    padding: 15px 30px;
+    margin-top: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #f8e398;
+}
+
+.comapny-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.company-brief{
+    width: 50%;
+}
+.company-description{
+    line-height: 50px;
+}
+.runnning-range {
+    width: 30%;
+    min-width: 300px;
+}
+
+.mid-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.mid-content li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon {
+    font-size: 40px;
+    margin-right: 15px;
+}
+
+.service-info h3 {
+    margin: 0;
+    font-size: 19.2px;
+}
+
+.service-info p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.service-link {
+    text-decoration: none;
+    color: rgb(94, 37, 25);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.service-link:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    width: 100%;
+    margin-top: 20px;
+    height: 60px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.footer button {
+    background-color: transparent;
+    border: 2px solid #ffc107;
+    padding: 10px 20px;
+    color: #ffc107;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footer button:hover {
+    background-color: #ffc107;
+    color: white;
+}
+
+/* 添加媒体查询以适配移动端 */
+@media screen and (max-width: 768px) {
+    .background-image {
+        top: 0;
+    }
+    .company-description{
+        line-height: 20px;
+
     }
 
-    100% {
-        opacity: 1;
+    .overlay {
+        top: 0;
+        height: 100vh;
+    }
+
+    .content-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+        
+    }
+
+    .left-content {
+        margin: 0;
+        margin-top: 100px;
+    }
+
+    .left-content h1 {
+        font-size: 32px;
+    }
+
+    .left-content h2 {
+        font-size: 18px;
+    }
+
+    .cta-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .comapny-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .company-brief{
+        width: 90%;
+        height:35vh;
+    }
+    .runnning-range {
+        width: 90%;
+        height:35vh;
+        margin-bottom: 30px;
+    }
+
+    .icon {
+        font-size: 30px;
+    }
+
+    .service-info h3 {
+        font-size: 18px;
+    }
+
+    .service-info p {
+        font-size: 14px;
+    }
+
+    .footer {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .footer span {
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    .footer button {
+        font-size: 14px;
+        padding: 8px 16px;
     }
 }
 </style>

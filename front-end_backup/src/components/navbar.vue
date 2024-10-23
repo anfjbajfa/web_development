@@ -1,249 +1,246 @@
 <template>
-  <!-- 第一个导航区：公司名+联系信息 -->
-  <nav class=" bg-white dark:bg-gray-500">
-    <div class="flex flex-wrap justify-between items-center mx-auto w-full px-4 md:px-6 py-2.5">
-
-      <div class="flex items-center p-2 dark:rounded-lg">
-        <img src="/logo.png" class="h-14" />
-        <span class="text-2xl font-bold text-black-900 dark:text-white ml-2">杭州跨远测绘有限公司</span>
-      </div>
-
-      <!-- div右上角那一块：电话+邮箱+模式调节 -->
-      <div class="flex items-center px-4">
-        <!-- 电话+邮箱 -->
-        <div class="flex flex-col items-center justify-center gap-2">
-          <a :href="'tel:' + phone_number"
-            class="mr-6 w-full text-sm font-medium text-black-900 dark:text-white hover:underline">{{ "电话: " +
-              phone_number }}</a>
-          <a :href="'mailto:' + email"
-            class="mr-6 text-sm w-full font-medium text-black-900 dark:text-white hover:underline">
-            {{ "邮件: " + email }}
-          </a>
-        </div>
-        <!-- 模式调节按钮 -->
-        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
-          <button type="button" @click="dark">
-            <svg v-if="dark_mode.state" class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-              </path>
-            </svg>
-            <svg v-if="!dark_mode.state" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-            </svg>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </nav>
-
-  <!-- 第二个导航区：导航栏(包括主页+服务+..) -->
-  <nav class="bg-blue-900 dark:bg-gray-800 h-13">
-    <div class="w-full px-4 py-2  md:px-6">
-      <div class="flex items-center">
-        <ul class="flex flex-row mt-0 mr-6 space-x-10 text-m font-bold">
-          <li v-for="i in Object.keys(menu_items)">
-            <RouterLink v-if="!(menu_items[i].constructor === Object)" :to="menu_items[i]"
-              class="text-white dark:text-white hover:underline">
-              {{ i }}
-            </RouterLink>
-
-            <!-- 这个div是关于 -->
-            <!-- <div v-else>
-              关于+箭头
-              <button @click="show_hide(i)"
-                class="flex items-start text-white dark:text-white hover:underline font-bold">
-                {{ i }}
-                <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
-                </svg>
-              </button>
-
-              子导航栏
-              <div hidden :ref="(el) => { drop_box_store[i] = { el: el, is_shown: 0 } }"
-                class="z-[999999] font-normal bg-white divide-y border-blue-200 border-2 divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute mt-3">
-                <ul class="py-1 text-sm text-gray-700 dark:text-gray-400">
-                  <li v-for="x in Object.keys(menu_items[i])" :key="x">
-                    <RouterLink :to="menu_items[i][x]"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full dark:hover:text-white">
-                      {{ x }}
-                    </RouterLink>
-                  </li>
-                </ul>
-              </div>
-            </div> -->
-          </li>
-        </ul>
-
-        <RouterLink v-if="!isLogined" :to="login" class="ml-auto text-white dark:text-white hover:underline font-bold">
-          登录
-        </RouterLink>
-        <RouterLink v-else class="ml-auto">
-          <Avatar />
-        </RouterLink>
-
-
-      </div>
-
-
+  <nav class="nav-container">
+    <div class="title-container">
+      <img src="/logo.png" class="logo" />
+      <span class="company-name">杭州跨远测绘有限公司</span>
     </div>
 
+    <!-- 菜单按钮，仅在移动端显示 -->
+    <div class="menu-toggle" @click="toggleMenu">
+      <span class="menu-icon"><el-icon>
+          <IconMenu />
+        </el-icon>
+      </span>
+    </div>
 
+    <!-- 菜单列表，PC端直接显示，移动端根据状态显示 -->
+    <div :class="['menu-list-container', { 'mobile-menu': isMobileMenuOpen }]">
+      <ul class="menu-list">
+        <li v-for="i in Object.keys(menu_items)" :key="i">
+          <RouterLink v-if="!(menu_items[i].constructor === Object)" :to="menu_items[i]" class="menu-link">
+            {{ i }}
+          </RouterLink>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 登录或头像 -->
+    <div class="auth-container">
+      <RouterLink v-if="!isLogined" :to="login" class="login-link">
+        登录
+      </RouterLink>
+      <RouterLink v-else class="avatar-link">
+        <Avatar/>
+      </RouterLink>
+    </div>
   </nav>
-
 </template>
 
-
-
-
-
 <script setup>
-
-import { reactive, ref } from 'vue'
-import { getUserInfo } from '../utils/storage.js'
-import Avatar from '../components/Avatar.vue'
-
-let dark_mode = reactive({ 'state': false })
-
-let menu_data = {
+import { ref, onMounted } from 'vue';
+import { getUserInfo } from '../utils/storage.js';
+import Avatar from '../components/Avatar.vue';
+import { Menu as IconMenu } from "@element-plus/icons-vue";
+const menu_data = {
   "主页": "/",
   "服务": "/services",
-  "产品": "/product",
   "合作": "/cooperation",
   "荣誉": '/honor',
-  "招聘": "/recruitment"
-  
-}
-const login = ref("/login")
+  "招聘": "/recruitment",
+};
 
-let menu_items = menu_data
-let phone_number = '+86 10086'
-let email = 'company@gmail.com'
+const login = ref("/login");
+const menu_items = menu_data;
+const isLogined = ref(false);
+const isMobileMenuOpen = ref(false);
 
-let drop_box_store = {
+// 切换移动端菜单显示状态
+const toggleMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
 
-}
+// 检查登录状态
+const checkLoginStatus = () => {
+  isLogined.value = getUserInfo() !== null;
+};
 
-
-/* <navbar v-if="!isLoginPage&&!isRegisterPage&&!isDatasetPage" :menu_items=menu_data phone_number="+86 1000000000000" :company_name=company_name email="company@gmail.com" /> */
-
-const isLogined = ref('')
-// 模拟登录状态的改变，可以根据实际的业务逻辑判断是否登录
-function checkLoginStatus() {
-  // 假设有个获取用户信息的方法 getUserInfo()
-  if (getUserInfo() == null) {
-    isLogined.value = false;
-  } else {
-    isLogined.value = true;
-  }
-}
-
-// 调用函数检查是否登录
-checkLoginStatus();
-
-function show_hide(name) {
-  if (drop_box_store[name]["is_shown"] == 0) {
-    drop_box_store[name]["is_shown"] = 1
-  }
-  else drop_box_store[name]["is_shown"] = 0
-
-  if (drop_box_store[name]["is_shown"] == 0) {
-
-    drop_box_store[name]["el"].classList.remove("bounce-enter")
-    setTimeout(() => { drop_box_store[name]["el"].classList.add("bounce-leave") }, 100)
-    setTimeout(() => { drop_box_store[name]["el"].style.display = 'none' }, 470)
-
-  }
-  else {
-    drop_box_store[name]["el"].style.display = 'block'
-    drop_box_store[name]["el"].classList.add("bounce-enter")
-    drop_box_store[name]["el"].classList.remove("bounce-leave")
-
-  }
-  make_other_box_close(name)
-  // console.log(drop_box_store[name]["el"])
-
-}
-
-function make_other_box_close(current) {
-
-  for (let i of Object.keys(drop_box_store)) {
-    if (i !== current) {
-      drop_box_store[i]["is_shown"] = 0
-      drop_box_store[i]["el"].style.display = 'none'
-
-      // drop_box_store[i]["el"].classList.remove("bounce-enter")
-      // setTimeout( () =>  {drop_box_store[i]["el"].classList.add("bounce-leave")},70)
-      // setTimeout( () =>  {drop_box_store[i]["el"].style.display = 'none'},370)
-    }
-    else if (i === "all") {
-      // drop_box_store[i]["el"].classList.remove("bounce-enter")
-      // setTimeout( () =>  {drop_box_store[i]["el"].classList.add("bounce-leave")},70)
-      // setTimeout( () =>  {drop_box_store[i]["el"].style.display = 'none'},370)
-    }
-
-  }
-}
-
-
-
-
-
-function dark() {
-  // if set via local storage previously
-  if (localStorage.getItem('color-theme')) {
-    if (localStorage.getItem('color-theme') === 'light') {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('color-theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('color-theme', 'light');
-    }
-
-    // if NOT set via local storage previously
-  } else {
-    if (document.documentElement.classList.contains('dark')) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('color-theme', 'light');
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('color-theme', 'dark');
-    }
-  }
-  dark_mode.state = document.documentElement.classList.contains('dark')
-
-}
-
+// 在组件挂载时调用函数
+onMounted(() => {
+  checkLoginStatus();
+});
 </script>
 
-
-
 <style scoped>
-.bounce-enter {
-  animation: bounce-in 0.5s;
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  padding: 0 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
 }
 
-.bounce-leave {
-  animation: bounce-in 0.6s reverse;
+.title-container {
+  display: flex;
+  align-items: center;
+}
 
+.logo {
+  height: 50px;
+}
+
+.company-name {
+  margin-left: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/* 菜单列表容器 */
+.menu-list-container {
+  display: flex;
+  align-items: center;
+  margin-right:200px ;
+}
+
+/* 菜单列表 */
+.menu-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-list li+li {
+  margin-left: 40px;
+}
+
+.menu-link,
+.login-link,
+.avatar-link {
+  font-weight: bold;
+  font-size: 16px;
+  font-family: sans-serif;
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.menu-link:hover,
+.login-link:hover,
+.avatar-link:hover {
+  color: #1e3a8a;
+  text-decoration: underline;
 }
 
 
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
+/* 登录/头像容器 */
+.auth-container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-link {
+  margin-left: 20px;
+}
+
+/* 移动端菜单按钮 */
+.menu-toggle {
+  display: none;
+}
+
+/* 媒体查询 */
+@media screen and (max-width: 768px) {
+  .nav-container {
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 20px;
   }
 
-  50% {
-    transform: scale(1.25);
+  .title-container {
+    width: 100%;
+    align-items: center;
   }
 
-  100% {
-    transform: scale(1);
+  .company-name {
+    margin-left: 1px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+
+  .logo {
+    height: 25px;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-top: 3px;
+  }
+
+  .menu-icon {
+    font-size: 13px;
+  }
+
+  .menu-list-container {
+    width: 100%;
+    display: none;
+    background-color: rgb(213, 220, 220);
+    transition: opacity 0.3s ease, transform 0.3s ease; /* 确保过渡效果生效 */
+  }
+
+  /* 修改这里 */
+  .menu-list-container.mobile-menu {
+    display: block;
+    position: absolute;
+    top: 52.8px; /* 根据导航栏的高度进行调整 */
+    left: 0;
+    width: 100vw;
+    height: 25vh;
+    z-index: 999;
+    overflow-y: auto; /* 如果菜单项超出容器高度，允许滚动 */
+    transition: opacity 2s ease, transform 0.8s ease; 
+  }
+
+  .menu-list {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .menu-list li {
+    width: 100%;
+  }
+
+  .menu-list li+li {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .menu-link,
+  .login-link,
+  .avatar-link {
+    font-size: 10px;
+    padding: 10px;
+    display: block;
+
+  }
+
+  .menu-link:hover,
+  .login-link:hover,
+  .avatar-link:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* 加深背景色 */
+  }
+
+  .auth-container {
+    width: 100%;
+    justify-content: flex-end;
   }
 }
 </style>

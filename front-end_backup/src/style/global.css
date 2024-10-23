@@ -1,0 +1,12 @@
+/* 重置浏览器默认样式 */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+/* 应用于所有元素 */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+  
