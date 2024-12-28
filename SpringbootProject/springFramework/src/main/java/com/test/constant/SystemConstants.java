@@ -6,6 +6,5 @@ public class SystemConstants {
      */
     public static final String ADMIN_USER = "1";
     public static final String REDIS_USER_ID_PREFIX = "login:user:id:";
-
-
+    public static final String REDIS_ORDER_PREFIX = "order:";
 }

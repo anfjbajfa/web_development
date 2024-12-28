@@ -62,7 +62,6 @@ service.interceptors.response.use(
                 }
             ).then(() => {
                 router.replace('/login')
-                console.log("ok")
             })
         } else if (msg) {
             ElMessage.error(msg)

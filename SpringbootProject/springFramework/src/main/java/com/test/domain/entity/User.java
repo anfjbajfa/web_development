@@ -26,11 +26,10 @@ public class User implements Serializable {
     private Long id;
 
     /**
-     * 用户名
+     * 手机号
      */
-    @NotBlank(message = "用户名不能为空")
-    private String userName;
-
+    @NotBlank(message = "手机号不能为空")
+    private String phone;
 
     /**
      * 密码
@@ -39,38 +38,19 @@ public class User implements Serializable {
     private String password;
 
     /**
-     * 用户类型：0代表普通用户，1代表管理员
+     * 用户类型：2代表普通用户，1代表管理员
      */
-
     private String type;
 
     /**
-     * 账号状态（0正常 1停用）
+     * 生成的随机字符串
      */
-    private String status;
-
-    /**
-     * 邮箱
-     */
-    @NotBlank(message = "邮箱不能为空")
-    @Email(message = "邮箱格式错误")
-    private String email;
-
-    /**
-     * 手机号
-     */
-    private String phonenumber;
-
-    /**
-     * 用户性别（0男，1女，2未知）
-     */
-    private String sex;
-
+    private String randomString;
 
     /**
      * 创建人的用户id
      */
-    private Long createBy;
+    private String createBy;
 
     /**
      * 创建时间
@@ -81,18 +61,13 @@ public class User implements Serializable {
     /**
      * 更新人
      */
-    private Long updateBy;
+    private String updateBy;
 
     /**
      * 更新时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-
-    /**
-     * 删除标志（0代表未删除，1代表已删除）
-     */
-    private Integer delFlag;
 
 }
 

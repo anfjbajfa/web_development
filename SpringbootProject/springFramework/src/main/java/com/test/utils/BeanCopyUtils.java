@@ -20,8 +20,30 @@ public class BeanCopyUtils {
     public static <V> V copyBean(Object o, Class<V> clazz) {
         V t = null;
         try {
-            t = clazz.newInstance();
+            t = clazz.getDeclaredConstructor().newInstance();
             BeanUtils.copyProperties(o, t);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
+
+    /**
+     * 拷贝属性
+     *
+     * @param o     原始数据实体类
+     * @param clazz 目标数据实体类
+     * @param <V>   目标实体类的类型
+     * @return 拷贝后的目标实体类
+     */
+    public static <V> V copyBean(Object o, Class<V> clazz, String... ignoredProps) {
+        if(o == null){
+            return null;
+        }
+        V t= null;
+        try {
+            t = clazz.getDeclaredConstructor().newInstance();
+            BeanUtils.copyProperties(o, t, ignoredProps);
         } catch (Exception e) {
             e.printStackTrace();
         }

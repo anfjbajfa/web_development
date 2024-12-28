@@ -1,35 +1,40 @@
-E:\SpringbootProject\springFramework\src\main\java\com\test\service\LoginService.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\utils\JwtUtil.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\mapper\UserMapper.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\ResponseResult.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\utils\Assert.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\entity\Access.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\service\impl\FileServiceImpl.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\service\UserService.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\utils\RedisCache.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\vo\UserLoginVo.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\dto\LoginUserDTO.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\entity\LoginUser.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\vo\UserInfoVo.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\handler\security\AuthenticationEntryPointImpl.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\service\impl\UserServiceImpl.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\Config\RedisConfig.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\handler\exception\GlobalExceptionHandler.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\mapper\AccessMapper.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\vo\FileNode.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\utils\BeanCopyUtils.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\enums\HttpCodeEnum.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\utils\FileTreeUtil.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\entity\User.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\service\FileService.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\utils\FastJsonRedisSerializer.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\exception\SystemException.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\handler\security\AccessDeniedHandlerImpl.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\filter\JwtAuthenticationTokenFilter.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\service\impl\LoginServiceImpl.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\domain\dto\UserDTO.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\service\impl\UserDetailsServiceImpl.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\Config\SecurityConfig.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\utils\SecurityUtils.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\utils\WebUtils.java
-E:\SpringbootProject\springFramework\src\main\java\com\test\constant\SystemConstants.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\vo\FileNode.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\vo\UserInfoVo.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\Main.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\dto\LoginUserDTO.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\handler\security\AuthenticationEntryPointImpl.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\Assert.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\handler\exception\GlobalExceptionHandler.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\exception\SystemException.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\mapper\UserMapper.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\service\UserRegisterService.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\entity\User.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\JwtUtil.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\service\FileService.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\constant\SystemConstants.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\handler\security\AccessDeniedHandlerImpl.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\FileTreeUtil.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\RedisCache.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\filter\JwtAuthenticationTokenFilter.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\service\LoginService.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\BeanCopyUtils.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\Config\SecurityConfig.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\mapper\AccessMapper.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\entity\Access.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\entity\LoginUser.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\service\impl\UserDetailsServiceImpl.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\Config\RedisConfig.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\service\impl\FileServiceImpl.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\FastJsonRedisSerializer.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\Config\SmsConfig.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\service\UserQueryService.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\SecurityUtils.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\WebUtils.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\RandomStringGeneratorUtil.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\service\impl\LoginServiceImpl.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\dto\UserRegisterDTO.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\utils\SmsUtils.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\enums\HttpCodeEnum.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\service\impl\UserRegisterServiceImpl.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\ResponseResult.java
+C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\springFramework\src\main\java\com\test\domain\vo\UserLoginVo.java

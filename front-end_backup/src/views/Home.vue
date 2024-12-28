@@ -65,39 +65,45 @@
         </div>
         <div class="runnning-range">
             <div class="mid-content">
-                <h2>经营范围</h2>
+                <h2>服务范围</h2>
                 <ul>
                     <li>
-                        <div class="icon">🏗️</div>
+                        <div class="icon">
+                            <img src="/construction-icon.svg" alt="icon" />
+                        </div>
                         <div class="service-info">
                             <h3>
-                                <RouterLink to="/services" class="service-link">
+                                <RouterLink to="/services#gong_cheng" class="service-link">
                                     工程测量
                                 </RouterLink>
                             </h3>
-                            <p>主要经营范围包括工程测量：控制、地形、市政工程、建筑物放样等</p>
+                            <p>控制、地形、市政工程、建筑物放样等</p>
                         </div>
                     </li>
                     <li>
-                        <div class="icon">🏙️</div>
+                        <div class="icon">
+                            <img src="/surveying-icon.svg">
+                        </div>
                         <div class="service-info">
                             <h3>
-                                <RouterLink to="/services" class="service-link">
-                                    不动产测绘
+                                <RouterLink to="/services#bu_dong_chan" class="service-link">
+                                    线与不动产测绘
                                 </RouterLink>
                             </h3>
-                            <p>线与不动产测绘：地籍测绘、宗地测量、土地面积测算、土地勘测定界等</p>
+                            <p>地籍测绘、宗地测量、土地面积测算、土地勘测定界等</p>
                         </div>
                     </li>
                     <li>
-                        <div class="icon">🛠️</div>
+                        <div class="icon">
+                            <img src="/GIS-icon.svg">
+                        </div>
                         <div class="service-info">
                             <h3>
                                 <RouterLink to="/services" class="service-link">
                                     地理信息系统工程
                                 </RouterLink>
                             </h3>
-                            <p>提供地理信息系统工程服务，包括测绘航空摄影等高精度技术支持</p>
+                            <p>测绘航空摄影等高精度技术支持</p>
                         </div>
                     </li>
                 </ul>
@@ -106,11 +112,13 @@
 
     </div>
     <div class="footer">
-        <span>联系我们获取免费咨询</span>
-        <button>在线测绘需求表单</button>
+        <span>订购服务</span>
+    
+        <button class="footer-button" @click="handleClick">
+            填写需求表单
+        </button>       
     </div>
     <LastestProjects></LastestProjects>
-    
 </template>
 
 <script setup>
@@ -120,6 +128,28 @@ import 'swiper/css/bundle';
 import { Pagination, A11y, Autoplay } from 'swiper/modules';
 import LastestProjects from './LastestProjects.vue';
 const modules = [Pagination, A11y, Autoplay];
+import {useStore} from 'vuex'
+import router from '../router/index.js';
+import { ElMessage, ElMessageBox } from 'element-plus';
+
+const store = useStore()
+
+const handleClick =()=>{
+    if (!store.getters.isLogined){
+        ElMessageBox.confirm(
+      '您需要登录才能填写需求表单，是否立即登录？',
+      '提示',
+      {
+        confirmButtonText: '去登录',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+      .then(()=>{router.push('/login')})
+       
+    } else{
+        router.push("/request")
+    }
+}
 </script>
 
 <style scoped>
@@ -239,8 +269,9 @@ const modules = [Pagination, A11y, Autoplay];
 }
 
 .icon {
-    font-size: 40px;
-    margin-right: 15px;
+   height:50px;
+   width:50px;
+   margin-right: 15px;
 }
 
 .service-info h3 {
@@ -282,19 +313,22 @@ const modules = [Pagination, A11y, Autoplay];
     font-weight: bold;
 }
 
-.footer button {
-    background-color: transparent;
-    border: 2px solid #ffc107;
-    padding: 10px 20px;
-    color: #ffc107;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.footer-button {
+  display: inline-block; /* 使链接具备块级元素的特性 */
+  background-color: transparent;
+  border: 2px solid #ffc107;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none; /* 去除下划线 */
+  color: #ffc107; /* 初始文本颜色 */
+  transition: background-color 0.3s, color 0.3s; /* 平滑过渡效果 */
 }
 
-.footer button:hover {
-    background-color: #ffc107;
-    color: white;
+.footer-button:hover {
+  background-color: #ffc107 !important;
+  color: white !important;
 }
 
 /* 添加媒体查询以适配移动端 */

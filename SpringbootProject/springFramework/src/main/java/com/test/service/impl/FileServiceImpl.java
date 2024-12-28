@@ -3,6 +3,7 @@ package com.test.service.impl;
 import com.test.domain.ResponseResult;
 import com.test.domain.vo.FileNode;
 import com.test.enums.HttpCodeEnum;
+import com.test.exception.SystemException;
 import com.test.service.FileService;
 import com.test.utils.FileTreeUtil;
 import com.test.utils.SecurityUtils;
@@ -53,36 +54,43 @@ public class FileServiceImpl implements FileService {
             String workingDir = System.getProperty("user.dir");
             // 解析绝对路径
             absoluteParentFilePath = new File(workingDir, parentFilePath).getCanonicalPath();
-//            System.out.println("absoluteParentFilePath是："+absoluteParentFilePath);      //C:\Users\Yu FAN\Desktop\web_dev\SpringbootProject\file
+            // logger.info("absoluteParentFilePath是：{}", absoluteParentFilePath);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to resolve file path", e);
+            // 使用全局异常处理器来处理异常
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "无法解析路径",e);
         }
     }
 
     @Override
-    public ResponseResult<String> uploadFile(MultipartFile file, String path) throws UnsupportedEncodingException {
+    public ResponseResult<String> uploadFile(MultipartFile file, String path) {
         if (file.isEmpty()) {
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "上传的文件不能为空");
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "上传的文件为空");
         }
-        System.out.println(path);
+
         String originalFilename = file.getOriginalFilename();
+        if (originalFilename == null || !originalFilename.contains(".")) {
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "文件名无效");
+        }
+
         String mainName = originalFilename.substring(0, originalFilename.lastIndexOf("."));
         String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
 
         // 确保路径安全，防止路径遍历攻击
         String sanitizedPath = SecurityUtils.sanitizePath(path, absoluteParentFilePath);
         if (sanitizedPath == null) {
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "非法的路径参数");
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "非法的路径");
         }
 
         // 创建要存储的路径
         String fileRealPath = absoluteParentFilePath + File.separator + sanitizedPath + File.separator + originalFilename;
 
-
         // 创建文件的存储目录，如果不存在的话
         File saveFile = new File(fileRealPath);
         if (!saveFile.getParentFile().exists()) {
-            saveFile.getParentFile().mkdirs();
+            boolean dirsCreated = saveFile.getParentFile().mkdirs();
+            if (!dirsCreated) {
+                throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "创建目录失败");
+            }
         }
 
         // 如果上传的文件已经存在了，那么重命名
@@ -96,26 +104,29 @@ public class FileServiceImpl implements FileService {
         try {
             file.transferTo(saveFile);
         } catch (IOException e) {
-            e.printStackTrace();
-            return ResponseResult.errorResult(HttpCodeEnum.INTERNAL_SERVER_ERROR.getCode(), "文件上传失败");
+            throw new SystemException(HttpCodeEnum.INTERNAL_SERVER_ERROR, "文件保存失败",e);
         }
 
         // 返回下载链接，注意不暴露文件系统路径
-        String url = "http://" + ip + ":" + port + "/file/download?path=" + URLEncoder.encode(sanitizedPath + "/" + saveFile.getName(), "UTF-8");
-        return ResponseResult.successResult(url);
+        String url;
+        try {
+            url = "http://" + ip + ":" + port + "/file/download?path=" + URLEncoder.encode(sanitizedPath + "/" + saveFile.getName(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new SystemException(HttpCodeEnum.INTERNAL_SERVER_ERROR, "URL编码失败");
+        }
+        return ResponseResult.success(url);
     }
 
     @Override
     public void downloadFile(List<String> filePaths, HttpServletResponse response) {
         if (filePaths == null || filePaths.isEmpty()) {
             try {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "未选择要下载的文件。");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "未选择要下载的文件");
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "发送错误响应失败",e);
             }
             return;
         }
-        System.out.println(filePaths);
 
         try {
             Path rootPath = Paths.get(absoluteParentFilePath).toRealPath();
@@ -127,15 +138,13 @@ public class FileServiceImpl implements FileService {
 
                 // 防止路径遍历攻击
                 if (!singleFilePath.startsWith(rootPath)) {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "非法的文件路径");
-                    return;
+                    throw new SystemException(HttpCodeEnum.BAD_REQUEST, "非法的文件路径");
                 }
 
                 File singleFile = singleFilePath.toFile();
 
                 if (!singleFile.exists() || !singleFile.isFile()) {
-                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "文件不存在");
-                    return;
+                    throw new SystemException(HttpCodeEnum.BAD_REQUEST, "文件不存在");
                 }
 
                 // 设置响应头
@@ -170,7 +179,6 @@ public class FileServiceImpl implements FileService {
 
                         // 防止路径遍历攻击
                         if (!filePath.startsWith(rootPath)) {
-                            // 可选择跳过或返回错误
                             continue; // 跳过非法路径
                         }
 
@@ -198,22 +206,16 @@ public class FileServiceImpl implements FileService {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            try {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "系统错误");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "文件下载失败",e);
         }
     }
-
 
     @Override
     public ResponseResult<FileNode> listFiles() {
         File directory = new File(absoluteParentFilePath);
         // 检查输入目录是否存在且为目录
         if (!directory.exists() || !directory.isDirectory()) {
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "无效的目录路径");
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "目录不存在或不是一个有效的目录");
         }
         // 构建文件树节点列表，传入初始路径
         List<FileNode> fileNodes = FileTreeUtil.buildFileTree(directory, directory.getAbsolutePath());
@@ -226,7 +228,7 @@ public class FileServiceImpl implements FileService {
         rootNode.setPath(directory.getAbsolutePath()); // 设置根节点的路径
 
         // 返回根节点
-        return ResponseResult.successResult(rootNode);
+        return ResponseResult.success(rootNode);
     }
 
     @Override
@@ -239,7 +241,7 @@ public class FileServiceImpl implements FileService {
             String canonicalRootPath = new File(absoluteParentFilePath).getCanonicalPath();
             String canonicalFilePath = file.getCanonicalPath();
             if (!canonicalFilePath.startsWith(canonicalRootPath)) {
-                return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "非法的文件路径");
+                throw new SystemException(HttpCodeEnum.BAD_REQUEST, "非法的文件路径");
             }
 
             // 防止删除固定的根目录
@@ -248,16 +250,16 @@ public class FileServiceImpl implements FileService {
             if (pathSegments.length > 0 && fixedRootDirectories.contains(pathSegments[0])) {
                 if (pathSegments.length == 1) {
                     // 试图删除固定的根目录
-                    return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "不能删除固定的根目录");
+                    throw new SystemException(HttpCodeEnum.BAD_REQUEST, "无法删除固定的根目录");
                 }
             }
 
         } catch (IOException e) {
-            return ResponseResult.errorResult(HttpCodeEnum.SYSTEM_ERROR.getCode(), "系统错误");
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "路径解析失败",e);
         }
 
         if (!file.exists()) {
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "文件或目录不存在");
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "文件不存在");
         }
 
         // 判断是文件还是目录
@@ -270,20 +272,21 @@ public class FileServiceImpl implements FileService {
             success = file.delete();
         }
 
-        if (success) {
-            return new ResponseResult<>();
-        } else {
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "删除失败");
+        if (!success) {
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "删除文件失败");
         }
+
+        return ResponseResult.success();
     }
 
     // 递归删除目录
-//    TODO
     private boolean deleteDirectoryRecursively(File dir) {
         File[] allContents = dir.listFiles();
         if (allContents != null) {
             for (File file : allContents) {
-                deleteDirectoryRecursively(file);
+                if (!deleteDirectoryRecursively(file)) {
+                    return false;
+                }
             }
         }
         return dir.delete();
@@ -291,74 +294,106 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public ResponseResult<Void> createDirectory(String parentPath, String folderName) {
+        // 构建根路径和父目录的绝对路径
+        Path rootPath;
         try {
-            // 构建根路径和父目录的绝对路径
-            Path rootPath = Paths.get(absoluteParentFilePath).toRealPath().normalize();
-            Path parentPathResolved = rootPath.resolve(parentPath).normalize();
-
-            // 校验父目录路径，防止路径遍历攻击
-            if (!parentPathResolved.startsWith(rootPath)) {
-                logger.warn("非法的父目录路径: {}", parentPath);
-                return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "非法的父目录路径");
-            }
-
-            // 构建新文件夹的路径
-            Path newFolderPath = parentPathResolved.resolve(folderName).normalize();
-
-            // 检查新文件夹是否仍在根路径下
-            if (!newFolderPath.startsWith(rootPath)) {
-                logger.warn("非法的文件夹路径: {}", newFolderPath);
-                return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "非法的文件夹路径");
-            }
-
-            // 检查文件夹是否已存在
-            if (Files.exists(newFolderPath)) {
-                logger.warn("文件夹已存在: {}", newFolderPath);
-                return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "文件夹已存在");
-            }
-
-            // 创建文件夹
-            Files.createDirectories(newFolderPath);
-            logger.info("文件夹创建成功: {}", newFolderPath);
-            return new ResponseResult<>();
-
+            rootPath = Paths.get(absoluteParentFilePath).toRealPath().normalize();
         } catch (IOException e) {
-            logger.error("文件夹创建失败: parentPath={}, folderName={}", parentPath, folderName, e);
-            return ResponseResult.errorResult(HttpCodeEnum.SYSTEM_ERROR.getCode(), "系统错误");
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "根路径解析失败",e);
         }
+
+        Path parentPathResolved = rootPath.resolve(parentPath).normalize();
+
+        // 校验父目录路径，防止路径遍历攻击
+        if (!parentPathResolved.startsWith(rootPath)) {
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "非法的父目录路径");
+        }
+
+        // 构建新文件夹的路径
+        Path newFolderPath = parentPathResolved.resolve(folderName).normalize();
+
+        // 检查新文件夹是否仍在根路径下
+        if (!newFolderPath.startsWith(rootPath)) {
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "非法的文件夹路径");
+        }
+
+        // 检查文件夹是否已存在
+        if (Files.exists(newFolderPath)) {
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "文件夹已存在");
+        }
+
+        // 创建文件夹
+        try {
+            Files.createDirectories(newFolderPath);
+        } catch (IOException e) {
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "创建文件夹失败",e);
+        }
+
+        return ResponseResult.success();
     }
 
     @Override
-    public ResponseResult<Void> moveFile(List<String> sourcePaths, String targetPath) throws IOException {
-        Path targetDir = Paths.get(targetPath);
+    public ResponseResult<Void> moveFile(List<String> sourcePaths, String targetPath) {
+        Path targetDir;
+        try {
+            targetDir = Paths.get(targetPath).toRealPath().normalize();
+        } catch (IOException e) {
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "目标路径解析失败",e);
+        }
 
         // 检查目标目录是否存在，不存在则创建
         if (!Files.exists(targetDir)) {
-            Files.createDirectories(targetDir);
+            try {
+                Files.createDirectories(targetDir);
+            } catch (IOException e) {
+                throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "创建目标目录失败",e);
+            }
         }
 
         for (String sourcePathStr : sourcePaths) {
-            Path sourcePath = Paths.get(sourcePathStr);
+            Path sourcePath;
+            try {
+                sourcePath = Paths.get(sourcePathStr).toRealPath().normalize();
+            } catch (IOException e) {
+                throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "源路径解析失败: " + sourcePathStr,e);
+            }
+
+            // 防止路径遍历攻击
+            try {
+                Path rootPath = Paths.get(absoluteParentFilePath).toRealPath();
+                if (!sourcePath.startsWith(rootPath)) {
+                    throw new SystemException(HttpCodeEnum.BAD_REQUEST, "非法的源路径: " + sourcePathStr);
+                }
+            } catch (IOException e) {
+                throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "路径解析失败",e);
+            }
 
             // 检查源文件是否存在
             if (!Files.exists(sourcePath)) {
-                throw new IOException("源文件不存在: " + sourcePathStr);
+                throw new SystemException(HttpCodeEnum.BAD_REQUEST, "源文件不存在: " + sourcePathStr);
             }
 
             // 检查是否为目录
             if (Files.isDirectory(sourcePath)) {
                 // 递归移动目录
                 Path destination = targetDir.resolve(sourcePath.getFileName());
-                moveDirectoryRecursively(sourcePath, destination);
+                try {
+                    moveDirectoryRecursively(sourcePath, destination);
+                } catch (IOException e) {
+                    throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "移动目录失败: " + sourcePathStr + " -> " + destination.toString(),e);
+                }
 
             } else {
                 // 移动单个文件
                 Path destination = targetDir.resolve(sourcePath.getFileName());
-                Files.move(sourcePath, destination, StandardCopyOption.REPLACE_EXISTING);
-
+                try {
+                    Files.move(sourcePath, destination, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "移动文件失败: " + sourcePathStr + " -> " + destination.toString(),e);
+                }
             }
         }
-        return new ResponseResult<>();
+        return ResponseResult.success();
     }
 
     /**
@@ -394,35 +429,44 @@ public class FileServiceImpl implements FileService {
         Files.delete(sourceDir);
     }
 
-
     @Override
-    public ResponseResult<Void> renameFile(String sourcePath, String targetPath) throws IOException {
-        Path source = Paths.get(sourcePath);
-        Path target = Paths.get(targetPath);
+    public ResponseResult<Void> renameFile(String sourcePath, String targetPath) {
+        Path source;
+        Path target;
+        try {
+            source = Paths.get(sourcePath).toRealPath().normalize();
+            target = Paths.get(targetPath).toRealPath().normalize();
+        } catch (IOException e) {
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "路径解析失败",e);
+        }
+
+        // 防止路径遍历攻击
+        try {
+            Path rootPath = Paths.get(absoluteParentFilePath).toRealPath();
+            if (!source.startsWith(rootPath) || !target.startsWith(rootPath)) {
+                throw new SystemException(HttpCodeEnum.BAD_REQUEST, "非法的文件路径");
+            }
+        } catch (IOException e) {
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "路径解析失败",e);
+        }
 
         // 检查源文件是否存在
         if (!Files.exists(source)) {
-            logger.error("重命名文件找不到源文件:{}", sourcePath);
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "源文件不存在");
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "源文件不存在: " + sourcePath);
         }
 
         // 检查目标文件是否已存在（根据业务逻辑，你可以决定是否覆盖）
         if (Files.exists(target)) {
-            logger.warn("目标文件已经存在: {}", targetPath);
-            // 如果不允许覆盖，则返回错误
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "目标文件已存在，无法重命名");
+            throw new SystemException(HttpCodeEnum.BAD_REQUEST, "目标文件已存在: " + targetPath);
         }
 
         // 执行文件重命名（移动）操作
         try {
-            Files.move(source, target, StandardCopyOption.ATOMIC_MOVE); // 确保操作是原子的
+            Files.move(source, target, StandardCopyOption.ATOMIC_MOVE);
         } catch (IOException e) {
-            logger.error("重命名文件失败: {} -> {}", sourcePath, targetPath, e);
-            throw e; // 将异常抛出给调用方处理
+            throw new SystemException(HttpCodeEnum.SYSTEM_ERROR, "重命名文件失败: " + sourcePath + " -> " + targetPath,e);
         }
 
-        return new ResponseResult<>();
+        return ResponseResult.success();
     }
 }
-
-

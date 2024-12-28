@@ -3,15 +3,15 @@ import service from '../utils/request.js'
 
 /**
  * 用户登录
- * @param {string} userName 用户名
+ * @param {string} phone 手机号
  * @param {string} password 密码
  * @returns promise
  */
-function login(userName, password) {
+function login(phone, password) {
     return service({
         url: "/login",
         method: "post",
-        data: { userName, password },
+        data: { phone, password },
     })
 }
 
@@ -29,29 +29,62 @@ function logout() {
 
 /**
  * 用户注册
- * @param {string} userName 用户名
- * @param {string} email 邮箱
+ * @param {string} phone 用户名
+ * @param {string} verificationCode 验证码
  * @param {string} password 密码
  * @returns promise
  */
-function register(email, userName, password) {
+function register(phone, password) {
     return service({
-        url: "user/login/register",
+        url: "register/login/register",
         method: "post",
-        data: { email, userName, password },
+        data: { phone, password},
     })
+}
+/**
+ * 更新密码
+ * @param 手机号
+ * @param 新密码
+ * @param {string} verificationCode 验证码
+ */
+function updatePassword(phone,password,verificationCode) {
+    return service(
+        {
+            url:"updateUserInfo/updatePassword",
+            method:"post",
+            data:{phone,password,verificationCode},
+            needAuthentication:true
+        }
+    )
+}
+
+/**
+ * 更新密码
+ * @param {string} phone 手机号 
+ * @param {string} verificationCode 验证码
+ */
+
+function sendVerificationCode(phone){
+    
+    return service(
+        {
+            url:"register/sendVerificationCode",
+            method:"post",
+            params:{phone}
+        }
+    )
 }
 
 /**
  * 获取所有用户信息
  */
-function getAllUserInfo() {
-    return service.get("/user/getAllUsers",{ needAuthentication: true })
-    .catch(error => {
-        console.error("Get all users error:", error);
-        throw error;
-    });
-}
+// function getAllUserInfo() {
+//     return service.get("/user/getAllUsers",{ needAuthentication: true })
+//     .catch(error => {
+//         console.error("Get all users error:", error);
+//         throw error;
+//     });
+// }
 
 
 // /**
@@ -81,4 +114,4 @@ function getAllUserInfo() {
 
 
 
-export { login, logout, register, getAllUserInfo}
+export { login, logout, register, updatePassword,sendVerificationCode}

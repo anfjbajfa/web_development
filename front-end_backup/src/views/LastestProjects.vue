@@ -42,7 +42,7 @@
   
       <button class="view-all">VIEW ALL</button>
     </div>
-  </template>
+</template>
   
 <style scoped>
 .latest-projects {

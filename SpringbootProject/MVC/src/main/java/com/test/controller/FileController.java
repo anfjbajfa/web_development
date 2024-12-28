@@ -51,10 +51,10 @@ public class FileController {
 
         // 简单的空值检查
         if (parentPath == null || parentPath.trim().isEmpty()) {
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "父目录路径不能为空");
+            return ResponseResult.error(HttpCodeEnum.BAD_REQUEST.getCode(), "父目录路径不能为空");
         }
         if (folderName == null || folderName.trim().isEmpty()) {
-            return ResponseResult.errorResult(HttpCodeEnum.BAD_REQUEST.getCode(), "文件夹名称不能为空");
+            return ResponseResult.error(HttpCodeEnum.BAD_REQUEST.getCode(), "文件夹名称不能为空");
         }
         // 调用服务层逻辑
         return fileService.createDirectory(parentPath.trim(), folderName.trim());

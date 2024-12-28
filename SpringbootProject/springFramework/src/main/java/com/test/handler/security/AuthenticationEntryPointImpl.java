@@ -23,12 +23,12 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
         ResponseResult result = null;
 
         if (e instanceof InsufficientAuthenticationException) {
-            result = ResponseResult.errorResult(HttpCodeEnum.NEED_LOGIN.getCode(), HttpCodeEnum.NEED_LOGIN.getMsg());
-//            System.out.println("错误在这里");
+            result = ResponseResult.error(HttpCodeEnum.NEED_LOGIN.getCode(), HttpCodeEnum.NEED_LOGIN.getMsg());
+
         } else if (e instanceof BadCredentialsException) {
-            result = ResponseResult.errorResult(HttpCodeEnum.LOGIN_ERROR.getCode(), e.getMessage());
+            result = ResponseResult.error(HttpCodeEnum.LOGIN_ERROR.getCode(), e.getMessage());
         } else {
-            result = ResponseResult.errorResult(HttpCodeEnum.SYSTEM_ERROR, "认证失败");
+            result = ResponseResult.error(HttpCodeEnum.SYSTEM_ERROR);
         }
 
         WebUtils.renderString(response, JSON.toJSONString(result));

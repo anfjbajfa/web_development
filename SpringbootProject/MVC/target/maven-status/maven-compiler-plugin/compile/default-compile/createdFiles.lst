@@ -1,5 +1,5 @@
+com\test\controller\UserQueryController.class
 com\test\config\WebConfig.class
 com\test\controller\LoginController.class
 com\test\controller\FileController.class
-com\test\Main.class
-com\test\controller\UserController.class
+com\test\controller\UserRegisterController.class

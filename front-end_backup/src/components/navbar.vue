@@ -30,17 +30,23 @@
         登录
       </RouterLink>
       <RouterLink v-else class="avatar-link">
-        <Avatar/>
+        
+          <Avatar/>
+          <el-badge v-if="getUserInfo().isAdmin" :value="pendingOrderCount"/>
+          <el-badge :is-dot="hasNewOrder" :hidden="!hasNewOrder"/>
+        
       </RouterLink>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed} from 'vue';
 import { getUserInfo } from '../utils/storage.js';
 import Avatar from '../components/Avatar.vue';
+import { useStore } from 'vuex'; 
 import { Menu as IconMenu } from "@element-plus/icons-vue";
+
 const menu_data = {
   "主页": "/",
   "服务": "/services",
@@ -51,7 +57,7 @@ const menu_data = {
 
 const login = ref("/login");
 const menu_items = menu_data;
-const isLogined = ref(false);
+
 const isMobileMenuOpen = ref(false);
 
 // 切换移动端菜单显示状态
@@ -59,15 +65,18 @@ const toggleMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
 
-// 检查登录状态
-const checkLoginStatus = () => {
-  isLogined.value = getUserInfo() !== null;
-};
+// 使用 Vuex store
+const store = useStore();
+const hasNewOrder = computed(()=>store.getters.hasNewOrder);
+const pendingOrderCount = computed(()=>store.getters.pendingOrderCount);
 
-// 在组件挂载时调用函数
 onMounted(() => {
-  checkLoginStatus();
+  store.dispatch('checkLoginStatus');
+  
 });
+
+// 计算属性，获取登录状态
+const isLogined = computed(() => store.getters.isLogined);
 </script>
 
 <style scoped>
@@ -242,5 +251,7 @@ onMounted(() => {
     width: 100%;
     justify-content: flex-end;
   }
+
+  
 }
 </style>

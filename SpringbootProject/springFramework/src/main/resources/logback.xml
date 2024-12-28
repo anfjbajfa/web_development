@@ -1,4 +1,9 @@
 <configuration>
+<!--configuration 主要有三个常用节点：appender，logger,root, 详见https://www.cnblogs.com/gavincoder/p/10091757.html-->
+
+    <!-- 从 Spring Boot 的 logging.path 属性获取日志目录，默认为 ./logs -->
+    <property name="LOG_HOME" value="${LOG_PATH:-./logs}" />
+
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -8,10 +13,10 @@
 
     <!-- 文件输出 -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/application.log</file>
+        <file>${LOG_HOME}/application.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 每天生成一个新的日志文件 -->
-            <fileNamePattern>logs/application.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/application.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>

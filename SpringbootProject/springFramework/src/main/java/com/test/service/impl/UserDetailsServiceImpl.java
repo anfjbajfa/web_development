@@ -19,9 +19,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-
+//获得authorization的信息
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -34,12 +33,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(User::getUserName, userName);
+        queryWrapper.eq(User::getPhone, userName);
         User user = userMapper.selectOne(queryWrapper);
         Assert.notNull(user, HttpCodeEnum.LOGIN_ERROR);
 
-
         List<String> permissions = accessMapper.selectPermissionsByUserId(user.getId());
+        System.out.println(permissions);
         return new LoginUser(user, permissions);
     }
 

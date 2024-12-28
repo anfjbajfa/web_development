@@ -1,12 +1,15 @@
 package com.test.filter;
 
-import com.test.Config.RedisConfig;
+
 import com.test.domain.entity.LoginUser;
 import com.test.enums.HttpCodeEnum;
 import com.test.exception.SystemException;
+import com.test.handler.exception.GlobalExceptionHandler;
 import com.test.utils.JwtUtil;
 import com.test.utils.RedisCache;
 import io.jsonwebtoken.Claims;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -24,6 +27,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
@@ -33,6 +38,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionResolver;
+
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -55,6 +62,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             }
 
             LoginUser loginUser = redisCache.getCacheObject(SystemConstants.REDIS_USER_ID_PREFIX + userId);
+
+
 //            System.out.println(loginUser.getAuthorities());
             if (loginUser == null) {
                 resolveException(request, response);
@@ -71,4 +80,3 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         exceptionResolver.resolveException(request, response, null, new SystemException(HttpCodeEnum.NEED_LOGIN));
     }
 }
-

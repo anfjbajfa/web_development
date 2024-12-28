@@ -3,7 +3,7 @@
  * @returns token
  */
 function getToken() {
-    return localStorage.getItem('token')
+    return sessionStorage.getItem('token')
 }
 
 /**
@@ -11,14 +11,14 @@ function getToken() {
  * @param {string} token 令牌
  */
 function setToken(token) {
-    localStorage.setItem('token', token)
+    sessionStorage.setItem('token', token)
 }
 
 /**
  * 移除令牌
  */
 function removeToken() {
-    localStorage.removeItem('token')
+    sessionStorage.removeItem('token')
 }
 
 
@@ -27,8 +27,7 @@ function removeToken() {
  * @returns userInfo
  */
 function getUserInfo() {
-    // console.log(localStorage.getItem('userInfo'))
-    return JSON.parse(localStorage.getItem('userInfo'))
+    return JSON.parse(sessionStorage.getItem('userInfo'))
 }
 
 
@@ -37,14 +36,14 @@ function getUserInfo() {
  * @param {object} userInfo 用户信息
  */
 function setUserInfo(userInfo) {
-    localStorage.setItem('userInfo', JSON.stringify(userInfo))
+    sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
 }
 
 /**
  * 移除用户信息
  */
 function removeUserInfo() {
-    localStorage.removeItem('userInfo')
+    sessionStorage.removeItem('userInfo')
 }
 
 

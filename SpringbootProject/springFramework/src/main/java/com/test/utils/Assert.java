@@ -52,8 +52,8 @@ public class Assert {
      * @param httpCodeEnum 状态码枚举类
      * @throws SystemException 系统异常
      */
-    public static void isTwo(int countAdmin, HttpCodeEnum httpCodeEnum) {
-        if (countAdmin>=2) {
+    public static void isThree(int countAdmin, HttpCodeEnum httpCodeEnum) {
+        if (countAdmin>=3) {
             throw new SystemException(httpCodeEnum);
         }
     }

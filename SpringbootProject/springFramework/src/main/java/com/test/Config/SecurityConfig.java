@@ -1,5 +1,6 @@
 package com.test.Config;
 
+import com.test.handler.security.AccessDeniedHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.access.AccessDeniedHandler;
+import com.test.handler.security.AuthenticationEntryPointImpl;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.test.filter.JwtAuthenticationTokenFilter;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
@@ -26,10 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
+    private AuthenticationEntryPointImpl authenticationEntryPoint;
 
     @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
+    private AccessDeniedHandlerImpl accessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -51,8 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/user/","user/register").permitAll()
                 .antMatchers("/login").anonymous()//允许匿名访问，登录以后就无法访问，这样阻止了已登录的用户再次登录
-//                .antMatchers(HttpMethod.GET,"/user/getCurrentlyLoginUserInfo").authenticated()   //得到所有的用户信息
-                .antMatchers("/logout").authenticated()
+
 
                 .anyRequest().permitAll();
 

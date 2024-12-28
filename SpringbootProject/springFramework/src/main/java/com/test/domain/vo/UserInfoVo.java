@@ -10,13 +10,9 @@ import lombok.NoArgsConstructor;
 public class UserInfoVo {
     private Long id;
 
-    private String userName;
+    private String phone;
 
-    private String sex;
+    private String randomString;
 
     private Boolean isAdmin;
-
-    private String email;
-
-    private String phonenumber;
 }

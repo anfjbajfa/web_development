@@ -2,8 +2,9 @@ package com.test.service;
 
 import com.test.domain.ResponseResult;
 import com.test.domain.dto.LoginUserDTO;
+import com.test.domain.vo.UserLoginVo;
 
 public interface LoginService {
-    ResponseResult<Void> login(LoginUserDTO user);
+    ResponseResult<UserLoginVo> login(LoginUserDTO user);
     ResponseResult<Void> logout();
 }
