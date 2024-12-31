@@ -1,46 +1,34 @@
 <template>
     <div class="latest-projects">
-      <h2>最近项目</h2>
+      <h2>项目集合</h2>
       <div class="yellow-line"></div>
       <div class="projects-container">
         <!-- 项目卡片1 -->
         <div class="project-card">
-          <img src="/projectPhoto.jpeg" alt="Project 1" />
+          <img src="/alidamo.jpg" alt="阿里达摩院" />
           <div class="project-info">
-            <h3>Service Title</h3>
+            <h3>余杭区项目</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id et euismod bibendum adipiscing et orci, fermentum.
+              余杭是文化古邑，是“中华文明圣地”——良渚古城遗址所在地，是良渚文化的发祥地，拥有5000年“良渚文化”，2000年“运河文化”和1000年“径山禅茶文化”。
             </p>
-            <button>Learn More</button>
+            <button>查看所有</button>
           </div>
         </div>
   
         <!-- 项目卡片2 -->
         <div class="project-card">
-          <img src="/projectPhoto.jpeg" alt="Project 2" />
+          <img src="/linpinCinema.jpg" alt="临平大剧院" />
           <div class="project-info">
-            <h3>Service Title</h3>
+            <h3>临平区项目</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id et euismod bibendum adipiscing et orci, fermentum.
+              临平之名在东汉时已见诸史册，晋时形成集市，隋唐以来是上塘河水路东出杭州的必经之地。临平区历史悠久、人文荟萃，是典型的江南水乡、鱼米之乡，先后获得2018—2020年健康浙江建设先进区等荣誉称号。
             </p>
-            <button>Learn More</button>
+            <button>查看所有</button>
           </div>
         </div>
   
-        <!-- 项目卡片3 -->
-        <div class="project-card">
-          <img src="/projectPhoto.jpeg" alt="Project 3" />
-          <div class="project-info">
-            <h3>Service Title</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id et euismod bibendum adipiscing et orci, fermentum.
-            </p>
-            <button>Learn More</button>
-          </div>
-        </div>
       </div>
   
-      <button class="view-all">VIEW ALL</button>
     </div>
 </template>
   
@@ -51,7 +39,6 @@
 }
 
 h2 {
-  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -65,8 +52,8 @@ h2 {
 
 .projects-container {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: center;
+  gap: 200px;
   margin-bottom: 30px;
   flex-wrap: wrap; /* 允许子元素换行 */
 }
@@ -117,61 +104,6 @@ h2 {
 .project-info button:hover {
   background-color: #000;
   color: #fff;
-}
-
-.view-all {
-  background-color: transparent;
-  border: 2px solid #000;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.view-all:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-/* 添加媒体查询 */
-@media screen and (max-width: 768px) {
-  .projects-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .latest-projects h2{
-    font-size: 25px;
-    margin-left: 0 !important;
-    padding-left: 0 !important;
-  }
-
-  .project-card {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .project-info {
-    padding: 15px;
-  }
-
-  .project-info h3 {
-    font-size: 1.5rem;
-  }
-
-  .project-info p {
-    font-size: 1rem;
-  }
-
-  .project-info button {
-    padding: 8px 16px;
-    font-size: 1rem;
-  }
-
-  .view-all {
-    width: 100%;
-    font-size: 1rem;
-  }
 }
 
 </style>

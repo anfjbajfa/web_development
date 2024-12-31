@@ -26,5 +26,3 @@ mybatis-plus:
 
 file:
   parent-path: ./file
-
-

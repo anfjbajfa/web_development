@@ -9,7 +9,7 @@
                 <img src="/surving.webp" alt="Construction Site 1" class="background-image" />
                 <div class="overlay">
                     <div class="content-container">
-                        <div class="left-content">
+                        <div class="swiper-inside">
                             <h1>什么是测绘?</h1>
                             <h2>
                                 测绘是大地与天空的对话，借助精确的工具与技术，<br />
@@ -26,7 +26,7 @@
                 <img src="/drone.jpg" alt="Construction Site 2" class="background-image" />
                 <div class="overlay">
                     <div class="content-container">
-                        <div class="left-content">
+                        <div class="swiper-inside">
                             <h1>我们的服务</h1>
                             <h2>
                                 提供无人机精准测绘解决方案，满足您的各类需求<br />
@@ -42,7 +42,7 @@
                 <img src="/digitalization.webp" alt="智能数字化" class="background-image" />
                 <div class="overlay">
                     <div class="content-container">
-                        <div class="left-content">
+                        <div class="swiper-inside">
                             <h1>智能数字化测绘</h1>
                             <h2>
                                 采用无人机和GIS技术，提供精准、高效的测绘解决方案<br />
@@ -60,11 +60,14 @@
         <div class="company-brief">
             <h2>公司简介&愿景</h2>
             <div class="company-description">
-                杭州跨远测绘有限公司是一家甲级专业测绘企业，成立于2006年1月19日。公司自成立以来，始终秉持<br>“精确、创新、服务”的理念，为客户提供高质量的测绘服务。作为一家拥有50名员工的小型企业，我们<br>致力于在测绘行业中树立标杆，始终走在技术创新的前沿。通过不断提升员工的专业能力和使用先进的<br>测绘设备，为客户提供精准的数据支持和解决方案。
+                杭州跨远测绘有限公司是一家甲级专业测绘企业，成立于2006年1月19日。
+                公司自成立以来，始终秉持“精确、创新、服务”的理念，为客户提供高质量的测绘服务。
+                作为一家拥有50名员工的小型企业，我们致力于在测绘行业中树立标杆，始终走在技术创新的前沿。
+                通过不断提升员工的专业能力和使用先进的测绘设备，为客户提供精准的数据支持和解决方案。
             </div>
         </div>
         <div class="runnning-range">
-            <div class="mid-content">
+            <div class="service-content">
                 <h2>服务范围</h2>
                 <ul>
                     <li>
@@ -111,14 +114,10 @@
         </div>
 
     </div>
-    <div class="footer">
-        <span>订购服务</span>
-    
-        <button class="footer-button" @click="handleClick">
-            填写需求表单
-        </button>       
-    </div>
     <LastestProjects></LastestProjects>
+    <projectTheme></projectTheme>
+    <ContactUs></ContactUs>
+    
 </template>
 
 <script setup>
@@ -131,25 +130,11 @@ const modules = [Pagination, A11y, Autoplay];
 import {useStore} from 'vuex'
 import router from '../router/index.js';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import projectTheme from './projectTheme.vue';
+import ContactUs from './ContactUs.vue';
 
 const store = useStore()
 
-const handleClick =()=>{
-    if (!store.getters.isLogined){
-        ElMessageBox.confirm(
-      '您需要登录才能填写需求表单，是否立即登录？',
-      '提示',
-      {
-        confirmButtonText: '去登录',
-        cancelButtonText: '取消',
-        type: 'warning',
-      })
-      .then(()=>{router.push('/login')})
-       
-    } else{
-        router.push("/request")
-    }
-}
 </script>
 
 <style scoped>
@@ -209,17 +194,17 @@ const handleClick =()=>{
     color: white;
 }
 
-.left-content {
+.swiper-inside {
     margin-top: 60px;
     margin-left: 240px;
 }
 
-.left-content h1 {
+.swiper-inside h1 {
     font-size: 48px;
     font-weight: bold;
 }
 
-.left-content p {
+.swiper-inside p {
     font-size: 19.2px;
     margin: 20px 0;
 }
@@ -239,30 +224,34 @@ const handleClick =()=>{
 }
 
 .comapny-wrapper {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap:250px;
+    justify-content: center;
     margin: 40px 0;
 }
 
 .company-brief{
-    width: 50%;
+    max-width: 600px; /* 最大宽度，防止在大屏上太宽 */
+    line-height: 2.5; /* 行高，优化文本可读性 */
+    text-align: left; /* 左对齐 */
+
 }
 .company-description{
-    line-height: 50px;
+    text-align: justify; /* 文本两端对齐，优化排版 */
 }
 .runnning-range {
     width: 30%;
-    min-width: 300px;
+    min-width: 400px;
+
 }
 
-.mid-content ul {
+.service-content ul {
     list-style: none;
     padding: 0;
 }
 
-.mid-content li {
+.service-content li {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -295,41 +284,6 @@ const handleClick =()=>{
     text-decoration: underline;
 }
 
-.footer {
-    width: 100%;
-    margin-top: 20px;
-    height: 60px;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.footer span {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.footer-button {
-  display: inline-block; /* 使链接具备块级元素的特性 */
-  background-color: transparent;
-  border: 2px solid #ffc107;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none; /* 去除下划线 */
-  color: #ffc107; /* 初始文本颜色 */
-  transition: background-color 0.3s, color 0.3s; /* 平滑过渡效果 */
-}
-
-.footer-button:hover {
-  background-color: #ffc107 !important;
-  color: white !important;
-}
 
 /* 添加媒体查询以适配移动端 */
 @media screen and (max-width: 768px) {
@@ -354,16 +308,16 @@ const handleClick =()=>{
         
     }
 
-    .left-content {
+    .swiper-inside {
         margin: 0;
         margin-top: 100px;
     }
 
-    .left-content h1 {
+    .swiper-inside h1 {
         font-size: 32px;
     }
 
-    .left-content h2 {
+    .swiper-inside h2 {
         font-size: 18px;
     }
 
@@ -400,21 +354,5 @@ const handleClick =()=>{
         font-size: 14px;
     }
 
-    .footer {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
-        margin-top: 50px;
-    }
-
-    .footer span {
-        margin-bottom: 10px;
-        font-size: 20px;
-    }
-
-    .footer button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
 }
 </style>

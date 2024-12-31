@@ -12,7 +12,7 @@
             <li><a href="www.baidu.com">=> 监测测绘：对工程结构的变形、沉降、位移等进行长期监测</a></li>
             <li><a href="www.baidu.com">=> 建筑工程：为建筑设计、施工提供地形图、基准点等数据。</a></li>
           </ul>
-        <button href="#" class="learn-more">订购服务</button>
+        <button @click="navigateToRequest" class="learn-more">填写需求表单</button>
       </div>
       <div class="image-container">
         <img src="/staff.jpg" alt="line" />
@@ -35,13 +35,34 @@
         </div>
       </div>
       <div class="text-container">
-        <h2>线与不动产测绘，ToB和ToG多种商业模式</h2>
+        <h2>界线与不动产测绘，ToB和ToG多种商业模式</h2>
         <ul>
           <li><a href="www.baidu.com">=> 边界测绘：明确土地、不动产的边界线，确保权属清晰</a></li>
           <li><a href="www.baidu.com">=> 权属测绘：记录土地、不动产的所有权、使用权等权属信息</a></li>
           <li><a href="www.baidu.com">=> 综合测绘：结合土地使用规划、地籍信息等进行全面测绘</a></li>
         </ul>
-        <button href="www.baidu.com" class="learn-more">订购服务</button>
+        <button @click="navigateToRequest" class="learn-more">填写需求表单</button>
+      </div>
+    </div>
+
+    <!-- 第三部分 -->
+    <div id="di_li_xin_xi" class="section-container" :ref="addToRefs">
+      <div class="text-container">
+        <h2>地理信息，软件+AI+硬件的深度结合</h2>
+          <ul>
+            <li><a href="www.baidu.com">=> 数据采集：专业的无人机团队进行高效的采集</a></li>
+            <li><a href="www.baidu.com">=> 软件开发和设计：打造一体化的数据存储和处理的GIS应用</a></li>
+            <li><a href="www.baidu.com">=> KUAYUAN大模型：公司自研AI语义像素级分割大模型</a></li>     
+          </ul>
+        <button @click="navigateToRequest" class="learn-more">填写需求表单</button>
+      </div>
+      <div class="image-container">
+        <img src="/Geoai.jpg" alt="line" />
+        <div class="citation">
+          <div>
+            <strong>跨远大模型地物分类成品</strong><br/>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -49,6 +70,8 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useRouter } from 'vue-router';
+
 
 const sectionRefs = ref([]);
 const addToRefs = (el) => {
@@ -90,6 +113,12 @@ onBeforeUnmount(() => {
   }
 });
 
+const router = useRouter();
+
+const navigateToRequest = () => {
+  router.push('/request'); // 跳转到 "/request"
+};
+
 
 </script>
 
@@ -97,6 +126,7 @@ onBeforeUnmount(() => {
 .overall_layout {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 hr {
@@ -109,13 +139,15 @@ hr {
 
 /* 布局样式 */
 .section-container {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   margin-bottom: 150px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s ease-out, transform 1s ease-out;
+  gap: 230px;
 }
 
 :deep(.section-container.fade-in) {
@@ -128,7 +160,7 @@ hr {
 }
 
 .text-container {
-  margin-left: 100px !important;
+
 }
 
 
@@ -137,10 +169,11 @@ hr {
 }
 
 .image-container img {
-  width: 600px;
-  height: 400px;
+  width: 550px;
+  height: 350px;
   border-radius: 8px;
-  object-fit: cover
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+  object-fit: fill
 }
 
 .citation {
@@ -178,20 +211,20 @@ a{
   color:#333;
 }
 a:hover{
-  color: #007bff;
+  color: #ffc107;
 }
 
 .learn-more {
-  color: #007bff;
+  color: black;
   text-decoration: none;
   font-weight: bold;
   height: 50px;
-  width:80px ;
+  width:auto;
   border-radius: 3px;
 }
 
 .learn-more:hover {
-    background-color: #007bff;
+    background-color: #ffc107;
     color: white;
 }
 
