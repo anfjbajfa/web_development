@@ -8,6 +8,7 @@
         <p class="subtitle">
           我们正在寻找有创造力的伙伴，携手推动行业变革，如果您有合作的意愿，请不要犹豫联系我们!
         </p>
+        <img src="" class="left-img"/>
       </div>
     </div>
 
@@ -72,9 +73,17 @@
         <!-- 循环渲染多张 Logo -->
         <div class="logo-item" v-for="(item, idx) in logos" :key="idx">
           <img :src="item.src" :alt="item.alt" />
+          <p class="logo-alt">{{ item.alt }}</p>
         </div>
       </div>
     </div>
+  </div>
+
+
+  <div class="story-wrapper">
+    <h2>合伙故事</h2>
+    <div class="yellow-line"></div>
+    
   </div>
 </template>
 
@@ -116,12 +125,12 @@ function animateValue(currentRef, target, duration) {
 
 
 const logos = ref([
-  { src: '/business-partners-logos/linpingGOV.png', alt: '临平政府' },
+  { src: '/business-partners-logos/linpingGOV.png', alt: '临平区政府' },
   { src: '/business-partners-logos/未来科技城.jpeg', alt: '未来科技城' },
-  { src: '/img/amazon.png', alt: 'Amazon' },
-  { src: '/img/stripe.png', alt: 'Stripe' },
-  { src: '/img/airbnb.png', alt: 'Airbnb' },
-  { src: '/img/ripple.png', alt: 'Ripple' },
+  { src: '/business-partners-logos/yuhangguihua.jpg', alt: '余杭区规划院' },
+  { src: '/business-partners-logos/alibab.png', alt: '阿里巴巴' },
+  { src: '/business-partners-logos/huadongdianjian.jpg', alt: '华东院' },
+  { src: '/logo.png', alt: '跨远' },
 ]);
 </script>
 
@@ -293,26 +302,42 @@ const logos = ref([
   display: inline-flex;
   /* 让所有logo在一行内 */
   align-items: center;
-  gap: 60px;
+  gap: 110px;
   /* Logo之间间距，可根据需要调整 */
   padding: 20px;
 }
 
+.logo-item {
+  display: flex;              /* 设置为 Flex 容器 */
+  flex-direction: column;     /* 垂直排列子元素 */
+  align-items: center;        /* 水平居中对齐子元素 */
+}
 .logo-item img {
-  height: 70px;
+  height: 60px;
   /* 控制logo的高度 */
   width: auto;
   /* 宽度自适应 */
-  filter: grayscale(100%);
+  filter: grayscale(60%);
   /* 灰度效果 */
   opacity: 0.7;
   /* 若想要更浅一些可以再调 */
   transition: opacity 0.3s;
+  
 }
 
 .logo-item img:hover {
   opacity: 1;
-  /* 鼠标悬停时变亮 */
+}
+
+.logo-alt {
+  text-align: center;      /* 文本居中 */
+  margin-top: 8px;         /* 与图片的间距 */
+  font-size: 14px;         /* 字体大小 */
+  color: #333;             /* 文本颜色 */
+  white-space: nowrap;     /* 防止文本换行 */
+  overflow: hidden;        /* 隐藏溢出部分 */
+  text-overflow: ellipsis; /* 溢出部分显示省略号 */
+  font-weight: bold;
 }
 
 .yellow-line {
@@ -320,5 +345,10 @@ const logos = ref([
   height: 5px;
   background-color: #ffc107;
   margin: 0 auto 30px auto;
+}
+
+/* -------------------------------- */
+.story-wrapper{
+  text-align: center;
 }
 </style>

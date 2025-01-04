@@ -188,7 +188,7 @@ const submitForm = async() => {
 
 .form-group textarea {
   resize: vertical;
-  min-height: 150px; 
+  min-height: 150px;
 }
 
 .required {
@@ -200,14 +200,13 @@ const submitForm = async() => {
   align-items: center;
   font-size: 11px;
 }
-.newsletter input{
-  width:1vw;
+.newsletter input {
+  width: 1vw;
   margin: 0;
 }
-.newsletter label{
+.newsletter label {
   margin: 0;
 }
-
 
 .submit-button {
   display: inline-block;
@@ -217,5 +216,87 @@ const submitForm = async() => {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* ============== 媒体查询开始 ============== */
+/* 768px 以下（平板及大部分手机） */
+@media screen and (max-width: 768px) {
+  .form-container {
+    padding: 10px;
+    margin-top: 40px; /* 根据需求可调整 */
+  }
+
+  .form-box {
+    width: 90%; /* 原先60%改为更大，让内容更居中 */
+    padding: 15px;
+  }
+
+  .info-text {
+    font-size: 13px; /* 字体略微缩小 */
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 14px;
+  }
+
+  .newsletter {
+    font-size: 12px; 
+  }
+
+  .newsletter input {
+    width: auto;  /* 避免在小屏下过大 */
+  }
+
+  .submit-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* 480px 以下（更小手机屏幕） */
+@media screen and (max-width: 480px) {
+  .form-container {
+    padding: 8px;
+    margin-top: 30px;
+  }
+
+  .form-box {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .info-text {
+    font-size: 12px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .form-group label {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .newsletter {
+    font-size: 11px;
+  }
+
+  .submit-button {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
 }
 </style>

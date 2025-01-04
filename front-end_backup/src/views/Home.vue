@@ -195,17 +195,16 @@ const store = useStore()
 }
 
 .swiper-inside {
-    margin-top: 60px;
-    margin-left: 240px;
+    
 }
 
 .swiper-inside h1 {
-    font-size: 48px;
+    font-size: 35px;
     font-weight: bold;
 }
 
 .swiper-inside p {
-    font-size: 19.2px;
+    font-size: 19px;
     margin: 20px 0;
 }
 
@@ -286,73 +285,125 @@ const store = useStore()
 
 
 /* 添加媒体查询以适配移动端 */
+/* 针对宽度 <= 768px 的适配（已存在） */
 @media screen and (max-width: 768px) {
-    .background-image {
-        top: 0;
-    }
-    .company-description{
-        line-height: 20px;
+  .background-image {
+    top: 0;
+  }
+  .company-description {
+    line-height: 20px;
+  }
+  .overlay {
+    top: 0;
+    height: 100vh;
+  }
+  .content-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+  }
+  .swiper-inside {
+    margin: 0;
+    margin-top: 100px;
+  }
+  .swiper-inside h1 {
+    font-size: 32px;
+  }
+  .swiper-inside h2 {
+    font-size: 18px;
+  }
+  .cta-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 
-    }
+  .comapny-wrapper {
+    /* 如果希望在 768px 以下就是一列布局，可以改为 flex 或单列 Grid */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    margin: 40px auto;
+  }
+  .company-brief {
+    width: 90%;
+    height: auto; /* 避免强制高度 */
+  }
+  .runnning-range {
+    width: 90%;
+    height: auto;
+    margin-bottom: 30px;
+  }
 
-    .overlay {
-        top: 0;
-        height: 100vh;
-    }
-
-    .content-container {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        text-align: center;
-        
-    }
-
-    .swiper-inside {
-        margin: 0;
-        margin-top: 100px;
-    }
-
-    .swiper-inside h1 {
-        font-size: 32px;
-    }
-
-    .swiper-inside h2 {
-        font-size: 18px;
-    }
-
-    .cta-button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-
-    .comapny-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .company-brief{
-        width: 90%;
-        height:35vh;
-    }
-    .runnning-range {
-        width: 90%;
-        height:35vh;
-        margin-bottom: 30px;
-    }
-
-    .icon {
-        font-size: 30px;
-    }
-
-    .service-info h3 {
-        font-size: 18px;
-    }
-
-    .service-info p {
-        font-size: 14px;
-    }
-
+  .icon {
+    font-size: 30px;
+  }
+  .service-info h3 {
+    font-size: 18px;
+  }
+  .service-info p {
+    font-size: 14px;
+  }
 }
+
+/* 针对宽度 <= 480px（更小屏幕）的进一步适配 */
+@media screen and (max-width: 480px) {
+  /* 让 Swiper 高度更适合手机 */
+  .hero-section {
+    height: 60vh; /* 原来是 75vh，可以根据需要缩减 */
+  }
+  .overlay {
+    height: 60vh; /* 同步修改以覆盖整个轮播 */
+  }
+
+  .swiper-inside {
+    margin-top: 60px; /* 在更小屏上再微调，让文字看起来更协调 */
+  }
+  .swiper-inside h1 {
+    font-size: 24px;  /* 再缩小一点 */
+    line-height: 1.3; /* 紧凑一些 */
+  }
+  .swiper-inside h2 {
+    font-size: 16px;
+  }
+  .cta-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+
+  /* 公司简介与服务范围的布局再做精简 */
+  .comapny-wrapper {
+    margin: 20px auto;
+    gap: 20px;  /* 减小行之间的间距 */
+  }
+
+  .company-brief {
+    width: 95%;
+    margin-bottom: 20px;
+    line-height: 1.6; /* 更小屏下行高稍微紧凑 */
+  }
+
+  .runnning-range {
+    width: 95%;
+    margin-bottom: 20px;
+  }
+
+  /* 服务列表字体再缩小一点 */
+  .service-info h3 {
+    font-size: 16px;
+  }
+  .service-info p {
+    font-size: 13px;
+  }
+
+  /* 如果需要让图标更小 */
+  .icon img {
+    width: 40px; /* 或者再小一点 */
+    height: 40px;
+  }
+}
+
 </style>
