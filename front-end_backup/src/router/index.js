@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router'; // 改为 createWebHashHistory
 import Home from '../views/Home.vue';
 import Services from '../views/services.vue';
 
@@ -11,6 +11,7 @@ import Recruitment from '../views/recruitment.vue';
 import Profile from '../views/Profile.vue';
 import Request from '../views/RequestForm.vue';
 import OrderDataset from '../views/OrderDataset.vue'
+
 const routes = [
   { path: '/', component: Home },
   { path: '/services', component: Services },
@@ -19,14 +20,14 @@ const routes = [
   { path: '/dataset', component: Dataset },
   { path: '/honor', component: Honor },
   { path: '/cooperation', component: Cooperation },
-  {path:'/profile',component:Profile},
-  {path:'/recruitment',component:Recruitment},
-  {path:'/request',component:Request},
-  {path:'/orderDataset',component:OrderDataset},
+  { path: '/profile', component: Profile },
+  { path: '/recruitment', component: Recruitment },
+  { path: '/request', component: Request },
+  { path: '/orderDataset', component: OrderDataset },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(import.meta.env.BASE_URL), // 使用 Hash 模式
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
@@ -38,7 +39,6 @@ const router = createRouter({
         top: 100
       };
     } else if (savedPosition) {
-      
       // 当用户使用浏览器的前进/后退按钮时，返回保存的位置
       return savedPosition;
     } else {
