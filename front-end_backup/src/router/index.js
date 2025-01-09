@@ -36,7 +36,7 @@ const router = createRouter({
       console.log('hello')
       return {
         el: to.hash,
-        behavior: 'smooth', // 平滑滚动
+        behavior: 'smooth',
         // 您可以根据需要调整偏移量
         top: 100
       };
@@ -44,7 +44,6 @@ const router = createRouter({
       // 当用户使用浏览器的前进/后退按钮时，返回保存的位置
       return savedPosition;
     } else {
-      // 否则，滚动到页面顶部
       return { top: 0 };
     }
   },
