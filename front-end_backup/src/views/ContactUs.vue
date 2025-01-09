@@ -25,9 +25,9 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
-  <script setup>
+<script setup>
   import { useStore } from 'vuex'
   import { ElMessageBox } from 'element-plus'
   import { useRouter } from 'vue-router'
@@ -52,9 +52,9 @@
       router.push("/request")
     }
   }
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   .contact-us-wrapper {
     text-align: center;
     background-color: #f7f7f7;

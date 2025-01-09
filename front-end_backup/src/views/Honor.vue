@@ -1,138 +1,257 @@
 <template>
-    <navbar/>
-    <div class="timeline-container">
-      <div class="timeline-item" v-for="(item, index) in timelineData" :key="index">
-        <div class="circle" :style="{ backgroundColor: item.circleColor }"></div>
-        <div class="text-container">
-          <!-- <p class="date">{{ item.date }}</p> -->
-          <h3 class="title">{{ item.title }}</h3>
-          <p class="description">{{ item.description }}</p>
-          <a :href="item.link" target="_blank" class="link">{{ item.linkText }}</a>
-        </div>
-        <div class="image-container">
-          <img :src="item.imageSrc" :alt="item.title" />
+  <navbar/>
+  <div class="pic-container">
+    <img src="/awards/award-surveying.jpg" class="award-pic"/>
+  </div>
+
+  <section class="case-honor-section">
+    <!-- 使用 v-for 渲染每一行数据 -->
+    <div
+      v-for="(item, index) in caseHonors"
+      :key="index"
+      class="case-honor-row"
+      :class="{'is-visible': visibleRows.includes(index)}"
+      :style="getRowStyle(index, item)"
+    >
+      <div class="circle">
+        <div class="text-content">
+          <span class="date-range">{{ item.dateRange }}</span>
+          <h2 class="title">{{ item.title }}</h2>
+          <p class="description">
+            {{ item.description }}
+          </p>
+          <!-- 改写链接，把箭头抽成单独的 <span>，用于动画 -->
+          <RouterLink
+            :to="item.link"
+            class="link"
+          >
+            {{ item.linkText }}
+            <span class="arrow">→</span>
+          </RouterLink>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script setup>
-  import navbar from '../components/navbar.vue';
-  const timelineData = [
-    {
-      date: "Jun–Aug 2023",
-      title: "Designing with the usage data",
-      description:
-        "How I analyzed the most used UI component among the most sophisticated design team — data-informed design insights.",
-      link: "#",
-      linkText: "Read the case study →",
-      imageSrc: "/images/example1.png",
-      circleColor: "#c5f6fa", // Light blue
-    },
-    {
-      date: "Oct 2023",
-      title: "Iterative study — 10 years in the making",
-      description:
-        "For a decade I worked closely with the product data to build the flagship product this is now.",
-      link: "#",
-      linkText: "See projects and video →",
-      imageSrc: "/images/example2.png",
-      circleColor: "#d0bfff", // Light purple
-    },
-    {
-      date: "Apr–May 2023",
-      title: "Designing two key Analyze features",
-      description:
-        "How I redesigned YCombinator’s flagship app, happening after two years and launched two features simultaneously.",
-      link: "#",
-      linkText: "Read the case study →",
-      imageSrc: "/images/example3.png",
-      circleColor: "#a5d8ff", // Light sky blue
-    },
-  ];
-  </script>
-  
-  <style scoped>
-  .timeline-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
-    padding: 20px;
-    background-color: #f7f7f7;
-  }
-  
-  .timeline-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 20px;
-    max-width: 1200px;
-    width: 100%;
-  }
-  
-  .circle {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    grid-column: 1 / span 2;
-    margin: 0 auto;
-    z-index: -1;
-  }
-  
-  .text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  
-  .date {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .description {
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .link {
-    font-size: 16px;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .link:hover {
-    text-decoration: underline;
-  }
-  
-  .image-container {
-    text-align: center;
-  }
-  
-  .image-container img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .timeline-item {
-      grid-template-columns: 1fr;
-      text-align: center;
+  </section>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import navbar from '../components/navbar.vue';
+
+// 1. 这里是每行的数据
+const caseHonors = [
+  {
+    imageSrc: '/awards/honor-zhiwei.png',
+    dateRange: '2014-2025',
+    title: '职称荣誉',
+    description:
+      "凭借卓越的技术能力和优质的服务，荣获了包括企业级、政府级在内的多项荣誉和奖项。这些荣誉不仅是对我们团队努力的认可，更是对我们测绘行业贡献的见证。截至目前，我们已获得超过10项权威奖项，如区甲级测绘单位、区级优秀工程奖等",
+    link: '/honor-zhicheng',
+    linkText: '查看所有职称荣誉',
+  },
+  {
+    imageSrc: '/awards/honor-zhuzuo.png',
+    dateRange: '2018-2025',
+    title: '软件著作',
+    description:
+      "在测绘和GIS领域不断创新中，我们研发了一系列具有自主知识产权的计算机软件。我们成功获得多项软件著作权和专利认证，这些软件涵盖了GIS数据处理、三维地形建模、遥感影像分析、测绘自动化等关键技术领域。例如，我们的“智能测绘数据处理系统”极大地提升了测绘数据处理效率",
+    link: '/honor-zhuzuo',
+    linkText: '查看所有著作荣誉',
+  },
+  {
+    imageSrc: '/awards/honor-system.png',
+    dateRange: '2017-2025',
+    title: '体系证书',
+    description:
+      "在测绘和GIS领域不断创新中，我们研发了一系列具有自主知识产权的计算机软件。我们成功获得多项软件著作权和专利认证，这些软件涵盖了GIS数据处理、三维地形建模、遥感影像分析、测绘自动化等关键技术领域。例如，我们的“智能测绘数据处理系统”极大地提升了测绘数据处理效率",
+    link: '/honor-system',
+    linkText: '查看所有著作荣誉',
+  },
+];
+
+// 2. 每行的背景色数组，可自行添加更多颜色
+const rowColors = [
+  '#e3f2fd', // 浅蓝
+  '#e8f5e9', // 浅绿
+  '#f1f8e9', // 浅青
+];
+
+// 3. 负责记录哪些 row 已经进入可视区域
+const visibleRows = ref([]);
+
+// 4. 滚动监听，决定何时添加 'is-visible' 动画类
+const handleScroll = () => {
+  const rows = document.querySelectorAll('.case-honor-row');
+  rows.forEach((row, index) => {
+    const rect = row.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100 && !visibleRows.value.includes(index)) {
+      visibleRows.value.push(index);
     }
-  
-    .text-container {
-      align-items: center;
-    }
-  }
-  </style>
-  
+  });
+};
+
+// 5. row 样式生成方法：将背景图片与背景色都设上
+const getRowStyle = (index, item) => {
+  return {
+    backgroundImage: `url(${item.imageSrc})`,
+    backgroundColor: rowColors[index % rowColors.length], // 不同 row 显示不同色
+  };
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+});
+</script>
+
+<style scoped>
+/* ------------------------------
+   布局和基本外观
+--------------------------------*/
+.pic-container {
+  width: 100vw;
+  height: 80vh;
+  margin-top: 72px;
+  justify-content: center;
+}
+
+.award-pic {
+  width: 100%; 
+  height: 100%; 
+  object-fit: fill; 
+}
+
+.case-honor-section {
+  margin-top: 30px;
+}
+
+/* ------------------------------
+   每一行(row)的通用样式
+--------------------------------*/
+.case-honor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 0 auto; /* 上右下左 */
+  opacity: 0;                 
+  transform: translateY(40px); 
+  transition: all 0.6s ease-out; 
+  background-size: contain;  
+  background-position: center;
+  background-repeat: no-repeat; 
+  z-index: 1;
+  position: relative;
+  margin: 30px 0 30px 0;
+}
+
+/* 
+  如果你想要保留黑色半透明覆盖，可以启用下面注释
+*/
+.case-honor-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1; 
+  border-radius: inherit;
+}
+
+
+/* 进入可视区域后，触发淡入 + 上移动画 */
+.case-honor-row.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------
+   圆形及其内部文本
+--------------------------------*/
+.circle {
+  position: relative;       
+  width: 30vw;
+  height: 30vw;
+  aspect-ratio: 1/1;
+  border-radius: 70%;
+  display: flex;            
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  background-color: white;
+  opacity: 0.8;
+}
+
+
+.text-content {
+  width: 60%;
+  text-align: center;
+}
+
+.date-range {
+  display: block;
+  font-size: 1vw;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 1.5vw;
+  font-weight: bold;
+  margin-bottom: 1vw;
+  color: #222;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+  margin-bottom:2vw;
+}
+
+/* ------------------------------
+   链接 & 箭头动画
+--------------------------------*/
+.link {
+  font-size: 0.8vw;
+  font-weight: bold;
+  text-decoration: none;
+  color: #2c3e50;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  /* 小小余量，避免文字与箭头贴得太紧 */
+  gap: 0.2rem;
+}
+
+/* 单独的箭头，用于做点击动画 */
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease-out;
+}
+
+
+.link:hover .arrow {
+  transform: translateX(5px);
+}
+
+
+/* ------------------------------
+   如果有右侧图片容器时的样式 (可选)
+--------------------------------*/
+.screenshot-container {
+  width: 40vw; 
+  max-width: 90vw;
+  margin: 20px;
+  margin-left: 5vw;
+}
+
+.screenshot {
+  width: 100%;
+  border-radius: 12px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+</style>

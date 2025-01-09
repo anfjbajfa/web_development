@@ -195,7 +195,9 @@ const store = useStore()
 }
 
 .swiper-inside {
-    
+    margin-top: 4vh;
+    margin-left: 8vh;
+
 }
 
 .swiper-inside h1 {

@@ -125,12 +125,12 @@ function animateValue(currentRef, target, duration) {
 
 
 const logos = ref([
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/linpingGOV.png`, alt: '临平区政府' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/未来科技城.jpeg`, alt: '未来科技城' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/yuhangguihua.jpg`, alt: '余杭区规划院' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/alibab.png`, alt: '阿里巴巴' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/huadongdianjian.jpg`, alt: '华东院' },
-  { src: `${import.meta.env.BASE_URL}/logo.png`, alt: '跨远' },
+  { src: "/business-partners-logos/linpingGOV.png", alt: '临平区政府' },
+  { src: "/business-partners-logos/未来科技城.jpeg", alt: '未来科技城' },
+  { src: "/business-partners-logos/yuhangguihua.jpg", alt: '余杭区规划院' },
+  { src: "/business-partners-logos/alibab.png", alt: '阿里巴巴' },
+  { src: "/business-partners-logos/huadongdianjian.jpg", alt: '华东院' },
+  { src: "/business-partners-logos/dahua.jpg", alt: '浙江大华' },
 ]);
 </script>
 
