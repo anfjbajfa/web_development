@@ -53,9 +53,9 @@
                     </div>
                 </div>
             </SwiperSlide>
-
         </Swiper>
     </div>
+
     <div class="comapny-wrapper">
         <div class="company-brief">
             <h2>公司简介&愿景</h2>
@@ -68,7 +68,7 @@
         </div>
         <div class="runnning-range">
             <div class="service-content">
-                <h2>服务范围</h2>
+                <h2>业务范围</h2>
                 <ul>
                     <li>
                         <div class="icon">
@@ -90,7 +90,7 @@
                         <div class="service-info">
                             <h3>
                                 <RouterLink to="/services#bu_dong_chan" class="service-link">
-                                    线与不动产测绘
+                                    界线与不动产测绘
                                 </RouterLink>
                             </h3>
                             <p>地籍测绘、宗地测量、土地面积测算、土地勘测定界等</p>
@@ -112,12 +112,11 @@
                 </ul>
             </div>
         </div>
-
     </div>
-    <LastestProjects></LastestProjects>
-    <projectTheme></projectTheme>
+
+    <LastestProjects class="lastest-projects" :class="{'is-visible':isLastestProjectsVisible}"></LastestProjects>
+    <projectTheme class="project-theme" :class="{ 'is-visible': isProjectThemeVisible }"></projectTheme>
     <ContactUs></ContactUs>
-    
 </template>
 
 <script setup>
@@ -126,14 +125,53 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css/bundle';
 import { Pagination, A11y, Autoplay } from 'swiper/modules';
 import LastestProjects from './LastestProjects.vue';
-const modules = [Pagination, A11y, Autoplay];
-import {useStore} from 'vuex'
-import router from '../router/index.js';
-import { ElMessage, ElMessageBox } from 'element-plus';
 import projectTheme from './projectTheme.vue';
 import ContactUs from './ContactUs.vue';
 
+import {useStore} from 'vuex';
+import router from '../router/index.js';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { ref,onMounted,onUnmounted } from 'vue';
+
+const modules = [Pagination, A11y, Autoplay];
 const store = useStore()
+
+const isLastestProjectsVisible = ref(false)
+const isProjectThemeVisible = ref(false)
+
+onMounted(()=>{
+  const lastestProjects = document.querySelector(".lastest-projects")
+  const projectTheme = document.querySelector(".project-theme")
+
+  const observer = new IntersectionObserver(
+    (entries)=>{
+      entries.forEach((entry)=>{
+        if(entry.isIntersecting){
+          if(entry.target === lastestProjects){
+            isLastestProjectsVisible.value = true
+          }
+          if (entry.target===projectTheme){
+            isProjectThemeVisible.value = true
+          }
+        }
+      })
+    },
+    {
+      threshold:0.1
+    }
+  )
+
+  // 开始观察
+  if (lastestProjects) observer.observe(lastestProjects);
+  if (projectTheme) observer.observe(projectTheme);
+
+  // 清除观察器
+  onUnmounted(() => {
+    if (lastestProjects) observer.unobserve(lastestProjects);
+    if (projectTheme) observer.unobserve(projectTheme);
+  });
+})
+
 
 </script>
 
@@ -197,7 +235,6 @@ const store = useStore()
 .swiper-inside {
     margin-top: 4vh;
     margin-left: 8vh;
-
 }
 
 .swiper-inside h1 {
@@ -205,9 +242,10 @@ const store = useStore()
     font-weight: bold;
 }
 
-.swiper-inside p {
-    font-size: 19px;
-    margin: 20px 0;
+.swiper-inside h2 {
+    font-size: 20px;
+    margin-top: 1vh;
+    line-height: 1.5;
 }
 
 .cta-button {
@@ -218,6 +256,8 @@ const store = useStore()
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    border: none;
+    border-radius: 4px;
 }
 
 .cta-button:hover {
@@ -236,15 +276,22 @@ const store = useStore()
     max-width: 600px; /* 最大宽度，防止在大屏上太宽 */
     line-height: 2.5; /* 行高，优化文本可读性 */
     text-align: left; /* 左对齐 */
-
+    margin-right:80px
 }
+
+.company-brief h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
 .company-description{
     text-align: justify; /* 文本两端对齐，优化排版 */
+    font-size: 16px;
 }
+
 .runnning-range {
     width: 30%;
     min-width: 400px;
-
 }
 
 .service-content ul {
@@ -286,34 +333,60 @@ const store = useStore()
 }
 
 
-/* 添加媒体查询以适配移动端 */
-/* 针对宽度 <= 768px 的适配（已存在） */
+/* 初始状态：元素隐藏并下移 */
+.lastest-projects, .project-theme {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* 当元素可见时：上浮且显示 */
+.lastest-projects.is-visible, .project-theme.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* 
+  =============================
+  移动端/平板端（小屏）优化
+  你可以按自己的需求再细调
+  =============================
+*/
+
+/* 针对宽度 <= 768px 的适配 */
 @media screen and (max-width: 768px) {
+  /* 优化轮播区域高度，让小屏幕看起来更紧凑 */
+  .hero-section {
+    height: 60vh; 
+  }
+  
   .background-image {
-    top: 0;
+    top: 0; 
+    height: 60vh;
   }
-  .company-description {
-    line-height: 20px;
-  }
+
   .overlay {
     top: 0;
-    height: 100vh;
+    height: 60vh;
   }
+
   .content-container {
     flex-direction: column;
     align-items: center;
     padding: 20px;
     text-align: center;
   }
+
   .swiper-inside {
     margin: 0;
-    margin-top: 100px;
+    margin-top: 10vh;
   }
   .swiper-inside h1 {
-    font-size: 32px;
+    font-size: 28px; 
   }
   .swiper-inside h2 {
-    font-size: 18px;
+    font-size: 16px;
   }
   .cta-button {
     margin-top: 20px;
@@ -321,91 +394,122 @@ const store = useStore()
     font-size: 14px;
   }
 
+  /* 让公司简介与业务范围堆叠显示 */
   .comapny-wrapper {
-    /* 如果希望在 768px 以下就是一列布局，可以改为 flex 或单列 Grid */
     display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
     margin: 40px auto;
   }
-  .company-brief {
+  .company-brief{
     width: 90%;
-    height: auto; /* 避免强制高度 */
+    line-height: 1.6;
+    text-align: center;
+    margin-right:0px
   }
-  .runnning-range {
-    width: 90%;
-    height: auto;
-    margin-bottom: 30px;
+  .company-brief h2 {
+    font-size: 20px;
+  }
+  .company-description {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .runnning-range h2{
+    text-align: center;
+  }
+  .service-content {
+    width: 100%;
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+
+  h2{
+    font-size: 18px !important;
+  }
+
+  .service-content ul {
+    margin-left: 10px;
+  }
+
+  .service-info h3 {
+    font-size: 14px;
+   
+  }
+
+  .service-info p {
+    font-size: 12px;
   }
 
   .icon {
-    font-size: 30px;
-  }
-  .service-info h3 {
-    font-size: 18px;
-  }
-  .service-info p {
-    font-size: 14px;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
   }
 }
 
 /* 针对宽度 <= 480px（更小屏幕）的进一步适配 */
 @media screen and (max-width: 480px) {
-  /* 让 Swiper 高度更适合手机 */
   .hero-section {
-    height: 60vh; /* 原来是 75vh，可以根据需要缩减 */
+    height: 50vh; 
   }
+  .background-image,
   .overlay {
-    height: 60vh; /* 同步修改以覆盖整个轮播 */
+    height: 50vh;
   }
 
   .swiper-inside {
-    margin-top: 60px; /* 在更小屏上再微调，让文字看起来更协调 */
+    margin-top: 8vh;
   }
+
   .swiper-inside h1 {
-    font-size: 24px;  /* 再缩小一点 */
-    line-height: 1.3; /* 紧凑一些 */
+    font-size: 24px;
+    line-height: 1.3;
   }
   .swiper-inside h2 {
-    font-size: 16px;
+    font-size: 14px;
   }
   .cta-button {
     padding: 8px 16px;
-    font-size: 14px;
+    font-size: 13px;
     margin-top: 15px;
   }
 
-  /* 公司简介与服务范围的布局再做精简 */
+  /* 公司简介与服务范围的布局更紧凑 */
   .comapny-wrapper {
     margin: 20px auto;
-    gap: 20px;  /* 减小行之间的间距 */
-  }
+    gap: 20px;
 
+  }
   .company-brief {
     width: 95%;
-    margin-bottom: 20px;
-    line-height: 1.6; /* 更小屏下行高稍微紧凑 */
   }
-
+  .company-brief h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .company-description {
+    font-size: 13px;
+    line-height: 1.4;
+  }
   .runnning-range {
     width: 95%;
-    margin-bottom: 20px;
   }
 
-  /* 服务列表字体再缩小一点 */
+  .service-content {
+    padding: 0;
+  }
   .service-info h3 {
-    font-size: 16px;
+    font-size: 15px;
   }
   .service-info p {
-    font-size: 13px;
+    font-size: 12px;
   }
-
-  /* 如果需要让图标更小 */
-  .icon img {
-    width: 40px; /* 或者再小一点 */
-    height: 40px;
+  .icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
   }
 }
-
 </style>

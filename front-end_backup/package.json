@@ -9,8 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@arcgis/core": "^4.30.9",
-    "@arcgis/map-components": "^4.30.7",
     "@vscode/codicons": "^0.0.36",
     "axios": "^1.7.4",
     "element-plus": "^2.8.0",

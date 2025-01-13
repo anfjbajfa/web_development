@@ -108,19 +108,26 @@ h2 {
 
 /* 768px 以下：平板及大部分手机 */
 @media screen and (max-width: 768px) {
+.latest-projects {
+  text-align: center;
+  padding: 0;
+}
   .projects-container {
     gap: 40px;          /* 减小列间距 */
     margin-bottom: 20px;
   }
   .project-card {
-    width: 80%;         /* 每行 1 列，或可改为 45% 让两列并排 */
+    width: 90%;         /* 每行 1 列，或可改为 45% 让两列并排 */
     margin-bottom: 20px;
   }
   .project-info h3 {
-    font-size: 1.1rem;
+    font-size: 16rem;
   }
   .project-info p {
     font-size: 0.95rem;
+  }
+  h2{
+    font-size: 18px !important;
   }
 }
 
@@ -141,5 +148,6 @@ h2 {
   .project-info button {
     padding: 8px 16px;
   }
+  
 }
 </style>

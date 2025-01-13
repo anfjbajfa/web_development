@@ -166,7 +166,7 @@ const cards = ref([
   .row {
     grid-template-columns: 1fr; /* 每行只显示1列，垂直堆叠 */
     gap: 40px;                  /* 减小缝隙 */
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .card {
@@ -198,6 +198,9 @@ const cards = ref([
   }
   .row {
     gap: 20px;                 
+  }
+  h2{
+    font-size: 18px !important;
   }
 }
 </style>

@@ -66,8 +66,6 @@ function handleCommand(command) {
   } else if (command === 'profile') {
     // 跳转到个人主页
     router.push('/profile');
-    // 重置红点状态
-    
   } 
 }
 </script>

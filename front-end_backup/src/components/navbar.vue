@@ -30,11 +30,9 @@
         登录
       </RouterLink>
       <RouterLink v-else class="avatar-link">
-        
           <Avatar/>
           <el-badge v-if="getUserInfo().isAdmin" :value="pendingOrderCount"/>
-          <el-badge :is-dot="hasNewOrder" :hidden="!hasNewOrder"/>
-        
+          <el-badge :is-dot="hasNewOrder" :hidden="!hasNewOrder"/>    
       </RouterLink>
     </div>
   </nav>
@@ -49,7 +47,7 @@ import { Menu as IconMenu } from "@element-plus/icons-vue";
 
 const menu_data = {
   "主页": "/",
-  "服务": "/services",
+  "业务": "/services",
   "合作": "/cooperation",
   "荣誉": '/honor',
   "招聘": "/recruitment",
@@ -171,18 +169,21 @@ const isLogined = computed(() => store.getters.isLogined);
     align-items: center;
     justify-content: space-around;
     padding: 10px 20px;
+    width:100%
   }
 
   .title-container {
-    width: 100%;
+    white-space: nowrap; /* 禁止换行 */
+    flex-wrap: nowrap;
     align-items: center;
   }
 
   .company-name {
     margin-left: 1px;
-    font-size: 13px;
+    font-size: 18px;
     font-weight: bold;
     font-family: sans-serif;
+    width: auto;
   }
 
   .logo {
@@ -192,10 +193,11 @@ const isLogined = computed(() => store.getters.isLogined);
   .menu-toggle {
     display: block;
     margin-top: 3px;
+    margin-left: 10px;
   }
 
   .menu-icon {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .menu-list-container {
@@ -235,7 +237,7 @@ const isLogined = computed(() => store.getters.isLogined);
   .menu-link,
   .login-link,
   .avatar-link {
-    font-size: 10px;
+    font-size: 12px;
     padding: 10px;
     display: block;
 

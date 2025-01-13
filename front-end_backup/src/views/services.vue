@@ -5,12 +5,12 @@
       <div class="left">
         <h2>关于团队</h2>
         <p>
-          公司拥有一支技术规范、敬业负责的专业测绘技术队伍。公司现有职工45人，其中从事<br />
+          公司拥有一支技术规范、敬业负责的专业测绘技术队伍。公司现有职工45人，其中从事
           测绘、计算机技术的专业技术人员40人，具有中高级职称的18人，具有初级职称的13人
         </p>
       </div>
       <div class="right">
-        <img src="/staff.webp" alt="About us image" />
+        <img src="/staff.png" alt="About us image" />
       </div>
     </div>
 
@@ -99,11 +99,12 @@ import service_detail from './service_detail.vue';
 .left {
   display: flex;
   flex-direction: column;
+  max-width: 40vw;
 }
 
 .right {
-  height: 150px;
-  width: 300px;
+  height: 300px;
+  width: 500px;
 }
 
 .right img {
@@ -230,9 +231,12 @@ import service_detail from './service_detail.vue';
     padding: 20px;
   }
   .left, .right {
-    width: 100%;
+    width: 90%;
     text-align: center;
     margin-bottom: 20px;
+  }
+  .left {
+    min-width: 100%;
   }
   .right {
     height: auto;

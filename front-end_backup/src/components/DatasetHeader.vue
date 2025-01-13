@@ -17,13 +17,13 @@
       </div>
   
       <!-- 右侧的内容 -->
-      <div class="header-right">
+      <!-- <div class="header-right">
         <Avatar></Avatar> 
-      </div>
+      </div> -->
     </div>
-  </template>
+</template>
   
-  <script setup>
+<script setup>
   import { HomeFilled } from '@element-plus/icons-vue';
   import Avatar from './Avatar.vue'; // 修正 Avatar 的导入
   import router from '../router/index';
@@ -37,9 +37,9 @@
         break;
     }
   };
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   .header {
     display: flex;         /* 确保左右部分水平排列 */
     justify-content: space-between; /* 左右两边有足够的空间 */

@@ -11,12 +11,16 @@ import Recruitment from '../views/recruitment.vue';
 import Profile from '../views/Profile.vue';
 import Request from '../views/RequestForm.vue';
 import OrderDataset from '../views/OrderDataset.vue'
-import component from 'element-plus/es/components/tree-select/src/tree-select-option.mjs';
-// import Zhicheng from ''
+import Service_detail_surveyingEngineer from '../views/service_detail_surveyingEngineer.vue';
+import Service_detail_lineSurveying from '../views/service_detail_lineSurveying.vue';
+import service_detail_GIS from '../views/service_detail_GIS.vue';
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/services', component: Services },
+  { path: '/services', component: Services},
+  {path:'/services/engineerSurveying',component:Service_detail_surveyingEngineer},
+  {path:'/services/LineSurveying',component:Service_detail_lineSurveying},
+  {path:'/services/GIS',component:service_detail_GIS},
   { path: '/login', component: Login },
   { path: '/login/register', component: Register },
   { path: '/dataset', component: Dataset },

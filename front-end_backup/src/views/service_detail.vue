@@ -8,27 +8,28 @@
         <h2>工程测绘，精度和数据安全是我们的承诺</h2>
         <ul>
           <li>
-            <a href="www.baidu.com"
+            <a
               >=> 地形测绘：详细记录地形地貌特征，包括高程、坡度、地形变化等</a
             >
           </li>
           <li>
-            <a href="www.baidu.com"
+            <a
               >=> 施工放样：将设计图纸上的位置和尺寸准确传递到施工现场</a
             >
           </li>
           <li>
-            <a href="www.baidu.com"
+            <a
               >=> 监测测绘：对工程结构的变形、沉降、位移等进行长期监测</a
             >
           </li>
           <li>
-            <a href="www.baidu.com"
+            <a
               >=> 建筑工程：为建筑设计、施工提供地形图、基准点等数据。</a
             >
           </li>
         </ul>
-        <button @click="navigateToRequest" class="learn-more">填写需求表单</button>
+        <!-- <button @click="navigateToRequest" class="learn-more">填写需求表单</button> -->
+        <RouterLink to="/services/engineerSurveying" class="learn-more">了解施工详情,最多跑一次</RouterLink>
       </div>
       <div class="image-container">
         <img src="/staff.jpg" alt="line" />
@@ -39,32 +40,32 @@
     <div id="bu_dong_chan" class="section-container reverse" :ref="addToRefs">
       <div class="image-container">
         <img src="/CAD.jpg" alt="surveying" />
-        <div class="citation">
+        <!-- <div class="citation">
           <div>
             <strong>临平区人民广场测量图</strong><br />
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="text-container">
         <h2>界线与不动产测绘，ToB和ToG多种商业模式</h2>
         <ul>
           <li>
-            <a href="www.baidu.com"
+            <a 
               >=> 边界测绘：明确土地、不动产的边界线，确保权属清晰</a
             >
           </li>
           <li>
-            <a href="www.baidu.com"
+            <a 
               >=> 权属测绘：记录土地、不动产的所有权、使用权等权属信息</a
             >
           </li>
           <li>
-            <a href="www.baidu.com"
+            <a 
               >=> 综合测绘：结合土地使用规划、地籍信息等进行全面测绘</a
             >
           </li>
         </ul>
-        <button @click="navigateToRequest" class="learn-more">填写需求表单</button>
+        <RouterLink to="/services/LineSurveying" class="learn-more">了解施工详情,最多跑一次</RouterLink>
       </div>
     </div>
 
@@ -74,22 +75,23 @@
         <h2>地理信息，软件+AI+硬件的深度结合</h2>
         <ul>
           <li>
-            <a href="www.baidu.com"
+            <a
               >=> 数据采集：专业的无人机团队进行高效的采集</a
             >
           </li>
           <li>
-            <a href="www.baidu.com"
+            <a
               >=> 软件开发和设计：打造一体化的数据存储和处理的GIS应用</a
             >
           </li>
           <li>
-            <a href="www.baidu.com"
+            <a
               >=> KUAYUAN大模型：公司自研AI语义像素级分割大模型</a
             >
           </li>
         </ul>
-        <button @click="navigateToRequest" class="learn-more">填写需求表单</button>
+        <!-- <button @click="navigateToRequest" class="learn-more">填写需求表单</button> -->
+        <RouterLink to="/services/GIS" class="learn-more">了解施工详情,最多跑一次</RouterLink>
       </div>
       <div class="image-container">
         <img src="/Geoai.jpg" alt="line" />
@@ -100,6 +102,8 @@
         </div>
       </div>
     </div>
+   
+   
   </div>
 </template>
 
@@ -195,8 +199,8 @@ hr {
 }
 
 /* 容器内文本/图片 */
-.text-container {
-  /* 可加一些 padding、布局等 */
+.text-container h2{
+  margin-bottom: 30px;
 }
 .image-container {
   position: relative;
@@ -238,26 +242,26 @@ ul li {
   text-decoration: none;
   font-size: 18px;
 }
+
 a {
   text-decoration: none;
   color: #333;
 }
-a:hover {
-  color: #ffc107;
-}
+
 .learn-more {
   color: black;
   text-decoration: none;
   font-weight: bold;
-  height: 50px;
+  height: 100px;
   width: auto;
   border-radius: 3px;
   border: 2px solid #aaa;
-  padding: 0 15px;
+  padding: 10px 15px;
   line-height: 46px;
 }
+
 .learn-more:hover {
-  background-color: #ffc107;
+  background-color:#333;
   color: white;
 }
 
@@ -286,11 +290,12 @@ a:hover {
     opacity: 1;           /* 让它显示 */
   }
   .section-container.fade-in {
-    /* 不再需要动画 */
+    opacity: 1;
+    transform: translateY(0);
   }
 
+
   /* 让第一、二个 section 占第一行，第三个 section 占第二行 */
-  /* (如果希望更灵活，可用 nth-child 或者直接让第三个占 grid-column: 1 / 3 ) */
   .section-container:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
@@ -338,6 +343,7 @@ a:hover {
   .reverse {
     flex-direction: column;
   }
+  
   .image-container img {
     width: 100%;
     height: auto;
@@ -359,7 +365,7 @@ a:hover {
     margin-bottom: 50px;
   }
   .image-container img {
-    max-width: 300px;
+    width: 100%;
   }
   .learn-more {
     font-size: 14px;
