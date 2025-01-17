@@ -71,12 +71,14 @@
   </div>
 
   <service_detail></service_detail>
+  <foot></foot>
 </template>
 
 <script setup>
 import { reactive } from 'vue';
 import navbar from '../components/navbar.vue';
 import service_detail from './service_detail.vue';
+import foot from './foot.vue';
 </script>
 
 <style scoped>
@@ -230,7 +232,8 @@ import service_detail from './service_detail.vue';
     height: auto;
     padding: 20px;
   }
-  .left, .right {
+  .left,
+  .right {
     width: 90%;
     text-align: center;
     margin-bottom: 20px;
@@ -250,23 +253,23 @@ import service_detail from './service_detail.vue';
 
   .stats-container {
     /* 把原先 flex 改为 grid */
-  display: grid;
-  
-  /* 2 列 x 2 行 */
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, auto);
-  
-  /* 根据需要设置行列间距 */
-  gap: 30px; /* 或者 row-gap / column-gap 分开写 */
+    display: grid;
 
-  /* 如果需要让网格在容器内居中，可以加上 */
-  justify-items: center;
-  align-items: center;
-  
-  /* 原有的背景色 / padding / margin 视需要保留 */
-  background-color: #fff;
-  padding: 30px 0;
-  margin-bottom: 50px;
+    /* 2 列 x 2 行 */
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+
+    /* 根据需要设置行列间距 */
+    gap: 30px; /* 或者 row-gap / column-gap 分开写 */
+
+    /* 如果需要让网格在容器内居中，可以加上 */
+    justify-items: center;
+    align-items: center;
+
+    /* 原有的背景色 / padding / margin 视需要保留 */
+    background-color: #fff;
+    padding: 30px 0;
+    margin-bottom: 50px;
   }
   .stat-item h3 {
     font-size: 30px;

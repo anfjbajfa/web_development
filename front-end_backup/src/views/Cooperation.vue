@@ -8,7 +8,7 @@
         <p class="subtitle">
           我们正在寻找有创造力的伙伴，携手推动行业变革，如果您有合作的意愿，请不要犹豫联系我们!
         </p>
-        <img src="" class="left-img"/>
+        <img src="" class="left-img" />
       </div>
     </div>
 
@@ -24,22 +24,26 @@
         <!-- 第一列：Growth -->
         <div class="card card-growth">
           <!-- 动态饼图 -->
-          <div class="pie-chart" :style="{
-            background: `conic-gradient(#f18640 0% ${growthValue}%, #ebebeb ${growthValue}% 100%)`
-          }">
+          <div
+            class="pie-chart"
+            :style="{
+              background: `conic-gradient(#f18640 0% ${growthValue}%, #ebebeb ${growthValue}% 100%)`,
+            }"
+          >
             {{ growthValue }}%
           </div>
           <h3>净利润增长</h3>
-          <p>
-            接下去的三年每年净利润增长会保持在60%左右，公司现金流储备充足
-          </p>
+          <p>接下去的三年每年净利润增长会保持在60%左右，公司现金流储备充足</p>
         </div>
 
         <!-- 第二列：Opportunity -->
         <div class="card card-opportunity">
-          <div class="pie-chart" :style="{
-            background: `conic-gradient(#0f5c5c 0% ${techInvest}%, #ebebeb ${techInvest}% 100%)`
-          }">
+          <div
+            class="pie-chart"
+            :style="{
+              background: `conic-gradient(#0f5c5c 0% ${techInvest}%, #ebebeb ${techInvest}% 100%)`,
+            }"
+          >
             {{ techInvest }}%
           </div>
           <h3>技术投入</h3>
@@ -50,9 +54,12 @@
 
         <!-- 第三列：Decrease -->
         <div class="card card-decrease">
-          <div class="pie-chart" :style="{
-            background: `conic-gradient(#f7b844 0% ${opportunityValue}%, #ebebeb ${opportunityValue}% 100%)`
-          }">
+          <div
+            class="pie-chart"
+            :style="{
+              background: `conic-gradient(#f7b844 0% ${opportunityValue}%, #ebebeb ${opportunityValue}% 100%)`,
+            }"
+          >
             {{ opportunityValue }}%
           </div>
           <h3>机遇</h3>
@@ -63,7 +70,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="partner-wrapper">
     <h2>合作伙伴</h2>
@@ -79,17 +85,17 @@
     </div>
   </div>
 
-
   <div class="story-wrapper">
     <h2>合伙故事</h2>
     <div class="yellow-line"></div>
-    
   </div>
+  <foot></foot>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import navbar from '../components/navbar.vue';
+import foot from './foot.vue';
 
 // 三个数值的响应式变量
 const growthValue = ref(0);
@@ -98,9 +104,9 @@ const opportunityValue = ref(0);
 
 // 页面加载后开始动画
 onMounted(() => {
-  animateValue(growthValue, 60, 1000);       // 从 0 动到 60%
+  animateValue(growthValue, 60, 1000); // 从 0 动到 60%
   animateValue(techInvest, 50, 1000); // 从 0 动到 80%
-  animateValue(opportunityValue, 30, 1000);    // 从 0 动到 65%
+  animateValue(opportunityValue, 30, 1000); // 从 0 动到 65%
 });
 
 /**
@@ -123,14 +129,33 @@ function animateValue(currentRef, target, duration) {
   }, stepTime);
 }
 
-
 const logos = ref([
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/linpingGOV.png`, alt: '临平区政府' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/未来科技城.jpeg`, alt: '未来科技城' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/yuhangguihua.jpg`, alt: '余杭区规划院' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/alibab.png`, alt: '阿里巴巴' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/huadongdianjian.jpg`, alt: '华东院' },
-  { src: `${import.meta.env.BASE_URL}/business-partners-logos/dahua.jpg`, alt: '浙江大华' },
+  {
+    src: `${import.meta.env.BASE_URL}/business-partners-logos/linpingGOV.png`,
+    alt: '临平区政府',
+  },
+  {
+    src: `${import.meta.env.BASE_URL}/business-partners-logos/未来科技城.jpeg`,
+    alt: '未来科技城',
+  },
+  {
+    src: `${import.meta.env.BASE_URL}/business-partners-logos/yuhangguihua.jpg`,
+    alt: '余杭区规划院',
+  },
+  {
+    src: `${import.meta.env.BASE_URL}/business-partners-logos/alibab.png`,
+    alt: '阿里巴巴',
+  },
+  {
+    src: `${
+      import.meta.env.BASE_URL
+    }/business-partners-logos/huadongdianjian.jpg`,
+    alt: '华东院',
+  },
+  {
+    src: `${import.meta.env.BASE_URL}/business-partners-logos/dahua.jpg`,
+    alt: '浙江大华',
+  },
 ]);
 </script>
 
@@ -144,7 +169,7 @@ const logos = ref([
   background-color: #f5efe7;
   padding: 40px 20px;
   box-sizing: border-box;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #333;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -218,7 +243,6 @@ const logos = ref([
   color: #fff;
   text-align: center;
   position: relative;
-
 }
 
 /* 3. 改卡片背景色，让它们和示例图更一致 */
@@ -308,9 +332,9 @@ const logos = ref([
 }
 
 .logo-item {
-  display: flex;              /* 设置为 Flex 容器 */
-  flex-direction: column;     /* 垂直排列子元素 */
-  align-items: center;        /* 水平居中对齐子元素 */
+  display: flex; /* 设置为 Flex 容器 */
+  flex-direction: column; /* 垂直排列子元素 */
+  align-items: center; /* 水平居中对齐子元素 */
 }
 .logo-item img {
   height: 60px;
@@ -322,7 +346,6 @@ const logos = ref([
   opacity: 0.7;
   /* 若想要更浅一些可以再调 */
   transition: opacity 0.3s;
-  
 }
 
 .logo-item img:hover {
@@ -330,12 +353,12 @@ const logos = ref([
 }
 
 .logo-alt {
-  text-align: center;      /* 文本居中 */
-  margin-top: 8px;         /* 与图片的间距 */
-  font-size: 14px;         /* 字体大小 */
-  color: #333;             /* 文本颜色 */
-  white-space: nowrap;     /* 防止文本换行 */
-  overflow: hidden;        /* 隐藏溢出部分 */
+  text-align: center; /* 文本居中 */
+  margin-top: 8px; /* 与图片的间距 */
+  font-size: 14px; /* 字体大小 */
+  color: #333; /* 文本颜色 */
+  white-space: nowrap; /* 防止文本换行 */
+  overflow: hidden; /* 隐藏溢出部分 */
   text-overflow: ellipsis; /* 溢出部分显示省略号 */
   font-weight: bold;
 }
@@ -348,7 +371,7 @@ const logos = ref([
 }
 
 /* -------------------------------- */
-.story-wrapper{
+.story-wrapper {
   text-align: center;
 }
 </style>
