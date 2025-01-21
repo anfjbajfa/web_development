@@ -34,6 +34,8 @@
 .latest-projects {
   text-align: center;
   padding: 10px 20px;
+  max-width: 1400px;
+  margin: 0 auto; /* 设置了max-width会左对齐，所以需要这一行来中间对齐 */
 }
 
 h2 {
@@ -51,13 +53,12 @@ h2 {
 .projects-container {
   display: flex;
   justify-content: center;
-  gap: 200px;
+  gap: 10vw;
   margin-bottom: 30px;
-  flex-wrap: wrap; /* 允许子元素换行 */
 }
 
 .project-card {
-  width: 30%;
+  width: 40vw;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
@@ -108,46 +109,28 @@ h2 {
 
 /* 768px 以下：平板及大部分手机 */
 @media screen and (max-width: 768px) {
-.latest-projects {
-  text-align: center;
-  padding: 0;
-}
+  .latest-projects {
+    text-align: center;
+    padding: 0;
+  }
   .projects-container {
-    gap: 40px;          /* 减小列间距 */
     margin-bottom: 20px;
+    flex-wrap: wrap;
   }
   .project-card {
-    width: 90%;         /* 每行 1 列，或可改为 45% 让两列并排 */
+    width: 95vw;
     margin-bottom: 20px;
-  }
-  .project-info h3 {
-    font-size: 16rem;
-  }
-  .project-info p {
-    font-size: 0.95rem;
-  }
-  h2{
-    font-size: 18px !important;
   }
 }
 
 /* 480px 以下：更小屏幕的手机 */
 @media screen and (max-width: 480px) {
-  .project-card {
-    width: 90%;         /* 再加大一些卡片宽度，让留白更舒适 */
-  }
   .project-info {
     padding: 15px;      /* 减少内边距 */
   }
-  .project-info h3 {
-    font-size: 1rem;
-  }
-  .project-info p {
-    font-size: 0.9rem;
-  }
+  
   .project-info button {
     padding: 8px 16px;
   }
-  
 }
 </style>

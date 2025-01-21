@@ -177,9 +177,9 @@ onMounted(()=>{
 
 <style scoped>
 .hero-section {
-    position: relative;
+    margin-top:72px;
     width: 100%;
-    height: 75vh;
+    height: 70vh;
     overflow: hidden;
 }
 
@@ -208,15 +208,11 @@ onMounted(()=>{
     height: 100%;
     object-fit: cover;
     position: absolute;
-    top: 73px;
-    left: 0;
     z-index: 1;
 }
 
 .overlay {
     position: absolute;
-    top: 73px;
-    left: 0;
     width: 100%;
     height: 75vh;
     background: rgba(0, 0, 0, 0.5);
@@ -233,8 +229,8 @@ onMounted(()=>{
 }
 
 .swiper-inside {
-    margin-top: 4vh;
-    margin-left: 8vh;
+    margin-top: 6vh;
+    margin-left: 10vw;
 }
 
 .swiper-inside h1 {
@@ -423,10 +419,6 @@ onMounted(()=>{
     width: 100%;
     padding: 0; 
     box-sizing: border-box; 
-  }
-
-  h2{
-    font-size: 18px !important;
   }
 
   .service-content ul {

@@ -22,8 +22,9 @@ import Header from '../components/DatasetHeader.vue'
 import { ref } from 'vue';
 import FileManagerDrawer from '../components/FileManagerDrawer.vue';
 // 控制抽屉显示的变量
-import Tab from '../components/Tab.vue';
+import Tab from '../components/DatasetTab.vue';
 const showFileManagerDrawer = ref(false);
+
 </script>
 
 <style>
@@ -31,7 +32,7 @@ const showFileManagerDrawer = ref(false);
   height:100vh
 }
 
-.el-header {
+.el-header{
   background-color: #1e3a8a;
   position: relative;
   z-index: 1000;

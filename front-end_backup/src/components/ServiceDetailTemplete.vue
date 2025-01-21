@@ -107,7 +107,7 @@ function closeOverlay(index) {
   display: flex;
   align-items: center;
   flex-direction: column;
-  max-height: 70vh;
+  /* max-height: 80vh; */
 }
 
 /* 卡片悬停动画效果 */
@@ -125,7 +125,7 @@ function closeOverlay(index) {
 
 .card-img {
   width: 80%;
-  height: 60%;
+  aspect-ratio: 4/3;
   object-fit: cover;
 }
 
@@ -160,7 +160,6 @@ function closeOverlay(index) {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   border-radius: 8px;
   z-index: 10;
   /* 防止点击穿透，只有当前卡片的 overlay 可以被点到 */
@@ -191,4 +190,24 @@ function closeOverlay(index) {
 .close-btn:hover {
   background-color: #ddd;
 }
+
+
+@media screen and (max-width: 768px) {
+  .service-card-wrapper {
+    grid-template-columns: 1fr; /* 每行只显示一列 */
+    gap: 20px; 
+    padding: 15px; 
+  }
+
+  .card-img {
+    width: 100%; 
+    aspect-ratio: 16/9; 
+  }
+
+  .service-theme {
+    margin-top: 5vh; /* 根据需要调整顶部外边距 */
+  }
+
+}
+
 </style>

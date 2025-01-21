@@ -199,8 +199,6 @@ const cards = ref([
   .row {
     gap: 20px;                 
   }
-  h2{
-    font-size: 18px !important;
-  }
+  
 }
 </style>

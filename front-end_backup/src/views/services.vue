@@ -36,11 +36,8 @@
     <div class="offices-section">
       <h2>办公地点</h2>
       <div class="offices-container">
-        <a
-          href="https://ditu.amap.com/search?id=B0HUU7S4S8&city=330113&geoobj=119.891395%7C30.125154%7C120.770717%7C30.539478&query_type=IDQ&query=%E6%9D%AD%E5%B7%9E%E8%B7%A8%E8%BF%9C%E6%B5%8B%E7%BB%98%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8&zoom=11.29"
-          target="_blank"
-          title="在高德中打开"
-        >
+        <a href="https://ditu.amap.com/search?id=B0HUU7S4S8&city=330113&geoobj=119.891395%7C30.125154%7C120.770717%7C30.539478&query_type=IDQ&query=%E6%9D%AD%E5%B7%9E%E8%B7%A8%E8%BF%9C%E6%B5%8B%E7%BB%98%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8&zoom=11.29"
+          target="_blank" title="在高德中打开">
           <div class="office-card">
             <div class="image-container">
               <img src="/linping_location.png" alt="临平办公室地图" />
@@ -51,11 +48,8 @@
             </div>
           </div>
         </a>
-        <a
-          href=" https://ditu.amap.com/search?id=B0JAGCEM4X&city=330110&geoobj=120.302767%7C30.408755%7C120.31598%7C30.414976&query_type=IDQ&query=%E6%9D%AD%E5%B7%9E%E8%B7%A8%E8%BF%9C%E6%B5%8B%E7%BB%98%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E4%BD%99%E6%9D%AD%E5%88%86%E5%85%AC%E5%8F%B8&zoom=17.35"
-          target="_blank"
-          title="在高德中打开"
-        >
+        <a href="https://ditu.amap.com/search?id=B0JAGCEM4X&city=330110&geoobj=120.302767%7C30.408755%7C120.31598%7C30.414976&query_type=IDQ&query=%E6%9D%AD%E5%B7%9E%E8%B7%A8%E8%BF%9C%E6%B5%8B%E7%BB%98%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E4%BD%99%E6%9D%AD%E5%88%86%E5%85%AC%E5%8F%B8&zoom=17.35"
+          target="_blank" title="在高德中打开">
           <div class="office-card">
             <div class="image-container">
               <img src="/yuhang_location.png" alt="余杭办公室地图" />
@@ -103,8 +97,8 @@ import service_detail from './service_detail.vue';
 }
 
 .right {
-  height: 300px;
-  width: 500px;
+  width: 30%;
+  height: 100%;
 }
 
 .right img {
@@ -116,7 +110,7 @@ import service_detail from './service_detail.vue';
 }
 
 .about-container h2 {
-  font-size: 40px;
+  font-size: 30px;
   color: #fafafb;
   margin-bottom: 0;
 }
@@ -158,14 +152,14 @@ import service_detail from './service_detail.vue';
 
 .offices-section h2 {
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   margin-bottom: 30px;
 }
 
 .offices-container {
   display: flex;
   justify-content: center;
-  gap: 50px;
+  gap: 300px;
   flex-wrap: wrap;
 }
 
@@ -230,61 +224,66 @@ import service_detail from './service_detail.vue';
     height: auto;
     padding: 20px;
   }
-  .left, .right {
+
+  .left,
+  .right {
     width: 90%;
     text-align: center;
     margin-bottom: 20px;
   }
+
   .left {
     min-width: 100%;
   }
+
   .right {
     height: auto;
-  }
-  .about-container h2 {
-    font-size: 28px;
-  }
-  .about-container p {
-    font-size: 16px;
   }
 
   .stats-container {
     /* 把原先 flex 改为 grid */
-  display: grid;
-  
-  /* 2 列 x 2 行 */
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, auto);
-  
-  /* 根据需要设置行列间距 */
-  gap: 30px; /* 或者 row-gap / column-gap 分开写 */
-
-  /* 如果需要让网格在容器内居中，可以加上 */
-  justify-items: center;
-  align-items: center;
-  
-  /* 原有的背景色 / padding / margin 视需要保留 */
-  background-color: #fff;
-  padding: 30px 0;
-  margin-bottom: 50px;
+    display: grid;
+    /* 2 列 x 2 行 */
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    /* 根据需要设置行列间距 */
+    gap: 10px;
+    /* 如果需要让网格在容器内居中，可以加上 */
+    justify-items: center;
+    align-items: center;
+    /* 原有的背景色 / padding / margin 视需要保留 */
+    background-color: #fff;
+    padding: 20px 0;
+    margin-bottom: 20px;
   }
+
   .stat-item h3 {
     font-size: 30px;
   }
+
   .stat-item p {
     font-size: 18px;
   }
 
   .offices-section {
-    height: auto; /* 避免强制高度导致内容溢出 */
+    height: auto;
+    /* 避免强制高度导致内容溢出 */
     padding-bottom: 40px;
   }
-  .offices-section h2 {
-    font-size: 30px;
+
+  .offices-container {
+    display: flex;
+    flex-direction: column; /* 将子元素垂直排列 */
+    align-items: center; /* 纵轴（水平）居中 */
+    gap: 20px; /* 设置子元素间距 */ 
   }
+
   .office-card {
-    width: 80%; /* 单列显示 */
+    width: 80vw;
+    margin: 0 auto;         /* 可选，如想更保险地居中 */
   }
+
+
 }
 
 /* 480px 以下（更小屏手机） */
@@ -292,6 +291,7 @@ import service_detail from './service_detail.vue';
   .about-container h2 {
     font-size: 24px;
   }
+
   .about-container p {
     font-size: 14px;
   }
@@ -299,19 +299,11 @@ import service_detail from './service_detail.vue';
   .stat-item h3 {
     font-size: 24px;
   }
+
   .stat-item p {
     font-size: 16px;
   }
 
-  .office-card {
-    width: 90%;
-    margin-bottom: 20px;
-  }
-  .office-card h4 {
-    font-size: 18px;
-  }
-  .office-card p {
-    font-size: 14px;
-  }
+ 
 }
 </style>

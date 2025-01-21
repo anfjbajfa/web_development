@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@arcgis/core": "^4.31.6",
     "@vscode/codicons": "^0.0.36",
     "axios": "^1.7.4",
     "element-plus": "^2.8.0",
     "gsap": "^3.12.2",
-    "js-md5": "^0.8.3",
     "mitt": "^3.0.1",
     "postcss-px-to-viewport": "^1.1.1",
     "swiper": "^11.1.14",
