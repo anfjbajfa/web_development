@@ -116,13 +116,6 @@
     transform: scale(1.05);
   }
   
-  .yellow-line {
-    width: 50px;
-    height: 5px;
-    background-color: #ffc107;
-    margin: 0 auto 30px auto;
-    border-radius: 2px;
-  }
   
   /* ============ 新增媒体查询示例 ============ */
   

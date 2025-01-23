@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dataset-tab">
     <!-- 按钮区域 -->
     <div style="margin-bottom: 8px;">
       <el-button size="small" type="primary" @click="addTab(false)">
@@ -126,14 +126,10 @@ const removeTab = (targetName: string) => {
 </script>
 
 <style scoped>
-.demo-tabs>.el-tabs__content {
-  color: #6b778c;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
-  padding: 0;
-}
 
+.dataset-tab{
+  width:100%
+}
 
 :deep( .el-tabs__header,.el-tabs__nav-wrap.is-top) {
   margin: 0 !important;               /* 去掉默认的margin */
@@ -148,4 +144,14 @@ const removeTab = (targetName: string) => {
 .el-button {
   margin-right: 3px;
 }
+
+
+:deep(.el-tabs){
+  width:100% !important
+}
+
+:deep(.el-tabs__content){
+  width: 100% !important;
+}
+
 </style>

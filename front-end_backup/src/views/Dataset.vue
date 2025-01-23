@@ -29,7 +29,8 @@ const showFileManagerDrawer = ref(false);
 
 <style>
 .el-container{
-  height:100vh
+  height:100vh;
+  width:100%
 }
 
 .el-header{

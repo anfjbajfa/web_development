@@ -1,6 +1,10 @@
 <template>
   <navbar/>
   <div class="pic-container">
+    <div class="caption" v-fade="'left-slide'">
+      <h2>荣誉</h2>
+      <p>2025年我们再次被评为甲级测绘单位，这不仅是对我们团队辛勤工作的认可，也是对我们在地理信息领域持续创新与卓越服务的肯定。</p>
+    </div>
     <img src="/awards/award-surveying.jpg" class="award-pic"/>
   </div>
 
@@ -113,6 +117,24 @@ onMounted(() => {
   height: 80vh;
   margin-top: 72px;
   justify-content: center;
+}
+
+.caption{
+ position: absolute;
+ z-index: 1;
+ margin:7% 0 0 15%;
+ max-width: 25%;
+}
+
+.caption h2 {
+  color:white;
+  font-size: 30px;
+}
+
+.caption p {
+  color:white;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .award-pic {

@@ -1,6 +1,6 @@
 <template>
     <navbar></navbar>
-    <div class="hero-section">
+    <div class="hero-section" v-fade="'fade-in'">
         <!-- Swiper 容器 -->
         <Swiper :modules="modules" :slides-per-view="1" :autoplay="{ delay: 5000, pauseOnMouseEnter: true }"
             :pagination="{ clickable: true }" :loop="true" class="mySwiper" :speed="1300">
@@ -56,7 +56,7 @@
         </Swiper>
     </div>
 
-    <div class="comapny-wrapper">
+    <div class="comapny-wrapper" v-fade="'fade-in'">
         <div class="company-brief">
             <h2>公司简介&愿景</h2>
             <div class="company-description">
@@ -114,8 +114,8 @@
         </div>
     </div>
 
-    <LastestProjects class="lastest-projects" :class="{'is-visible':isLastestProjectsVisible}"></LastestProjects>
-    <projectTheme class="project-theme" :class="{ 'is-visible': isProjectThemeVisible }"></projectTheme>
+    <LastestProjects class="lastest-projects" v-lazy v-fade></LastestProjects>
+    <projectTheme class="project-theme" v-lazy v-fade></projectTheme>
     <ContactUs></ContactUs>
 </template>
 
@@ -135,43 +135,6 @@ import { ref,onMounted,onUnmounted } from 'vue';
 
 const modules = [Pagination, A11y, Autoplay];
 const store = useStore()
-
-const isLastestProjectsVisible = ref(false)
-const isProjectThemeVisible = ref(false)
-
-onMounted(()=>{
-  const lastestProjects = document.querySelector(".lastest-projects")
-  const projectTheme = document.querySelector(".project-theme")
-
-  const observer = new IntersectionObserver(
-    (entries)=>{
-      entries.forEach((entry)=>{
-        if(entry.isIntersecting){
-          if(entry.target === lastestProjects){
-            isLastestProjectsVisible.value = true
-          }
-          if (entry.target===projectTheme){
-            isProjectThemeVisible.value = true
-          }
-        }
-      })
-    },
-    {
-      threshold:0.1
-    }
-  )
-
-  // 开始观察
-  if (lastestProjects) observer.observe(lastestProjects);
-  if (projectTheme) observer.observe(projectTheme);
-
-  // 清除观察器
-  onUnmounted(() => {
-    if (lastestProjects) observer.unobserve(lastestProjects);
-    if (projectTheme) observer.unobserve(projectTheme);
-  });
-})
-
 
 </script>
 
@@ -326,20 +289,6 @@ onMounted(()=>{
 
 .service-link:hover {
     text-decoration: underline;
-}
-
-
-/* 初始状态：元素隐藏并下移 */
-.lastest-projects, .project-theme {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-/* 当元素可见时：上浮且显示 */
-.lastest-projects.is-visible, .project-theme.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 

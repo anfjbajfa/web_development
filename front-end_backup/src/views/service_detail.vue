@@ -1,7 +1,11 @@
 <template>
   <!-- 分隔线 -->
   <hr />
-  <div class="overall_layout">
+  <div class="overall_layout" v-lazy>
+    <div style="text-align:center">
+  <h2>业务详情</h2>
+    <div class="yellow-line"></div>
+  </div>
     <!-- 第一部分 -->
     <div id="gong_cheng" class="section-container" :ref="addToRefs">
       <div class="text-container">
@@ -174,7 +178,6 @@ hr {
   margin: 20px auto;
 }
 
-/* ============= 大屏布局 ============= */
 .section-container {
   display: grid;
   justify-content: center;

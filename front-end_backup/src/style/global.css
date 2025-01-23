@@ -10,8 +10,61 @@ body, html {
   box-sizing: inherit;
 }
 
+/* 全局动画效果 */
 
+/* 从无到有 */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2.5s forwards;
+}
 
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* 从下向上浮现 */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation:fadeUp 1s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+
+/* 从屏幕左侧划出 */
+.left-slide {
+  /* 绑定动画名称、持续时间、动画曲线和填充模式 */
+  animation: leftSlide 1.5s ease-out forwards;
+}
+
+/* 定义动画的关键帧 */
+@keyframes leftSlide {
+  from {
+    transform: translateX(-100%); 
+    opacity: 0;                   
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;                   
+  }
+}
+
+/* 基础复用元素 */
+.yellow-line {
+  width: 50px;
+  height: 5px;
+  background-color: #ffc107;
+  margin: 0 auto 30px auto;
+}
+
+/* 媒体查询对应的字体变化 */
 @media screen and (max-width: 768px){
   h2{
     font-size: 18px !important;

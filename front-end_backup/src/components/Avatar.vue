@@ -1,18 +1,12 @@
 <template>
   <el-dropdown @command="handleCommand">
     <!-- 头像组件作为触发器 -->
-    <el-avatar class="custom-avatar">
-      {{userName}} 
-    </el-avatar>
+    <el-avatar class="custom-avatar"> user </el-avatar>
 
     <!-- 下拉菜单 -->
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item command="profile">
-          用户中心
-          <el-badge v-if="getUserInfo().isAdmin" :value="pendingOrderCount"/>
-          <el-badge :is-dot="hasNewOrder" :hidden="!hasNewOrder"/>
-        </el-dropdown-item>
+        <el-dropdown-item command="profile">个人主页</el-dropdown-item>
         <!-- <el-dropdown-item command="settings">设置</el-dropdown-item> -->
         <el-dropdown-item command="logout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
@@ -21,19 +15,14 @@
 </template>
 
 <script setup>
-import { removeUserInfo, removeToken,getUserInfo} from '../utils/storage.js';
+import { removeUserInfo, removeToken } from '../utils/storage.js';
 import router from '../router/index.js';
 import { logout } from '../api/user.js';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { useStore } from 'vuex';
-import { computed } from 'vue';
-
+import { useStore } from 'vuex'; // 从 'vuex' 导入 useStore
 
 const store = useStore();
-const hasNewOrder = computed(()=>store.getters.hasNewOrder);
-const pendingOrderCount = computed(()=>store.getters.pendingOrderCount);
-const userName = getUserInfo().isAdmin?"admin":"client";
-console.log(userName);
+
 function handleCommand(command) {
   if (command === 'logout') {
     ElMessageBox.confirm(
@@ -50,11 +39,10 @@ function handleCommand(command) {
           removeUserInfo();
           removeToken();
           // 提交 mutation 更新登录状态
-          store.dispatch('stopPolling') // 停止轮询
           store.commit('setLogined', false);
           store.commit('setAdminStatus', false);
-          ElMessage.success("退出登录状态成功！");
-          router.push('/');
+          ElMessage.success("退出登录成功！");
+          router.replace('/');
           console.log('退出登录');
         })
         .catch(() => {
@@ -66,7 +54,11 @@ function handleCommand(command) {
   } else if (command === 'profile') {
     // 跳转到个人主页
     router.push('/profile');
-  } 
+    console.log('个人主页');
+  } else if (command === 'settings') {
+    // 跳转到设置页面
+    console.log('设置');
+  }
 }
 </script>
 
@@ -77,11 +69,8 @@ function handleCommand(command) {
 }
 
 .custom-avatar {
-  background-color: rgb(223, 223, 222);
-  color: rgb(6, 6, 6);
+  background-color: #fcfcfc;
+  color: black;
   font-weight: bold;
-  font-size: 10px;
 }
-
-
 </style>

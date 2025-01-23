@@ -1,6 +1,6 @@
 <template>
   <navbar></navbar>
-  <div class="about-us-section">
+  <div class="about-us-section" v-fade="''">
     <div class="about-container">
       <div class="left">
         <h2>关于团队</h2>
@@ -152,7 +152,6 @@ import service_detail from './service_detail.vue';
 
 .offices-section h2 {
   text-align: center;
-  font-size: 30px;
   margin-bottom: 30px;
 }
 

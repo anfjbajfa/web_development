@@ -87,12 +87,7 @@ function closeOverlay(index) {
   font-weight: bold;
 }
 
-.yellow-line {
-  width: 50px;
-  height: 5px;
-  background-color: #ffc107;
-  margin: 0 auto 30px auto;
-}
+
 
 /* 卡片样式 */
 .service-card {

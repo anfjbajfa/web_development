@@ -73,7 +73,7 @@ h2 {
 
 .project-card img {
   width: 100%;
-  height: auto;
+  height: 60%;
 }
 
 .project-info {

@@ -6,7 +6,7 @@
     <!-- 第一行（两个卡片） -->
     <div class="row row-1">
       <div class="card large" v-if="cards[0]">
-        <img class="card-image" :src="cards[0].img" :alt="cards[0].title" />
+        <img class="card-image" loading="lazy" :src="cards[0].img" :alt="cards[0].title" />
         <div class="card-info">
           <h3 class="card-title">{{ cards[0].title }}</h3>
           <p class="card-desc">{{ cards[0].desc }}</p>
@@ -79,12 +79,6 @@ const cards = ref([
   text-align: center;
 }
 
-.yellow-line {
-  width: 50px;
-  height: 5px;
-  background-color: #ffc107;
-  margin: 0 auto 30px auto;
-}
 
 /* 每一行: 两列布局 */
 .row {
