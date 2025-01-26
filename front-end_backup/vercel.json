@@ -1,9 +1,8 @@
 {
     "rewrites": [
-      { "source": "/web_development/:path*", "destination": "/web_development/index.html" }
-    ],
-    "routes": [
-      { "handle": "filesystem" },
-      { "source": "/web_development/:path*", "destination": "/web_development/index.html" }
+      {
+        "source": "/web_development/:path*",
+        "destination": "/web_development/index.html"
+      }
     ]
   }
