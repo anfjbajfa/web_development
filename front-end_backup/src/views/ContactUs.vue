@@ -1,8 +1,7 @@
 <template>
     <div class="contact-us-wrapper">
       <h2>与我们联系</h2>
-      <div class="yellow-line"></div>
-      <div class="contact-us">
+      <div class="contact-us" v-fade>
         <!-- 电话和邮箱 -->
         <div class="contact-way">
           <h3>电话和邮箱</h3>
@@ -58,8 +57,9 @@
   .contact-us-wrapper {
     text-align: center;
     background-color: #f7f7f7;
-    padding: 50px 20px;
+    padding: 30px 20px;
     border-radius: 8px;
+    margin-bottom: 3vh;
   }
   
   .contact-us {
@@ -99,7 +99,7 @@
   
   .contact-us-button {
     display: inline-block;
-    background-color: #ffc107;
+    background-color: #565656;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
@@ -112,7 +112,7 @@
   }
   
   .contact-us-button:hover {
-    background-color: #ffc107 !important;
+    background-color: #565656 !important;
     transform: scale(1.05);
   }
   

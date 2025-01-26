@@ -43,12 +43,6 @@ h2 {
   margin-bottom: 10px;
 }
 
-.yellow-line {
-  width: 50px;
-  height: 5px;
-  background-color: #ffc107;
-  margin: 0 auto 30px auto;
-}
 
 .projects-container {
   display: flex;
@@ -73,7 +67,8 @@ h2 {
 
 .project-card img {
   width: 100%;
-  height: 60%;
+  aspect-ratio: 16 / 10; /* 例子 */
+  object-fit: cover;    /* 或 contain */
 }
 
 .project-info {
@@ -120,6 +115,7 @@ h2 {
   .project-card {
     width: 95vw;
     margin-bottom: 20px;
+    min-height:auto;
   }
 }
 

@@ -7,7 +7,7 @@ export default {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             console.log("开始观察");
-            console.log(entry)
+            // console.log(entry)
             const targetImg = entry.target;
             // 使用自定义属性存储的实际图片地址
             targetImg.src = targetImg._actualSrc || "";

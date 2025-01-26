@@ -1,6 +1,6 @@
 <template>
   <navbar></navbar>
-  <div class="about-us-section" v-fade="''">
+  <div class="about-us-section" v-fade="'fade-in'">
     <div class="about-container">
       <div class="left">
         <h2>关于团队</h2>
@@ -221,7 +221,11 @@ import service_detail from './service_detail.vue';
   .about-container {
     flex-direction: column;
     height: auto;
-    padding: 20px;
+   margin-bottom: 0;
+  }
+
+  .about-us-section {
+  padding: 0;
   }
 
   .left,
@@ -233,6 +237,7 @@ import service_detail from './service_detail.vue';
 
   .left {
     min-width: 100%;
+    margin-top: 10%;
   }
 
   .right {
@@ -282,7 +287,6 @@ import service_detail from './service_detail.vue';
     margin: 0 auto;         /* 可选，如想更保险地居中 */
   }
 
-
 }
 
 /* 480px 以下（更小屏手机） */
@@ -302,7 +306,5 @@ import service_detail from './service_detail.vue';
   .stat-item p {
     font-size: 16px;
   }
-
- 
 }
 </style>

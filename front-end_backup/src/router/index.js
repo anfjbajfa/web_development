@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router"; // 改为 createWebHashHistory
+import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 // import Services from "../views/services.vue";
 
@@ -62,6 +62,8 @@ const routes = [
     path: "/orderDataset",
     component: () => import("../views/OrderDataset.vue"),
   },
+
+  {path:"/cehuiLearnMore",component:()=>import("../views/cehuiLearnMore.vue")}
 ];
 
 const router = createRouter({
@@ -69,11 +71,12 @@ const router = createRouter({
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
+      const offset = window.innerHeight * 0.18;
       return {
         el: to.hash,
         behavior: "smooth",
         // 您可以根据需要调整偏移量
-        top: 100,
+        top: offset, // 动态偏移量
       };
     } else if (savedPosition) {
       // 当用户使用浏览器的前进/后退按钮时，返回保存的位置

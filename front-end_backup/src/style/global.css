@@ -9,7 +9,6 @@ body, html {
 *, *::before, *::after {
   box-sizing: inherit;
 }
-
 /* 全局动画效果 */
 
 /* 从无到有 */
@@ -78,5 +77,20 @@ body, html {
 
   p {
     font-size: 12px !important;
+  }
+
+  a {
+    font-size: 12px !important;
+  }
+
+  strong {
+    font-size: 12px;
+  }
+
+  .yellow-line {
+    width: 50px;
+    height: 5px;
+    background-color: #ffc107;
+    margin: 0 auto 10px auto;
   }
 }

@@ -8,7 +8,6 @@
         <p class="subtitle">
           我们正在寻找有创造力的伙伴，携手推动行业变革，如果您有合作的意愿，请不要犹豫联系我们!
         </p>
-        <img src="" class="left-img"/>
       </div>
     </div>
 
@@ -98,9 +97,9 @@ const opportunityValue = ref(0);
 
 // 页面加载后开始动画
 onMounted(() => {
-  animateValue(growthValue, 60, 1000);       // 从 0 动到 60%
-  animateValue(techInvest, 50, 1000); // 从 0 动到 80%
-  animateValue(opportunityValue, 30, 1000);    // 从 0 动到 65%
+  animateValue(growthValue, 60, 1000);       
+  animateValue(techInvest, 50, 1000); 
+  animateValue(opportunityValue, 30, 1000);    
 });
 
 /**
@@ -137,7 +136,7 @@ const logos = ref([
 <style scoped>
 /* 1. 页面整体布局（保持不变） */
 .container {
-  margin-top: 72px;
+  margin-top: 3.5%;
   position: relative;
   width: 100%;
   min-height: 60vh;
@@ -176,7 +175,7 @@ const logos = ref([
 
 .subtitle {
   margin: 0;
-  font-size: 15px;
+  font-size: 17px;
   color: #666;
   max-width: 400px;
 }
@@ -190,7 +189,7 @@ const logos = ref([
 }
 
 .image-section img {
-  width: 1000px;
+  width:100%;
   height: 230px;
   border-radius: 6px;
   object-fit: fill;
@@ -330,13 +329,13 @@ const logos = ref([
 }
 
 .logo-alt {
-  text-align: center;      /* 文本居中 */
-  margin-top: 8px;         /* 与图片的间距 */
-  font-size: 14px;         /* 字体大小 */
-  color: #333;             /* 文本颜色 */
-  white-space: nowrap;     /* 防止文本换行 */
-  overflow: hidden;        /* 隐藏溢出部分 */
-  text-overflow: ellipsis; /* 溢出部分显示省略号 */
+  text-align: center;      
+  margin-top: 8px;         
+  font-size: 14px;         
+  color: #333;           
+  white-space: nowrap;     
+  overflow: hidden;        
+  text-overflow: ellipsis; 
   font-weight: bold;
 }
 
