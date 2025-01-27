@@ -9,7 +9,7 @@ export default defineConfig({
       plugins: [],
     },
   },
-  base: "/web_development/",
+  base: "./",
   build: {
     rollupOptions: {
       output: {
@@ -23,4 +23,3 @@ export default defineConfig({
   },
 });
 
-// vite.config.js

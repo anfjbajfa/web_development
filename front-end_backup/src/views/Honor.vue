@@ -51,7 +51,7 @@ import navbar from '../components/navbar.vue';
 // 1. 这里是每行的数据
 const caseHonors = [
   {
-    imageSrc: `${import.meta.env.BASE_URL}/awards/honor-zhiwei.png`,
+    imageSrc: `/awards/honor-zhiwei.png`,
     dateRange: '2014-2025',
     title: '职称荣誉',
     description:
@@ -60,7 +60,7 @@ const caseHonors = [
     linkText: '查看所有职称荣誉->',
   },
   {
-    imageSrc: `${import.meta.env.BASE_URL}/awards/honor-zhuzuo.png`,
+    imageSrc: `/awards/honor-zhuzuo.png`,
     dateRange: '2018-2025',
     title: '软件著作',
     description:
@@ -69,7 +69,7 @@ const caseHonors = [
     linkText: '查看所有著作荣誉->',
   },
   {
-    imageSrc: `${import.meta.env.BASE_URL}/awards/honor-system.png`,
+    imageSrc: `/awards/honor-system.png`,
     dateRange: '2017-2025',
     title: '体系证书',
     description:

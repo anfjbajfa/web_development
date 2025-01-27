@@ -80,21 +80,21 @@ const showQRModal = ref(false)
 const slides = ref([
   {
     id: 1,
-    image: `${import.meta.env.BASE_URL}/recent_activities/2025nianhui.webp`,
+    image: `/recent_activities/2025nianhui.webp`,
     title: '跨远2025迎新年会',
     description: '传承，表彰，总结，创新',
     time: '2025-01-15'
   },
   {
     id: 2,
-    image: `${import.meta.env.BASE_URL}/recent_activities/laba.webp`,
+    image: `/recent_activities/laba.webp`,
     title: '腊八福利',
     description: '全体员工欢聚一堂，共度腊八节',
     time: '2025-01-18'
   },
   {
     id: 3,
-    image: `${import.meta.env.BASE_URL}/recent_activities/ganxie.png`,
+    image: `/recent_activities/ganxie.png`,
     title: '来自领导的感谢',
     description:
       '近日，跨远收到杭州市规划和自然资源局临平分局、余杭分局发来的感谢信,当局肯定了过去一年跨远的付出',
