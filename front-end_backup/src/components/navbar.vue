@@ -6,7 +6,7 @@
     </div>
 
     <!-- 菜单按钮，仅在移动端显示 -->
-    <div class="menu-toggle" @click="toggleMenu">
+    <div class="menu-toggle" @click="toggleMenu" ref="menuToggle">
       <span class="menu-icon"><el-icon>
           <IconMenu />
         </el-icon>
@@ -17,7 +17,8 @@
     <div :class="['menu-list-container', { 'mobile-menu': isMobileMenuOpen }]">
       <ul class="menu-list">
         <li v-for="i in Object.keys(menu_items)" :key="i">
-          <RouterLink v-if="!(menu_items[i].constructor === Object)" :to="menu_items[i]" class="menu-link">
+          <RouterLink v-if="!(menu_items[i].constructor === Object)" :to="menu_items[i]" class="menu-link"
+            active-class="active-menu-link">
             {{ i }}
           </RouterLink>
         </li>
@@ -30,19 +31,19 @@
         登录
       </RouterLink>
       <RouterLink v-else class="avatar-link">
-          <Avatar/>
-          <el-badge v-if="getUserInfo().isAdmin" :value="pendingOrderCount"/>
-          <el-badge :is-dot="hasNewOrder" :hidden="!hasNewOrder"/>    
+        <Avatar />
+        <el-badge v-if="getUserInfo().isAdmin" :value="pendingOrderCount" />
+        <el-badge :is-dot="hasNewOrder" :hidden="!hasNewOrder" />
       </RouterLink>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted, computed} from 'vue';
+import { ref, onMounted, computed, onUnmounted } from 'vue';
 import { getUserInfo } from '../utils/storage.js';
 import Avatar from '../components/Avatar.vue';
-import { useStore } from 'vuex'; 
+import { useStore } from 'vuex';
 import { Menu as IconMenu } from "@element-plus/icons-vue";
 
 const menu_data = {
@@ -58,6 +59,10 @@ const menu_items = menu_data;
 
 const isMobileMenuOpen = ref(false);
 
+// 引用
+const menuListContainer = ref(null);
+const menuToggle = ref(null);
+
 // 切换移动端菜单显示状态
 const toggleMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
@@ -65,16 +70,75 @@ const toggleMenu = () => {
 
 // 使用 Vuex store
 const store = useStore();
-const hasNewOrder = computed(()=>store.getters.hasNewOrder);
-const pendingOrderCount = computed(()=>store.getters.pendingOrderCount);
+const hasNewOrder = computed(() => store.getters.hasNewOrder);
+const pendingOrderCount = computed(() => store.getters.pendingOrderCount);
 
 onMounted(() => {
   store.dispatch('checkLoginStatus');
-  
+  document.addEventListener('click', handleClickOutside);
+  window.addEventListener('scroll', handleScrollOrSwipe);
+  window.addEventListener('touchstart', handleTouchStart, { passive: true });
+  window.addEventListener('touchmove', handleTouchMove, { passive: true });
+  window.addEventListener('touchend', handleTouchEnd);
 });
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside);
+  window.removeEventListener('scroll', handleScrollOrSwipe);
+  window.removeEventListener('touchstart', handleTouchStart);
+  window.removeEventListener('touchmove', handleTouchMove);
+  window.removeEventListener('touchend', handleTouchEnd);
+});
+
+let touchStartY = 0;
+let touchEndY = 0;
 
 // 计算属性，获取登录状态
 const isLogined = computed(() => store.getters.isLogined);
+// 关闭菜单的方法
+const closeMenu = () => {
+  isMobileMenuOpen.value = false;
+};
+
+// 处理点击事件，判断是否点击在菜单外部
+const handleClickOutside = (event) => {
+  if (isMobileMenuOpen.value) {
+    // 如果点击的是菜单按钮，忽略
+    if (menuToggle.value && menuToggle.value.contains(event.target)) {
+      return;
+    }
+    // 如果点击在菜单内部，忽略
+    if (menuListContainer.value && menuListContainer.value.contains(event.target)) {
+      return;
+    }
+    // 其他情况，关闭菜单
+    closeMenu();
+  }
+};
+
+const handleScrollOrSwipe = () => {
+  if (isMobileMenuOpen.value) {
+    closeMenu();
+  }
+};
+
+
+const handleTouchStart = (event) => {
+  touchStartY = event.changedTouches[0].screenY;
+};
+
+const handleTouchMove = (event) => {
+  touchEndY = event.changedTouches[0].screenY;
+};
+
+const handleTouchEnd = () => {
+  const touchDifference = touchStartY - touchEndY;
+  // 如果用户向上滑动超过50px，则关闭菜单
+  if (touchDifference > 10) {
+    closeMenu();
+  }
+};
+
 </script>
 
 <style scoped>
@@ -112,7 +176,7 @@ const isLogined = computed(() => store.getters.isLogined);
 .menu-list-container {
   display: flex;
   align-items: center;
-  margin-right:200px ;
+  margin-right: 200px;
 }
 
 /* 菜单列表 */
@@ -141,8 +205,14 @@ const isLogined = computed(() => store.getters.isLogined);
 .menu-link:hover,
 .login-link:hover,
 .avatar-link:hover {
-  color: #1e3a8a;
+  color: rgb(94, 37, 25);
   text-decoration: underline;
+}
+
+/* 使用 ::v-deep 穿透 scoped 限制，定义 active-menu-link 的样式 */
+:deep(.active-menu-link) {
+  transform: scale(1.2);
+  display: inline-block;
 }
 
 
@@ -169,11 +239,12 @@ const isLogined = computed(() => store.getters.isLogined);
     align-items: center;
     justify-content: space-around;
     padding: 10px 20px;
-    width:100%
+    width: 100%
   }
 
   .title-container {
-    white-space: nowrap; /* 禁止换行 */
+    white-space: nowrap;
+    /* 禁止换行 */
     flex-wrap: nowrap;
     align-items: center;
   }
@@ -200,24 +271,28 @@ const isLogined = computed(() => store.getters.isLogined);
     font-size: 14px;
   }
 
+  /* 菜单列表容器的初始状态 */
   .menu-list-container {
     width: 100%;
-    display: none;
+    position: absolute;
+    top: 50px;
+    /* 与导航栏高度一致 */
+    left: 0;
     background-color: rgb(213, 220, 220);
-    transition: opacity 0.3s ease, transform 0.3s ease; /* 确保过渡效果生效 */
+    max-height: 0;
+    /* 初始高度为0 */
+    overflow: hidden;
+    /* 隐藏溢出内容 */
+    transition: max-height 1s ease, opacity 1s ease;
+    /* 改为max-height实现滑动效果 */
+    opacity: 0;
+    z-index: 999;
   }
 
-  /* 修改这里 */
+  /* 当菜单打开时 */
   .menu-list-container.mobile-menu {
-    display: block;
-    position: absolute;
-    top: 52.8px; /* 根据导航栏的高度进行调整 */
-    left: 0;
-    width: 100vw;
-    height: 25vh;
-    z-index: 999;
-    overflow-y: auto; /* 如果菜单项超出容器高度，允许滚动 */
-    transition: opacity 2s ease, transform 0.8s ease; 
+    max-height: 500px;
+    opacity: 1;
   }
 
   .menu-list {
@@ -246,7 +321,8 @@ const isLogined = computed(() => store.getters.isLogined);
   .menu-link:hover,
   .login-link:hover,
   .avatar-link:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* 加深背景色 */
+    background-color: rgba(0, 0, 0, 0.1);
+    /* 加深背景色 */
   }
 
   .auth-container {
@@ -254,6 +330,14 @@ const isLogined = computed(() => store.getters.isLogined);
     justify-content: flex-end;
   }
 
-  
+  /* 使用 ::v-deep 穿透 scoped 限制，定义 active-menu-link 的样式 */
+  :deep(.active-menu-link) {
+    transform: scale(1.2);
+    display: inline-block;
+    color: black;
+  }
+
+
+
 }
 </style>

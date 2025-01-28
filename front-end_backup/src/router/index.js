@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import component from "element-plus/es/components/tree-select/src/tree-select-option.mjs";
 
 const routes = [
   { path: "/", component: Home },
@@ -18,7 +19,7 @@ const routes = [
   },
   { path: "/login", component: () => import("../views/Login.vue") },
   { path: "/login/register", component: () => import("../views/register.vue") },
-  { path: "/dataset", component: () => import("../views/Dataset.vue") },
+  // { path: "/dataset", component: () => import("../views/Dataset.vue") },
   { path: "/honor", component: () => import("../views/Honor.vue") },
   { path: "/cooperation", component: () => import("../views/Cooperation.vue") },
   { path: "/profile", component: () => import("../views/Profile.vue") },
@@ -29,11 +30,14 @@ const routes = [
     component: () => import("../views/OrderDataset.vue"),
   },
 
-  {path:"/cehuiLearnMore",component:()=>import("../views/cehuiLearnMore.vue")}
+  {path:"/cehuiLearnMore",component:()=>import("../views/cehuiLearnMore.vue")},
+  {path:"/futureLearnMore", component:()=>import("../views/futureLearnMore.vue")},
+  {path:"/shuziLearnMore", component:()=>import("../views/shuziLearnMore.vue")},
+  
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL), // 使用 Hash 模式
+  history: createWebHashHistory(), // 使用 Hash 模式
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {

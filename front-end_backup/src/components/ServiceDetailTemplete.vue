@@ -7,7 +7,7 @@
   </div>
   <div class="yellow-line"></div>
   <!-- 卡片容器 -->
-  <div class="service-card-wrapper">
+  <div class="service-card-wrapper" v-fade>
     <!-- 遍历 cards 数组，输出卡片内容 -->
     <div v-for="(card, index) in cards" :key="index" class="service-card" 
     @click="toggleOverlay(index)"

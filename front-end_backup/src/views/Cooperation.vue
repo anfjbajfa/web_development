@@ -1,12 +1,16 @@
 <template>
   <navbar></navbar>
+  <!-- 1. 保持原有的页面结构、卡片等不变 -->
   <div class="container">
     <!-- 左侧：标题与描述 -->
     <div class="left">
       <div class="text-section">
         <h1 class="title">未来已来，<br />跨远的增长潜能超乎想象！</h1>
         <p class="subtitle">
-          我们正在寻找有创造力的伙伴，携手推动行业变革，如果您有合作的意愿，请不要犹豫联系我们!
+          我们正在寻找志同道合的伙伴，携手推动行业变革，如果您有合作的意愿，请不要犹豫联系我们!
+        </p>
+        <p class="subtitle">
+          招商热线：+86 18968063939
         </p>
       </div>
     </div>
@@ -22,7 +26,6 @@
       <div class="cards">
         <!-- 第一列：Growth -->
         <div class="card card-growth">
-          <!-- 动态饼图 -->
           <div class="pie-chart" :style="{
             background: `conic-gradient(#f18640 0% ${growthValue}%, #ebebeb ${growthValue}% 100%)`
           }">
@@ -63,75 +66,164 @@
     </div>
   </div>
 
-
+  <!-- 2. 合作伙伴区域：将所有 logo 手动放在一起 -->
   <div class="partner-wrapper">
     <h2>合作伙伴</h2>
     <div class="yellow-line"></div>
-    <div class="logo-slider">
-      <div class="logo-list">
-        <!-- 循环渲染多张 Logo -->
-        <div class="logo-item" v-for="(item, idx) in logos" :key="idx">
-          <img :src="item.src" :alt="item.alt" />
-          <p class="logo-alt">{{ item.alt }}</p>
-        </div>
-      </div>
+    <div class="logo-slider" @mouseenter="stopSwiper" @click="handleClick" @mouseleave="handleMouseLeave">
+      <Swiper class="my-swiper" :modules="[Autoplay]" direction="horizontal" :loop="true" :slides-per-view="'auto'"
+        :space-between="10" :speed="4000" :autoplay="{
+          delay: 4000,
+          disableOnInteraction: true
+        }" @swiper="onSwiperReady">
+        <!-- 第一个 Slide（放 6 个 Logo） -->
+        <SwiperSlide>
+          <div class="logo-list">
+            <div class="logo-item">
+              <img src="/business-partners-logos/linpingGOV.png" alt="临平区政府" />
+              <p class="logo-alt">临平区政府</p>
+            </div>
+            <div class="logo-item">
+              <img src="/business-partners-logos/未来科技城.jpeg" alt="未来科技城" />
+              <p class="logo-alt">未来科技城</p>
+            </div>
+            <div class="logo-item">
+              <img src="/business-partners-logos/yuhangguihua.jpg" alt="余杭区规划院" />
+              <p class="logo-alt">余杭区规划院</p>
+            </div>
+            <div class="logo-item">
+              <img src="/business-partners-logos/alibab.png" alt="阿里巴巴" />
+              <p class="logo-alt">阿里巴巴</p>
+            </div>
+            <div class="logo-item">
+              <img src="/business-partners-logos/huadongdianjian.jpg" alt="华东院" />
+              <p class="logo-alt">华东院</p>
+            </div>
+          </div>
+        </SwiperSlide>
+
+        <!-- 第二个 Slide（重复 6 个 Logo），用于实现无缝循环 -->
+        <SwiperSlide>
+          <div class="logo-list">
+            <div class="logo-item">
+              <img src="/business-partners-logos/yayun.png" alt="亚运会" />
+              <p class="logo-alt">2024亚运会</p>
+            </div>
+            <div class="logo-item">
+              <img src="/business-partners-logos/zhejiangziran.jpg" alt="未来科技城" />
+              <p class="logo-alt">浙江自然资源局</p>
+            </div>
+
+            <div class="logo-item">
+              <img src="/business-partners-logos/dahua.jpg" alt="浙江大华" />
+              <p class="logo-alt">浙江大华</p>
+            </div>
+
+            <div class="logo-item">
+              <img src="/business-partners-logos/yintai.jpg" alt="浙江大华" />
+              <p class="logo-alt">银泰百货</p>
+            </div>
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </div>
   </div>
 
-
+  <!-- 3. 合伙故事部分 -->
   <div class="story-wrapper">
     <h2>合伙故事</h2>
     <div class="yellow-line"></div>
-    
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import navbar from '../components/navbar.vue';
+import { ref, onMounted, onUnmounted } from 'vue'
+import navbar from '../components/navbar.vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay, FreeMode } from 'swiper/modules'
 
-// 三个数值的响应式变量
-const growthValue = ref(0);
-const techInvest = ref(0);
-const opportunityValue = ref(0);
+/* 三个数值的响应式变量 */
+const growthValue = ref(0)
+const techInvest = ref(0)
+const opportunityValue = ref(0)
 
 // 页面加载后开始动画
 onMounted(() => {
-  animateValue(growthValue, 60, 1000);       
-  animateValue(techInvest, 50, 1000); 
-  animateValue(opportunityValue, 30, 1000);    
-});
+  animateValue(growthValue, 60, 1000)
+  animateValue(techInvest, 50, 1000)
+  animateValue(opportunityValue, 30, 1000)
 
-/**
- * @param currentRef  ref对象，用于存储当前值
- * @param target      目标数值
- * @param duration    动画持续时间(毫秒)
- */
+})
+
 function animateValue(currentRef, target, duration) {
-  let start = 0;
-  const range = target - start;
-  // 根据数值差分配一个 step 的时间间隔
-  const stepTime = Math.abs(Math.floor(duration / range));
-
+  let start = 0
+  const range = target - start
+  const stepTime = Math.abs(Math.floor(duration / range))
   const timer = setInterval(() => {
-    start++;
-    currentRef.value = start;
+    start++
+    currentRef.value = start
     if (start === target) {
-      clearInterval(timer);
+      clearInterval(timer)
     }
-  }, stepTime);
+  }, stepTime)
 }
 
+/* 用于保存 Swiper 实例，便于暂停/恢复 */
+const mySwiper = ref(null)
 
-const logos = ref([
-  { src: `/business-partners-logos/linpingGOV.png`, alt: '临平区政府' },
-  { src: `/business-partners-logos/未来科技城.jpeg`, alt: '未来科技城' },
-  { src: `/business-partners-logos/yuhangguihua.jpg`, alt: '余杭区规划院' },
-  { src: `/business-partners-logos/alibab.png`, alt: '阿里巴巴' },
-  { src: `/business-partners-logos/huadongdianjian.jpg`, alt: '华东院' },
-  { src: `/business-partners-logos/dahua.jpg`, alt: '浙江大华' },
-]);
+function onSwiperReady(swiper) {
+  mySwiper.value = swiper
+}
+
+console.log(mySwiper)
+
+// 添加定时器引用
+const resumeTimer = ref(null)
+
+// 修改后的处理方法
+function handleClick() {
+  stopSwiper()
+  // 清除已有定时器
+  if (resumeTimer.value) {
+    clearTimeout(resumeTimer.value)
+  }
+  // 设置3秒后恢复
+  resumeTimer.value = setTimeout(() => {
+    startSwiper()
+    resumeTimer.value = null
+  }, 2000)
+}
+
+function handleMouseLeave() {
+  // 只有没有点击触发的定时器时才立即恢复
+  if (!resumeTimer.value) {
+    startSwiper()
+  }
+}
+
+/* 原有swiper相关方法保持不变 */
+function stopSwiper() {
+  if (mySwiper.value) {
+    mySwiper.value.autoplay.stop()
+  }
+}
+
+function startSwiper() {
+  if (mySwiper.value) {
+    mySwiper.value.autoplay.start()
+  }
+}
+
+// 组件卸载时清除定时器
+onUnmounted(() => {
+  if (resumeTimer.value) {
+    clearTimeout(resumeTimer.value)
+  }
+})
+
+
 </script>
+
 
 <style scoped>
 /* 1. 页面整体布局（保持不变） */
@@ -140,8 +232,17 @@ const logos = ref([
   position: relative;
   width: 100%;
   min-height: 60vh;
-  background-color: #f5efe7;
-  padding: 40px 20px;
+  background:
+    /* 兜底颜色 */
+    #f5efe7
+    /* 图片地址 */
+    url('/honor_background.jpg')
+    /* 背景重复方式 */
+    no-repeat
+    /* 水平/垂直对齐方式 */
+    center center;
+  background-size: cover;
+  padding: 2% 2%;
   box-sizing: border-box;
   font-family: "Helvetica Neue", Arial, sans-serif;
   color: #333;
@@ -153,29 +254,28 @@ const logos = ref([
 .left {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-bottom: 40px;
 }
 
 .right {
-  height: auto;
+  max-height: 60vh;
 }
 
 /* 左侧标题文字 */
 .text-section {
-  margin-top: 50px;
+  margin-top: 15%;
   flex: 1;
 }
 
 .title {
   line-height: 1.2;
   font-weight: 700;
-  margin: 0 0 20px 0;
+  margin: 0 0 15% 0;
 }
 
 .subtitle {
-  margin: 0;
+  margin-top: 10%;
   font-size: 17px;
+  font-weight: bold;
   color: #666;
   max-width: 400px;
 }
@@ -186,54 +286,47 @@ const logos = ref([
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 40%;
 }
 
 .image-section img {
-  width:100%;
-  height: 230px;
+  width: 100%;
+  height: 90%;
   border-radius: 6px;
-  object-fit: fill;
+  object-fit: cover;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* 2. 三列卡片布局（保持不变） */
 .cards {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  margin-top: 20px;
-  min-height: 300px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3%;
+  height: 100%;
 }
 
-@media (min-width: 768px) {
-  .cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
 
 .card {
+  margin-top: 8%;
+  height: 50%;
   padding: 20px;
   border-radius: 8px;
   color: #fff;
   text-align: center;
   position: relative;
-
 }
 
 /* 3. 改卡片背景色，让它们和示例图更一致 */
 .card-growth {
   background-color: #0f5c5c;
-  /* 第一列：墨绿色(示例) */
 }
 
 .card-opportunity {
   background-color: #f18640;
-  /* 第二列：橘色 */
 }
 
 .card-decrease {
   background-color: #fff;
-  /* 第三列：白色 */
   color: #333;
   border: 2px solid #ccc;
 }
@@ -241,12 +334,11 @@ const logos = ref([
 /* 卡片内文字 */
 .card h3 {
   margin: 15px 0 10px 0;
-  font-size: 20px;
   font-weight: 600;
 }
 
 .card p {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.4;
   color: inherit;
 }
@@ -274,8 +366,9 @@ const logos = ref([
 
 /* -------------------------------------------------- */
 .partner-wrapper {
-  margin-top: 50px;
+  margin-top: 2%;
   justify-content: center;
+  align-items: center;
 }
 
 .partner-wrapper h2 {
@@ -284,44 +377,33 @@ const logos = ref([
 
 .logo-slider {
   display: flex;
-  width: 100vw;
-  /* 全屏宽 */
-  overflow-x: auto;
-  /* 允许左右滚动 */
+  width: 100%;
+  overflow-x: hidden;
   overflow-y: hidden;
-  /* 不要出现垂直滚动 */
   white-space: nowrap;
-  /* 子元素在同一行显示 */
   background-color: #fff;
-  justify-content: center;
-  /* 如果想去掉滚动条，可以用::-webkit-scrollbar等方式自定义 */
+  margin: 0 auto;
 }
 
 .logo-list {
   display: inline-flex;
-  /* 让所有logo在一行内 */
   align-items: center;
-  gap: 110px;
-  /* Logo之间间距，可根据需要调整 */
-  padding: 20px;
+  gap:20%
 }
 
 .logo-item {
-  display: flex;              /* 设置为 Flex 容器 */
-  flex-direction: column;     /* 垂直排列子元素 */
-  align-items: center;        /* 水平居中对齐子元素 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px 0 10px
 }
+
 .logo-item img {
   height: 60px;
-  /* 控制logo的高度 */
-  width: auto;
-  /* 宽度自适应 */
+  aspect-ratio: 1/1;
   filter: grayscale(60%);
-  /* 灰度效果 */
   opacity: 0.7;
-  /* 若想要更浅一些可以再调 */
   transition: opacity 0.3s;
-  
 }
 
 .logo-item img:hover {
@@ -329,18 +411,125 @@ const logos = ref([
 }
 
 .logo-alt {
-  text-align: center;      
-  margin-top: 8px;         
-  font-size: 14px;         
-  color: #333;           
-  white-space: nowrap;     
-  overflow: hidden;        
-  text-overflow: ellipsis; 
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: bold;
 }
 
 /* -------------------------------- */
-.story-wrapper{
+.story-wrapper {
   text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .left {
+    margin-top: 12%;
+  }
+
+  .right {
+    max-height: 60vh;
+  }
+
+  .text-section {
+    margin: 0;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .subtitle {
+    font-weight: bold;
+    color: #666;
+    margin-top: 3%;
+  }
+
+  .logo-item img {
+    height: 40px;
+    filter: grayscale(60%);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+.logo-slider {
+  display: flex;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+ 
+}
+
+.logo-list {
+  display: flex;
+  gap:5%;
+  justify-content: center;
+    align-items: center;
+}
+
+.logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 3px 0 3px
+}
+  
+  .cards {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2%;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .card {
+    margin-top: 5px;
+    width: 33%;
+    padding: 10px;
+    height: auto;
+  }
+
+  .card h3 {
+  margin: 7px 0 5px 0;
+  font-weight: 600;
+}
+
+  .pie-chart {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    /* 先不设置固定背景色，交给 conic-gradient 动态生成 */
+    /* 默认文字颜色为白色 */
+    color: #fff;
+    font-size: 14px;
+  }
+
+
+}
+
+/* 在最大宽度 480px 下再做更紧凑处理 */
+@media (max-width: 480px) {
+
 }
 </style>

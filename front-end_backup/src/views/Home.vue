@@ -31,7 +31,7 @@
                 随着人工智能与自动化技术的发展<br />
                 测绘正结合模型迈向更加AI化的未来
               </h2>
-              <button class="cta-button" @click="toMore('/AILearnMore')">了解更多</button>
+              <button class="cta-button" @click="toMore('/futureLearnMore')">了解更多</button>
             </div>
           </div>
         </div>
