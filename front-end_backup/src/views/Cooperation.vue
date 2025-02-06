@@ -175,8 +175,6 @@ function onSwiperReady(swiper) {
   mySwiper.value = swiper
 }
 
-console.log(mySwiper)
-
 // 添加定时器引用
 const resumeTimer = ref(null)
 

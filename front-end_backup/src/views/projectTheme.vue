@@ -5,6 +5,7 @@
 
     <!-- 第一行（两个卡片） -->
     <div class="row row-1">
+      <RouterLink to="/liXiangProject">
       <div class="card large" v-if="cards[0]">
         <img class="card-image" loading="lazy" :src="cards[0].img" :alt="cards[0].title" />
         <div class="card-info">
@@ -12,6 +13,9 @@
           <p class="card-desc">{{ cards[0].desc }}</p>
         </div>
       </div>
+    </RouterLink>
+
+    <RouterLink to="/wenyiProject">
       <div class="card" v-if="cards[1]">
         <img class="card-image" :src="cards[1].img" :alt="cards[1].title" />
         <div class="card-info">
@@ -19,10 +23,12 @@
           <p class="card-desc">{{ cards[1].desc }}</p>
         </div>
       </div>
+    </RouterLink>
     </div>
 
     <!-- 第二行（两个卡片） -->
     <div class="row row-2">
+    <RouterLink to="/alidamoProject">
       <div class="card" v-if="cards[2]">
         <img class="card-image" :src="cards[2].img" :alt="cards[2].title" />
         <div class="card-info">
@@ -30,6 +36,9 @@
           <p class="card-desc">{{ cards[2].desc }}</p>
         </div>
       </div>
+    </RouterLink>
+
+    <RouterLink to="/yuhangProject">
       <div class="card" v-if="cards[3]">
         <img class="card-image" :src="cards[3].img" :alt="cards[3].title" />
         <div class="card-info">
@@ -37,6 +46,7 @@
           <p class="card-desc">{{ cards[3].desc }}</p>
         </div>
       </div>
+    </RouterLink>
     </div>
   </div>
 </template>

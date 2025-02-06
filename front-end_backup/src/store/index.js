@@ -9,6 +9,7 @@ export default createStore({
     hasNewOrder:false,
     pendingOrderCount: 0,
     pollingTimer: null,
+    loadingCount:0
   }),
   mutations: {
     // 更新登录状态
@@ -36,6 +37,7 @@ export default createStore({
         state.pollingTimer=null;
       }
     },
+  
   },
   actions: {
     // 检查登录状态
@@ -79,14 +81,15 @@ export default createStore({
     stopPendingOrderPolling({ commit }) {
       commit('clearPollingTimer')
     },
+
   },
   
   getters: {
     isLogined: (state) => state.isLogined,
     isAdmin: (state) => state.isAdmin,
     hasNewOrder: (state) => state.hasNewOrder,
-    pendingOrderCount: (state) => state.pendingOrderCount
+    pendingOrderCount: (state) => state.pendingOrderCount,
+
   }
-  
   
 });

@@ -7,7 +7,6 @@ import { ref } from 'vue';
 import SwiperLearnMoreTemplete from '../components/SwiperLearnMoreTemplete.vue';
 
 const data = ref([
-    
     {
         title: '智能数据库管理系统',
         imageUrl: `/digitalCeHui/intelligent_db.jpg`,

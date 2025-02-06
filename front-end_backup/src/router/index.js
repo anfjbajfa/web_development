@@ -33,7 +33,10 @@ const routes = [
   {path:"/cehuiLearnMore",component:()=>import("../views/cehuiLearnMore.vue")},
   {path:"/futureLearnMore", component:()=>import("../views/futureLearnMore.vue")},
   {path:"/shuziLearnMore", component:()=>import("../views/shuziLearnMore.vue")},
-  
+  {path:"/liXiangProject", component:()=>import("../views/LiXiangProjectThemeDetail.vue")},
+  {path:"/wenyiProject",component:()=>import("../views/WenyiProjectThemeDetail.vue")},
+  {path:"/alidamoProject",component:()=>import("../views/AlidamoProjectThemeDetail.vue")},
+  {path:"/yuhangProject",component:()=>import("../views/YuhangzhongxueProjectThemeDetial.vue")}
 ];
 
 const router = createRouter({
