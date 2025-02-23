@@ -52,14 +52,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref,onMounted } from "vue";
 
 const cards = ref([
   {
     title: "理想臻品(汀山和院)",
     desc: "位于临平区临平山南，紧邻杭州钱江新城和未来科技城，面积约为12.5万平方米",
-    img: `/lixiangzhenpin.jpg`,
-    tag: "你好",
+    img: `/lixiangzhenpin.webp`,
   },
   {
     title: "文一西路西延工程(一期)",
@@ -69,14 +68,15 @@ const cards = ref([
   {
     title: "阿里巴巴达摩院",
     desc: "位于余杭区南湖科学中心片区，项目用地面积22.8万平方米，总建筑面积为49万平方米。项目总投资21亿元。",
-    img: `/alinanhu.jpg`,
+    img: `/alinanhu.webp`,
   },
   {
     title: "余杭第一中学",
     desc: "地处余杭区良渚街道庄墩路818号，是余杭区教育局重点打造的一所高起点、高标准的现代化公办高中。占地面积168.37亩，总建筑面积约15万平方米",
-    img: `/yuhangzhongxue.jpg`,
+    img: `/yuhangzhongxue.webp`,
   },
 ]);
+
 </script>
 
 <style scoped>
@@ -88,7 +88,6 @@ const cards = ref([
   color: #333;
   text-align: center;
 }
-
 
 /* 每一行: 两列布局 */
 .row {

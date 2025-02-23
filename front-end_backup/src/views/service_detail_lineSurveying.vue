@@ -8,7 +8,7 @@ import { ref } from 'vue'
 
 const cardsData = ref([
   {
-    img: `/service/shencha.png`,
+    img: `/service/shencha.webp`,
     title: "勘测定界图（用地预审址用）",
     needMaterials: [
       "《规划选址意见书》及附件、附图（复印件）",
@@ -25,7 +25,7 @@ const cardsData = ref([
     ]
   },
   {
-    img: `/service/nongzhuanyong.jpg`,
+    img: `/service/nongzhuanyong.webp`,
     title: "勘测定界图（农转用）",
     needMaterials: [
       "准确的用地红线或《规划选址意见书》及附件、附图（复印件）",
@@ -46,7 +46,7 @@ const cardsData = ref([
     ]
   },
   {
-    img: `/service/gongdi.jpg`,
+    img: `/service/gongdi.webp`,
     title: "勘测定界图（供地）",
     needMaterials: [
       "规划指标函或《规划选址意见书》及附件、附图（复印件）",
@@ -66,7 +66,7 @@ const cardsData = ref([
     ]
   },
   {
-    img: `/service/zongdidengji.jpg`,
+    img: `/service/zongdidengji.webp`,
     title: "宗地测绘（初始登记）",
     needMaterials: [
       "供地阶段的勘测定界图、勘测定界成果表（复印件）或电子版",
@@ -82,7 +82,7 @@ const cardsData = ref([
     ]
   },
   {
-    img: `/service/zongdifuhe.jpg`,
+    img: `/service/zongdifuhe.webp`,
     title: "宗地测绘（竣工复核）",
     needMaterials: [
       "土地证复印件（复印件）",
@@ -98,7 +98,7 @@ const cardsData = ref([
     ]
   },
   {
-    img: `/service/tudifentan.jpg`,
+    img: `/service/tudifentan.webp`,
     title: "土地竣工复核、分摊",
     needMaterials: [
       "土地证复印件（复印件）",

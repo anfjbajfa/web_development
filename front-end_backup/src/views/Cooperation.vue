@@ -19,7 +19,7 @@
     <div class="right">
       <!-- 图片区域 -->
       <div class="image-section">
-        <img src="/business-partner.png" alt="商业合作" />
+        <img src="/business-partner.webp" alt="商业合作" />
       </div>
 
       <!-- 三列卡片 -->
@@ -80,7 +80,7 @@
         <SwiperSlide>
           <div class="logo-list">
             <div class="logo-item">
-              <img src="/business-partners-logos/linpingGOV.png" alt="临平区政府" />
+              <img src="/business-partners-logos/linpingGOV.webp" alt="临平区政府" />
               <p class="logo-alt">临平区政府</p>
             </div>
             <div class="logo-item">
@@ -88,15 +88,15 @@
               <p class="logo-alt">未来科技城</p>
             </div>
             <div class="logo-item">
-              <img src="/business-partners-logos/yuhangguihua.jpg" alt="余杭区规划院" />
+              <img src="/business-partners-logos/yuhangguihua.webp" alt="余杭区规划院" />
               <p class="logo-alt">余杭区规划院</p>
             </div>
             <div class="logo-item">
-              <img src="/business-partners-logos/alibab.png" alt="阿里巴巴" />
+              <img src="/business-partners-logos/alibab.webp" alt="阿里巴巴" />
               <p class="logo-alt">阿里巴巴</p>
             </div>
             <div class="logo-item">
-              <img src="/business-partners-logos/huadongdianjian.jpg" alt="华东院" />
+              <img src="/business-partners-logos/huadongdianjian.webp" alt="华东院" />
               <p class="logo-alt">华东院</p>
             </div>
           </div>
@@ -106,21 +106,21 @@
         <SwiperSlide>
           <div class="logo-list">
             <div class="logo-item">
-              <img src="/business-partners-logos/yayun.png" alt="亚运会" />
+              <img src="/business-partners-logos/yayun.webp" alt="亚运会" />
               <p class="logo-alt">2024亚运会</p>
             </div>
             <div class="logo-item">
-              <img src="/business-partners-logos/zhejiangziran.jpg" alt="未来科技城" />
+              <img src="/business-partners-logos/zhejiangziran.webp" alt="未来科技城" />
               <p class="logo-alt">浙江自然资源局</p>
             </div>
 
             <div class="logo-item">
-              <img src="/business-partners-logos/dahua.jpg" alt="浙江大华" />
+              <img src="/business-partners-logos/dahua.webp" alt="浙江大华" />
               <p class="logo-alt">浙江大华</p>
             </div>
 
             <div class="logo-item">
-              <img src="/business-partners-logos/yintai.jpg" alt="浙江大华" />
+              <img src="/business-partners-logos/yintai.webp" alt="浙江大华" />
               <p class="logo-alt">银泰百货</p>
             </div>
           </div>
@@ -234,7 +234,7 @@ onUnmounted(() => {
     /* 兜底颜色 */
     #f5efe7
     /* 图片地址 */
-    url('/honor_background.jpg')
+    url('/honor_background.webp')
     /* 背景重复方式 */
     no-repeat
     /* 水平/垂直对齐方式 */

@@ -56,7 +56,7 @@
 
     <section class="timeline-article">
       <div v-for="(article, index) in timelineArticle" :key="article.id" class="article-wrapper" v-fade v-lazy
-      :ref="el => articleRefs[article.id] = el">
+        :ref="el => articleRefs[article.id] = el">
         <h2 class="article-title">
           {{ article.title }}
         </h2>
@@ -68,7 +68,37 @@
       </div>
     </section>
 
-    <section class="other-story">
+    <section class="other-story" v-fade v-lazy>
+    <div class="story-header">
+      <h2 class="article-title" style="font-size: 1.3rem;">
+        别的项目故事
+      </h2>
+      <div class="nav-buttons">
+          <button class="nav-btn prev" @click="swiperRef?.slidePrev()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="nav-btn next" @click="swiperRef?.slideNext()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+    </div>
+      <div class="cutting-line"></div>
+
+
+      <Swiper :modules="[Navigation]" :slides-per-view="3" :breakpoints="swiperBreakpoints" space-between="10" class="other-stories-swiper" @swiper="onSwiper">
+        <SwiperSlide v-for="(story, index) in otherStories" :key="index" class="story-slide">
+          
+          <div class="story-card">
+            <img :src="story.img" alt="别的项目图片" class="story-img" />
+            <div class="story-detail">
+              <RouterLink :to="story.route" style=" color:black">
+              <h3 class="story-title">{{ story.title }}</h3>
+            </RouterLink>
+              <p class="story-description">{{ story.desc }}</p>
+            </div>
+          </div>
+        </SwiperSlide>
+      </Swiper>
 
     </section>
   </div>
@@ -78,7 +108,32 @@
 
 <script setup>
 import Navbar from "./navbar.vue"
-import { computed,ref } from "vue"
+import { computed, ref } from "vue"
+
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { Navigation } from "swiper/modules"
+
+// 3. Swiper 样式（必须）
+import "swiper/css"
+
+
+// Swiper breakpoints 配置
+const swiperBreakpoints = {
+  100: {
+    slidesPerView: 2,
+    spaceBetween: 10,
+  },
+  1000: {
+    slidesPerView: 3,
+    spaceBetween: 15,
+  }
+}
+
+const swiperRef = ref(null)
+
+const onSwiper = (swiper) => {
+  swiperRef.value = swiper
+}
 
 const props = defineProps({
   timelineSteps: {
@@ -86,18 +141,22 @@ const props = defineProps({
   },
   timelineArticle: {
     type: Array
+  },
+  otherStories: {
+    type: Array,
   }
 })
 
 // 存储DOM元素
-const articleRefs= ref({});
+const articleRefs = ref({});
 
-const scrollToArticle=(id)=>{
+const scrollToArticle = (id) => {
   const articleElement = articleRefs.value[id];
-  if(articleElement){
-    articleElement.scrollIntoView({behavior:"smooth",block:"end"})
+  if (articleElement) {
+    articleElement.scrollIntoView({ behavior: "smooth", block: "end" })
   }
 }
+
 </script>
 
 <style scoped>
@@ -110,8 +169,9 @@ const scrollToArticle=(id)=>{
   padding: 2% 3%;
   box-sizing: border-box;
   margin-top: 18%;
-  height: 50vh;
+  min-height: 50vh;
   align-items: center;
+  margin-bottom: 20px; /* 增加下边距 */
 }
 
 .timeline-section {
@@ -256,6 +316,7 @@ const scrollToArticle=(id)=>{
   font-family: Georgia;
   font-size: 2rem;
   margin: 0;
+  flex-wrap: nowrap;
 }
 
 .cutting-line {
@@ -277,6 +338,92 @@ const scrollToArticle=(id)=>{
   object-fit: cover;
   border-radius: 5px;
 }
+
+/* =-=============================================== */
+
+.other-story {
+  margin-top: 10%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+
+.story-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 5px;
+}
+
+.nav-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: white;
+  transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+  background-color: #f5f5f5;
+}
+
+/* -------------------------------- */
+.other-stories-swiper {
+  width: 100%;
+  margin-top: 0.5rem;
+  height: fit-content;
+}
+
+.story-slide {
+  width: 90%;
+  height: 15vh;
+  display: flex;
+}
+
+.story-card {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  gap: 5px;
+}
+
+.story-img {
+  object-fit: cover;
+  width: 40%;
+  height: 80%;
+}
+
+.story-detail{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 左对齐 */
+  text-align: left;
+  max-width: 40%;
+  text-decoration: none;
+}
+
+.story-title {
+  margin: 0 ;
+  font-size: 1rem;
+}
+
+.story-description {
+  color: #666;
+  font-size: 13px;
+}
+
 
 @media screen and (max-width: 768px) {
   .project-theme-detail-constainer {
@@ -337,6 +484,28 @@ const scrollToArticle=(id)=>{
     margin-top: 4vh;
   }
 
+  .nav-btn {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: white;
+  transition: background-color 0.2s;
+}
 
+.story-title {
+  margin: 0 ;
+  font-size: 0.8rem !important;
+  margin-bottom: 0;
+}
+
+.story-img {
+
+  height: 100%;
+}
 }
 </style>

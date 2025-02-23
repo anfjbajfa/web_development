@@ -28,7 +28,7 @@
         <RouterLink to="/services/engineerSurveying" class="learn-more">了解施工详情,最多跑一次</RouterLink>
       </div>
       <div class="image-container">
-        <img src="/staff.jpg" alt="line" />
+        <img src="/gongcheng.jpg" alt="line" />
       </div>
     </div>
 
@@ -36,7 +36,7 @@
     <!-- 第二部分 -->
     <div id="bu_dong_chan" class="section-container reverse" v-fade>
       <div class="image-container">
-        <img src="/CAD.jpg" alt="surveying" />
+        <img src="/CAD.webp" alt="surveying" />
         <!-- <div class="citation">
           <div>
             <strong>临平区人民广场测量图</strong><br />
@@ -79,7 +79,7 @@
         <RouterLink to="/services/GIS" class="learn-more">了解施工详情,最多跑一次</RouterLink>
       </div>
       <div class="image-container">
-        <img src="/Geoai.jpg" alt="line" />
+        <img src="/Geoai.webp" alt="line" />
         <div class="citation">
           <div>
             <strong>跨远大模型地物分类成品</strong><br />

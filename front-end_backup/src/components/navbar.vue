@@ -1,7 +1,7 @@
 <template>
   <nav class="nav-container">
     <div class="title-container">
-      <img src="/logo.png" class="logo" />
+      <img src="/logo.webp" class="logo" />
       <span class="company-name">杭州跨远测绘有限公司</span>
     </div>
 

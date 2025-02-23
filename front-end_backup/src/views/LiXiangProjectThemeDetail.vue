@@ -1,9 +1,13 @@
 <template>
-  <projectThemeDetailTemplete :timeline-steps="timelineSteps" :timeline-article="timelineArticle"></projectThemeDetailTemplete>
+  <projectThemeDetailTemplete :timeline-steps="timelineSteps" :timeline-article="timelineArticle" :other-stories="otherStories"></projectThemeDetailTemplete>
 </template>
 
 <script setup>
+import {ref,onMounted} from "vue"
 import projectThemeDetailTemplete from '../components/projectThemeDetailTemplete.vue';
+import projectTheme from './projectTheme.vue';
+import eventBus from "../eventBus";
+
 const timelineSteps = [
   {
     id: 1,
@@ -42,13 +46,13 @@ const timelineArticle = [
     id: 2,
     title: '2025.02.12 控制测量',
     content: '项目团队召开了第二次项目规划会议，由项目经理王丽主持，详细拆解了各阶段的工作内容，并制定了测绘任务分工。数据采集小组由张伟和李晨带队，负责外业数据采集；数据处理小组由陈静和赵磊负责，确保测量数据的正确性和一致性。团队评估了测区内可能存在的挑战，如部分地形较为复杂、建筑密集度较高等问题，并制定了备用方案。项目团队还与杭州市自然资源局取得联系，申请获取最新的土地利用数据，以便进行更精确的比对分析。',
-    img: "/projectThemeDetail/plan.jpg"
+    img: "/projectThemeDetail/plan.webp"
   },
   {
     id: 3,
     title: '2025.03.01 详细测绘',
     content: '项目正式进入实施阶段，测绘团队携带高精度RTK设备、全站仪以及无人机航测设备，开始对临平区理想臻品周边区域进行数据采集。为确保数据的全面性，团队采用了地面测量与空中测绘相结合的方法。第一天的测量任务由李晨负责，他带领小组完成了主要建筑物的高程和边界测量，同时，张伟操控无人机进行大范围航测，并生成了初步的DEM（数字高程模型）。在此过程中，团队发现部分区域存在遮挡，需要补充地面采样点以提高精度。整个测绘工作持续了两周，团队成员每日晚上都会进行数据整理和初步分析，以确保数据质量。',
-    img:"/projectThemeDetail/cehui.jpg"
+    img:"/projectThemeDetail/cehui.webp"
   },
   {
     id: 4,
@@ -58,8 +62,32 @@ const timelineArticle = [
   }
 ];
 
+
+const otherStories = [
+  {
+    title: "理想臻品(汀山和院)",
+    desc: "位于临平区临平山南，紧邻杭州钱江新城和未来科技城，面积约为12.5万平方米",
+    img: `/lixiangzhenpin.webp`,
+    route:"/liXiangProject"
+  },
+  {
+    title: "文一西路西延工程(一期)",
+    desc: "东起余杭数云路以西，西至狮山路，分为地下隧道+地面快速路两部分，长约1.855公里。",
+    img: `/wenyixilu.webp`,
+    route:"/wenyiProject"
+  },
+  {
+    title: "阿里巴巴达摩院",
+    desc: "位于余杭区南湖科学中心片区，项目用地面积22.8万平方米，总建筑面积为49万平方米。项目总投资21亿元。",
+    img: `/alinanhu.webp`,
+    route:"/alidamoProject"
+  },
+  {
+    title: "余杭第一中学",
+    desc: "地处余杭区良渚街道庄墩路818号，是余杭区教育局重点打造的一所高起点、高标准的现代化公办高中。占地面积168.37亩，总建筑面积约15万平方米",
+    img: `/yuhangzhongxue.webp`,
+    route:"/yuhangProject"
+  },
+]
+
 </script>
-
-<style>
-
-</style>

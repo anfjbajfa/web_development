@@ -1,10 +1,10 @@
 <template>
-    <projectThemeDetailTemplete :timeline-steps="timelineSteps" :timeline-article="timelineArticle"></projectThemeDetailTemplete>
+    <projectThemeDetailTemplete :timeline-steps="timelineSteps" :timeline-article="timelineArticle" :other-stories="otherStories"></projectThemeDetailTemplete>
 </template>
   
 <script setup>
-  import projectThemeDetailTemplete from '../components/projectThemeDetailTemplete.vue';
-  const timelineSteps = [
+import projectThemeDetailTemplete from '../components/projectThemeDetailTemplete.vue';
+const timelineSteps = [
     {
       id: 1,
       title: '阶段一',
@@ -25,12 +25,12 @@
     },    
   ];
   
-  const timelineArticle = [
+const timelineArticle = [
     {
       id: 1,
       title: '2025.02.05 前期准备',
       content: '项目团队与杭州临平区理想臻品的客户代表张工、王经理进行了初次会议，明确了项目的总体目标和需求。团队成员收集了该区域的现有测绘资料，包括过去五年的地形数据、建筑规划图和土地利用现状图。为了确保测绘精度，团队制定了初步的测绘技术方案，并讨论了数据采集的方法，如无人机航测与RTK测量的结合方案。会议结束后，技术负责人李明撰写了项目需求分析报告，为后续测绘工作的展开奠定了基础。',
-      img: "/projectThemeDetail/plan.jpg"
+      img: "/projectThemeDetail/plan.webp"
     },
     {
       id: 2,
@@ -44,7 +44,35 @@
       content: '项目正式进入实施阶段，测绘团队携带高精度RTK设备、全站仪以及无人机航测设备，开始对临平区理想臻品周边区域进行数据采集。为确保数据的全面性，团队采用了地面测量与空中测绘相结合的方法。第一天的测量任务由李晨负责，他带领小组完成了主要建筑物的高程和边界测量，同时，张伟操控无人机进行大范围航测，并生成了初步的DEM（数字高程模型）。在此过程中，团队发现部分区域存在遮挡，需要补充地面采样点以提高精度。整个测绘工作持续了两周，团队成员每日晚上都会进行数据整理和初步分析，以确保数据质量。',
       img:null
     },
-   
-  ];
+];
+
+const otherStories = [
+  {
+    title: "理想臻品(汀山和院)",
+    desc: "位于临平区临平山南，紧邻杭州钱江新城和未来科技城，面积约为12.5万平方米",
+    img: `/lixiangzhenpin.webp`,
+    route:"/liXiangProject"
+  },
+  {
+    title: "文一西路西延工程(一期)",
+    desc: "东起余杭数云路以西，西至狮山路，分为地下隧道+地面快速路两部分，长约1.855公里。",
+    img: `/wenyixilu.webp`,
+    route:"/wenyiProject"
+  },
+  {
+    title: "阿里巴巴达摩院",
+    desc: "位于余杭区南湖科学中心片区，项目用地面积22.8万平方米，总建筑面积为49万平方米。项目总投资21亿元。",
+    img: `/alinanhu.webp`,
+    route:"/alidamoProject"
+  },
+  {
+    title: "余杭第一中学",
+    desc: "地处余杭区良渚街道庄墩路818号，是余杭区教育局重点打造的一所高起点、高标准的现代化公办高中。占地面积168.37亩，总建筑面积约15万平方米",
+    img: `/yuhangzhongxue.webp`,
+    route:"/yuhangProject"
+  },
+]
+
+
   
 </script>

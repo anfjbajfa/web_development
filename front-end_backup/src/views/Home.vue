@@ -39,7 +39,7 @@
 
       <!-- Swiper Slide 2 -->
       <SwiperSlide>
-        <img src="/drone.jpg" alt="Construction Site 2" class="background-image" />
+        <img src="/drone.webp" alt="Construction Site 2" class="background-image" />
         <div class="overlay">
           <div class="content-container">
             <div class="swiper-inside">

@@ -8,7 +8,7 @@
         也是对我们在地理信息领域持续创新与卓越服务的肯定。
       </p>
     </div>
-    <img src="/awards/award-surveying.jpg" class="award-pic" />
+    <img src="/awards/award-surveying.webp" class="award-pic" />
   </div>
 
   <section class="case-honor-section">
@@ -51,7 +51,7 @@ import navbar from '../components/navbar.vue';
 // 1. 这里是每行的数据
 const caseHonors = [
   {
-    imageSrc: `/awards/honor-zhiwei.png`,
+    imageSrc: `/awards/1.jpg`, ///awards/honor-zhiwei.webp
     dateRange: '2014-2025',
     title: '职称荣誉',
     description:
@@ -60,7 +60,7 @@ const caseHonors = [
     linkText: '查看所有职称荣誉->',
   },
   {
-    imageSrc: `/awards/honor-zhuzuo.png`,
+    imageSrc: `/awards/2.jpg`, ///awards/honor-zhuzuo.webp
     dateRange: '2018-2025',
     title: '软件著作',
     description:
@@ -69,7 +69,7 @@ const caseHonors = [
     linkText: '查看所有著作荣誉->',
   },
   {
-    imageSrc: `/awards/honor-system.png`,
+    imageSrc: `/awards/3.jpg`, ////awards/honor-system.webp
     dateRange: '2017-2025',
     title: '体系证书',
     description:
@@ -80,7 +80,7 @@ const caseHonors = [
 ];
 
 // 2. 每行的背景色数组
-const rowColors = ['#e3f2fd', '#e8f5e9', '#f1f8e9'];
+
 
 // 3. 负责记录哪些 row 已经进入可视区域
 const visibleRows = ref([]);
@@ -100,7 +100,7 @@ const handleScroll = () => {
 const getRowStyle = (index, item) => {
   return {
     backgroundImage: `url(${item.imageSrc})`,
-    backgroundColor: rowColors[index % rowColors.length],
+  
   };
 };
 
@@ -165,7 +165,7 @@ onMounted(() => {
   transition: all 0.6s ease-out;
 
   /* 背景图相关 */
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }

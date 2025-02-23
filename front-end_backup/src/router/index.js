@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import component from "element-plus/es/components/tree-select/src/tree-select-option.mjs";
-
+import component from "element-plus/es/components/tree-select/src/tree-select-option.mjs"; 
 const routes = [
   { path: "/", component: Home },
   { path: "/services", component: () => import("../views/services.vue") },
@@ -36,7 +35,10 @@ const routes = [
   {path:"/liXiangProject", component:()=>import("../views/LiXiangProjectThemeDetail.vue")},
   {path:"/wenyiProject",component:()=>import("../views/WenyiProjectThemeDetail.vue")},
   {path:"/alidamoProject",component:()=>import("../views/AlidamoProjectThemeDetail.vue")},
-  {path:"/yuhangProject",component:()=>import("../views/YuhangzhongxueProjectThemeDetial.vue")}
+  {path:"/yuhangProject",component:()=>import("../views/YuhangzhongxueProjectThemeDetial.vue")},
+  {path:"/honor-zhicheng",component:()=>import("../views/Honor-zhicheng.vue")},
+  {path:"/honor-zhuzuo",component:()=>import("../views/Honor-zhuzuo.vue")},
+  {path:"/honor-system",component:()=>import("../views/Honor-honorSystem.vue")}
 ];
 
 const router = createRouter({

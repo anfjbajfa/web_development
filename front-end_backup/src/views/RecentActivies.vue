@@ -60,7 +60,7 @@
     >
       <div class="qr-code-container">
         <img
-          src="/recent_activities/gongzhonghao.png"
+          src="/recent_activities/gongzhonghao.webp"
           alt="公众号二维码"
           class="qr-code-image"
         />
@@ -94,7 +94,7 @@ const slides = ref([
   },
   {
     id: 3,
-    image: `/recent_activities/ganxie.png`,
+    image: `/recent_activities/ganxie.webp`,
     title: '来自领导的感谢',
     description:
       '近日，跨远收到杭州市规划和自然资源局临平分局、余杭分局发来的感谢信,当局肯定了过去一年跨远的付出',

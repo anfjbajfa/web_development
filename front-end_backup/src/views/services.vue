@@ -10,7 +10,7 @@
         </p>
       </div>
       <div class="right">
-        <img src="/staff.png" alt="About us image" />
+        <img src="/staff.webp" alt="About us image" />
       </div>
     </div>
 
@@ -40,7 +40,7 @@
           target="_blank" title="在高德中打开">
           <div class="office-card">
             <div class="image-container">
-              <img src="/linping_location.png" alt="临平办公室地图" />
+              <img src="/linping_location.webp" alt="临平办公室地图" />
             </div>
             <div class="office-content">
               <h4>临平</h4>
@@ -52,7 +52,7 @@
           target="_blank" title="在高德中打开">
           <div class="office-card">
             <div class="image-container">
-              <img src="/yuhang_location.png" alt="余杭办公室地图" />
+              <img src="/yuhang_location.webp" alt="余杭办公室地图" />
             </div>
             <div class="office-content">
               <h4>余杭</h4>

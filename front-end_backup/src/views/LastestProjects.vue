@@ -5,7 +5,7 @@
     <div class="projects-container">
       <!-- 项目卡片1 -->
       <div class="project-card">
-        <img src="/alidamo.jpg" alt="阿里达摩院" />
+        <img src="/alidamo.webp" alt="阿里达摩院" />
         <div class="project-info">
           <h3>余杭区项目</h3>
           <p>
@@ -17,7 +17,7 @@
 
       <!-- 项目卡片2 -->
       <div class="project-card">
-        <img src="/linpinCinema.jpg" alt="临平大剧院" />
+        <img src="/linpinCinema.webp" alt="临平大剧院" />
         <div class="project-info">
           <h3>临平区项目</h3>
           <p>
