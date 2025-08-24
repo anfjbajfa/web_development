@@ -612,6 +612,13 @@ onUnmounted(() => {
 @media (max-width: 480px) {
   .story-cards {
     grid-template-columns: 1fr;
+    width:90%;
+    margin-bottom: 40%;
+  }
+
+  .story-card {
+    width: 100%;
+    height: fit-content;
   }
 }
 </style>
