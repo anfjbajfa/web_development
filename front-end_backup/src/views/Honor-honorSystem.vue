@@ -28,6 +28,11 @@ const HonorData = ref([
         image: '/Honor/system/20240925职业健康安全管理体系认证证书_00.png',
         text: '职业健康安全管理体系认证证书'
     },
+     {
+        date: '2024年 9月',
+        image: '/Honor/system/20240925质量管理体系认证证书_00.png',
+        text: '质量管理体系认证证书'
+    },
     {
         date: '2024年 9月',
         image: '/Honor/system/20240925质量管理体系认证证书_00.png',

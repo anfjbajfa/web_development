@@ -73,12 +73,6 @@ const HonorData = ref([
         text: '测绘数据采集信息管理系统'
     },
 
-    {
-        date: '2021年 4月',
-        image: '/Honor/zhuzuo/软件著作13个_12.png',
-        text: '测绘文档信息智能数字化管理软件'
-    },
-
 ]);
 
 const height = 50

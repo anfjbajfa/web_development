@@ -33,7 +33,7 @@
           </div>
           <h3>净利润增长</h3>
           <p>
-            接下去的三年每年净利润增长会保持在60%左右，公司现金流储备充足
+            接下去的三年每年净利润增长会保持在10%左右，公司现金流储备充足
           </p>
         </div>
 
@@ -131,8 +131,32 @@
 
   <!-- 3. 合伙故事部分 -->
   <div class="story-wrapper">
-    <h2>合伙故事</h2>
+    <h2>合作往事</h2>
     <div class="yellow-line"></div>
+
+    <div class="story-cards">
+    <div class="story-card" @click="navigateToStory('yayun')">
+      <img src="/stories/story1.jpg" alt="合作故事1" />
+      <h3>2024亚运会空间数据支持</h3>
+      <p>
+        为杭州亚运会提供了全方位的空间数据支持，助力亚运智慧场馆建设。
+      </p>
+    </div>
+    <div class="story-card" @click="navigateToStory('damo')">
+      <img src="/stories/story2.jpg" alt="合作故事2" />
+      <h3>阿里巴巴达摩院测绘</h3>
+      <p>
+        参与阿里巴巴达摩院的部分策划，打造智慧园区标杆项目。
+      </p>
+    </div>
+    <div class="story-card" @click="navigateToStory('xincheng')">
+      <img src="/stories/story3.jpg" alt="合作故事3" />
+      <h3>临平新城规划</h3>
+      <p>
+        助力临平新城规划建设，打造杭州城北新中心。
+      </p>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -141,7 +165,15 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import navbar from '../components/navbar.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, FreeMode } from 'swiper/modules'
+import { useRouter } from 'vue-router'
 
+
+const router = useRouter()
+
+
+const navigateToStory = (storyId) => {
+  router.push(`/story/${storyId}`)
+}
 /* 三个数值的响应式变量 */
 const growthValue = ref(0)
 const techInvest = ref(0)
@@ -149,7 +181,7 @@ const opportunityValue = ref(0)
 
 // 页面加载后开始动画
 onMounted(() => {
-  animateValue(growthValue, 60, 1000)
+  animateValue(growthValue, 10, 1000)
   animateValue(techInvest, 50, 1000)
   animateValue(opportunityValue, 30, 1000)
 
@@ -422,8 +454,53 @@ onUnmounted(() => {
 /* -------------------------------- */
 .story-wrapper {
   text-align: center;
+  margin:5% 5% 10% 5%;
 }
 
+.story-cards {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  row-gap: 5%; 
+  margin: 30px;
+  justify-items: center;
+}
+
+.story-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 70%;
+  height: 90%;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.story-card img {
+  width: 100%;
+  height: 80%;
+  object-fit: fill;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.story-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.story-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
 
 @media (max-width: 768px) {
   .container {
@@ -524,10 +601,17 @@ onUnmounted(() => {
   }
 
 
+  .story-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
 }
 
 /* 在最大宽度 480px 下再做更紧凑处理 */
 @media (max-width: 480px) {
-
+  .story-cards {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

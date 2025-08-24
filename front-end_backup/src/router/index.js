@@ -38,7 +38,9 @@ const routes = [
   {path:"/yuhangProject",component:()=>import("../views/YuhangzhongxueProjectThemeDetial.vue")},
   {path:"/honor-zhicheng",component:()=>import("../views/Honor-zhicheng.vue")},
   {path:"/honor-zhuzuo",component:()=>import("../views/Honor-zhuzuo.vue")},
-  {path:"/honor-system",component:()=>import("../views/Honor-honorSystem.vue")}
+  {path:"/honor-system",component:()=>import("../views/Honor-honorSystem.vue")},
+  {path: '/story/:id',component: () => import('../views/cooperation-stories.vue')
+}
 ];
 
 const router = createRouter({
